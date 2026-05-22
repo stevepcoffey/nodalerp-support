@@ -60,7 +60,7 @@
     .page-hero h1 { color: var(--white); margin: 1rem 0 1.2rem; max-width: 30rem; }
     .page-hero .lead { color: rgba(243,243,243,0.78); max-width: 38rem; margin-bottom: 2rem; }
     .page-hero-ctas { display: flex; gap: 0.75rem; flex-wrap: wrap; }
-    .cost-compare { padding: 0 0 4.5rem; }
+    .cost-compare { padding: 6rem 0 5.5rem; }
     .compare-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; max-width: 70rem; }
     .compare-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(78,189,250,0.15); border-radius: 6px; padding: 2rem; position: relative; }
     .compare-card.nodal { border-color: rgba(78,189,250,0.4); background: rgba(78,189,250,0.04); }
@@ -79,7 +79,7 @@
     .cost-savings strong { color: var(--white); font-weight: 500; }
     .enterprise-copy { max-width: 48rem; }
     .enterprise-copy p { color: rgba(243,243,243,0.78); font-size: 1.05rem; font-weight: 300; line-height: 1.6; margin: 0; }
-    .quote-calc-section { padding: 5.5rem 0; background: var(--white); }
+    .quote-calc-section { padding: 5.5rem 0 6.5rem; background: var(--white); }
     .quote-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
     .quote-form { display: flex; flex-direction: column; gap: 1.25rem; }
     .quote-field label { display: block; font-size: 0.88rem; font-weight: 500; margin-bottom: 0.4rem; color: var(--text); }
@@ -266,7 +266,7 @@
       <div class="section-head">
         <span class="section-number">01: Estimate Your Price</span>
         <h2>Get an approximate quote.</h2>
-        <p class="lead">Adjust the inputs below to see a ballpark monthly subscription and one-time hardware cost.</p>
+        <p class="lead">Monthly subscription is based on production lines. Hardware cost is based on facilities.</p>
       </div>
       <div class="quote-layout">
         <form class="quote-form" id="quoteForm" onsubmit="return false;">
@@ -629,12 +629,13 @@
 
     function updateQuote() {
       const facilities = Math.max(1, parseInt(document.getElementById('calcFacilities').value, 10) || 1);
+      const lines = Math.max(1, parseInt(document.getElementById('calcLines').value, 10) || 1);
       const hwRadio = document.querySelector('input[name="hardware"]:checked');
       const hwPerFacility = hwRadio ? parseInt(hwRadio.value, 10) : 0;
 
       let monthly;
-      if (facilities === 1) monthly = 1500;
-      else if (facilities <= 4) monthly = 2500;
+      if (lines <= 3) monthly = 1500;
+      else if (lines <= 15) monthly = 2500;
       else monthly = 4500;
 
       const annual = monthly * 12;
