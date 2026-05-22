@@ -97,6 +97,20 @@
     .pillar p { color: var(--text-muted); font-size: 0.94rem; line-height: 1.55; margin-bottom: 1.2rem; }
     .pillar-link { display: inline-flex; align-items: center; gap: 0.4rem; color: var(--blue); font-weight: 500; font-size: 0.9rem; transition: gap 0.2s ease; }
     .pillar:hover .pillar-link { gap: 0.6rem; }
+    .cost { padding: 6rem 0; }
+    .cost-savings {
+      margin-top: 2rem;
+      padding: 1.25rem 1.5rem;
+      background: rgba(78, 189, 250, 0.06);
+      border: 1px solid rgba(78, 189, 250, 0.2);
+      border-radius: 6px;
+      font-size: 0.95rem;
+      color: rgba(243, 243, 243, 0.78);
+      font-weight: 300;
+      max-width: 48rem;
+    }
+    .cost-savings strong { color: var(--white); font-weight: 500; }
+    .cost-cta { margin-top: 1.5rem; }
     .speed { padding: 6rem 0; }
     .compare-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; max-width: 70rem; }
     .compare-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(78,189,250,0.15); border-radius: 6px; padding: 2rem; position: relative; }
@@ -147,7 +161,7 @@
       .hero-grid { gap: 2.5rem; }
       .nav, .header-cta .btn { display: none; }
       .hero { padding: 4rem 0 4.5rem; }
-      .pillars, .speed, .why, .for-section { padding: 4rem 0; }
+      .pillars, .cost, .speed, .why, .for-section { padding: 4rem 0; }
       .cta .container { flex-direction: column; align-items: flex-start; }
     }
     @media (max-width: 600px) { .why-grid, .for-grid { grid-template-columns: 1fr 1fr; } }
@@ -234,11 +248,50 @@
     </div>
   </section>
 
+  <section class="dark-section cost">
+    <div class="deco-glow"></div><div class="deco-grid"></div>
+    <div class="container">
+      <div class="section-head">
+        <span class="section-number on-dark">02 — Total cost</span>
+        <h2>Enterprise capability. <span class="gradient-text">Not enterprise pricing.</span></h2>
+        <p class="lead">The average manufacturer spends over $200K a year on ERP software, licenses, and maintenance. Nodal runs your operation for a fraction of that — one predictable annual price.</p>
+      </div>
+      <div class="compare-grid">
+        <div class="compare-card">
+          <div class="compare-label">Industry average</div>
+          <h3>$210,000 / year</h3>
+          <div class="compare-time">Typical ERP total cost of ownership</div>
+          <ul class="compare-list">
+            <li><span class="mark">—</span>Per-seat licenses that scale with headcount</li>
+            <li><span class="mark">—</span>Module fees for MRP, shop floor, reporting</li>
+            <li><span class="mark">—</span>Annual maintenance and support renewals</li>
+            <li><span class="mark">—</span>Add-on costs for integrations and APIs</li>
+          </ul>
+        </div>
+        <div class="compare-card nodal">
+          <div class="compare-label">NodalERP</div>
+          <h3>$18,000 / year</h3>
+          <div class="compare-time">All-in annual · platform + orchestration + floor</div>
+          <ul class="compare-list">
+            <li><span class="mark">→</span>One price — no per-seat surprises</li>
+            <li><span class="mark">→</span>Production, inventory, and purchasing included</li>
+            <li><span class="mark">→</span>Orchestration layer and shop floor app included</li>
+            <li><span class="mark">→</span>API-first integrations without license tiers</li>
+          </ul>
+        </div>
+      </div>
+      <p class="cost-savings"><strong>$192,000 less per year</strong> than the industry average — so budget goes to production, not software overhead.</p>
+      <div class="cost-cta">
+        <a href="pricing.html" class="btn btn-ghost">See full pricing <span class="arrow">→</span></a>
+      </div>
+    </div>
+  </section>
+
   <section class="dark-section speed">
     <div class="deco-glow alt"></div><div class="deco-grid"></div>
     <div class="container">
       <div class="section-head">
-        <span class="section-number on-dark">02 — Integration</span>
+        <span class="section-number on-dark">03 — Integration</span>
         <h2>Cut integration time from months to <span class="gradient-text">days.</span></h2>
         <p class="lead">Most ERPs were built before APIs mattered. Nodal was built API-first — which means connecting it to your existing stack is configuration, not a six-month implementation project.</p>
       </div>
@@ -274,7 +327,7 @@
   <section class="for-section">
     <div class="container">
       <div class="section-head">
-        <span class="section-number">03 — Who it's for</span>
+        <span class="section-number">04 — Who it's for</span>
         <h2>For people who run real operations.</h2>
         <p class="lead">Nodal is built around how four kinds of people actually work — not how a system administrator wishes they did.</p>
       </div>

@@ -60,6 +60,23 @@
     .page-hero h1 { color: var(--white); margin: 1rem 0 1.2rem; max-width: 30rem; }
     .page-hero .lead { color: rgba(243,243,243,0.78); max-width: 38rem; margin-bottom: 2rem; }
     .page-hero-ctas { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+    .cost-compare { padding: 0 0 4.5rem; }
+    .compare-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; max-width: 70rem; }
+    .compare-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(78,189,250,0.15); border-radius: 6px; padding: 2rem; position: relative; }
+    .compare-card.nodal { border-color: rgba(78,189,250,0.4); background: rgba(78,189,250,0.04); }
+    .compare-card.nodal::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--gradient); border-radius: 6px 6px 0 0; }
+    .compare-label { font-size: 0.72rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.2em; color: rgba(243,243,243,0.5); margin-bottom: 0.8rem; }
+    .compare-card.nodal .compare-label { color: var(--blue-light); }
+    .compare-card h3 { color: var(--white); font-size: 1.4rem; margin-bottom: 0.4rem; }
+    .compare-time { font-size: 1.05rem; color: rgba(243,243,243,0.55); font-weight: 300; margin-bottom: 1.5rem; }
+    .compare-card.nodal .compare-time { color: var(--blue-light); font-weight: 400; }
+    .compare-list { list-style: none; padding: 0; margin: 0; }
+    .compare-list li { padding: 0.7rem 0; border-bottom: 1px solid rgba(78,189,250,0.08); display: flex; align-items: flex-start; gap: 0.7rem; font-size: 0.92rem; color: rgba(243,243,243,0.72); }
+    .compare-list li:last-child { border-bottom: none; }
+    .compare-list .mark { flex-shrink: 0; margin-top: 2px; color: rgba(243,243,243,0.35); }
+    .compare-card.nodal .compare-list .mark { color: var(--blue-light); }
+    .cost-savings { margin-top: 2rem; padding: 1.25rem 1.5rem; background: rgba(78,189,250,0.06); border: 1px solid rgba(78,189,250,0.2); border-radius: 6px; font-size: 0.95rem; color: rgba(243,243,243,0.78); font-weight: 300; max-width: 48rem; }
+    .cost-savings strong { color: var(--white); font-weight: 500; }
     .section { padding: 5.5rem 0; }
     .section.light { background: var(--white); }
     .section.gray { background: var(--gray); }
@@ -96,6 +113,7 @@
     .footer-bottom-links { display: flex; gap: 1.5rem; }
     .footer-bottom-links a:hover { color: var(--blue-light); }
     @media (max-width: 900px) {
+      .compare-grid { grid-template-columns: 1fr; }
       .feature-grid, .feature-grid.cols-2, .feature-grid.cols-4, .footer-grid { grid-template-columns: 1fr; }
       .nav, .header-cta .btn { display: none; }
       .page-hero { padding: 3.5rem 0 4rem; }
@@ -226,6 +244,42 @@
         <a href="demo.html" class="btn btn-primary">Get a quote <span class="arrow">→</span></a>
         <a href="#whats-included" class="btn btn-ghost">See what's included</a>
       </div>
+    </div>
+  </section>
+
+  <section class="dark-section cost-compare">
+    <div class="deco-glow alt"></div><div class="deco-grid"></div>
+    <div class="container">
+      <div class="section-head">
+        <span class="section-number on-dark">Industry vs. Nodal</span>
+        <h2>Enterprise capability. <span class="gradient-text">Not enterprise pricing.</span></h2>
+        <p class="lead">The average manufacturer spends over $200K a year on ERP software, licenses, and maintenance. Nodal's Starter tier — one facility, every feature — runs your operation for a fraction of that.</p>
+      </div>
+      <div class="compare-grid">
+        <div class="compare-card">
+          <div class="compare-label">Industry average</div>
+          <h3>$210,000 / year</h3>
+          <div class="compare-time">Typical ERP total cost of ownership</div>
+          <ul class="compare-list">
+            <li><span class="mark">—</span>Per-seat licenses that scale with headcount</li>
+            <li><span class="mark">—</span>Module fees for MRP, shop floor, reporting</li>
+            <li><span class="mark">—</span>Annual maintenance and support renewals</li>
+            <li><span class="mark">—</span>Add-on costs for integrations and APIs</li>
+          </ul>
+        </div>
+        <div class="compare-card nodal">
+          <div class="compare-label">NodalERP — Starter</div>
+          <h3>$18,000 / year</h3>
+          <div class="compare-time">All-in annual · 1 facility · unlimited users</div>
+          <ul class="compare-list">
+            <li><span class="mark">→</span>One price — no per-seat surprises</li>
+            <li><span class="mark">→</span>Production, inventory, and purchasing included</li>
+            <li><span class="mark">→</span>Orchestration layer and shop floor app included</li>
+            <li><span class="mark">→</span>API-first integrations without license tiers</li>
+          </ul>
+        </div>
+      </div>
+      <p class="cost-savings"><strong>$192,000 less per year</strong> than the industry average — so budget goes to production, not software overhead.</p>
     </div>
   </section>
 
