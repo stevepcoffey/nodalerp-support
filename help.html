@@ -192,6 +192,11 @@
       letter-spacing: 0.22em;
       color: var(--blue-light);
     }
+    .header-end {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
     .nav { display: flex; gap: 2rem; }
     .nav a {
       font-size: 0.92rem;
@@ -202,6 +207,11 @@
     }
     .nav a:hover { color: var(--blue-light); border-bottom-color: var(--blue-light); }
     .nav a.active { color: var(--blue-light); border-bottom-color: var(--blue-light); }
+    .header-back {
+      padding: 0.55rem 1.1rem;
+      font-size: 0.78rem;
+      flex-shrink: 0;
+    }
 
     /* Hero (smaller than home) */
     .hero {
@@ -478,6 +488,7 @@
       .nav,
       .brand-divider,
       .brand-label { display: none; }
+      .header-end { gap: 0; }
       .footer-grid { grid-template-columns: 1fr; }
       .hero { padding: 3rem 0 3.5rem; }
       .cat-section { padding: 3rem 0; }
@@ -509,12 +520,15 @@
         <span class="brand-divider" aria-hidden="true"></span>
         <span class="brand-label">Support</span>
       </a>
-      <nav class="nav" aria-label="Primary">
-        <a href="help.html" class="active">Help Topics</a>
-        <a href="support.html#ticket">Submit a Ticket</a>
-        <a href="support.html#faq">FAQ</a>
-        <a href="support.html#contact">Contact</a>
-      </nav>
+      <div class="header-end">
+        <nav class="nav" aria-label="Primary">
+          <a href="help.html" class="active">Help Topics</a>
+          <a href="support.html#ticket">Submit a Ticket</a>
+          <a href="support.html#faq">FAQ</a>
+          <a href="support.html#contact">Contact</a>
+        </nav>
+        <a href="index.html" class="btn btn-ghost header-back">← Main site</a>
+      </div>
     </div>
   </header>
 
