@@ -266,7 +266,7 @@
       <div class="section-head">
         <span class="section-number">01: Estimate Your Price</span>
         <h2>Get an approximate quote.</h2>
-        <p class="lead">Monthly subscription is based on production lines. Hardware cost is based on facilities.</p>
+        <p class="lead">Monthly subscription is based on production lines and facilities. Hardware cost is per facility.</p>
       </div>
       <div class="quote-layout">
         <form class="quote-form" id="quoteForm" onsubmit="return false;">
@@ -634,9 +634,13 @@
       const hwPerFacility = hwRadio ? parseInt(hwRadio.value, 10) : 0;
 
       let monthly;
-      if (lines <= 3) monthly = 1500;
-      else if (lines <= 15) monthly = 2500;
-      else monthly = 4500;
+      if (facilities >= 5 || lines >= 15) {
+        monthly = 4500;
+      } else if (lines <= 3) {
+        monthly = 1500;
+      } else {
+        monthly = 2500;
+      }
 
       const annual = monthly * 12;
       const hardware = facilities * hwPerFacility;
