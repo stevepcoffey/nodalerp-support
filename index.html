@@ -54,36 +54,117 @@
     .deco-glow.alt { background-image: radial-gradient(circle at 85% 20%, rgba(78,189,250,0.1) 0%, transparent 40%), radial-gradient(circle at 15% 85%, rgba(0,86,181,0.18) 0%, transparent 45%); }
     .deco-grid { background-image: linear-gradient(rgba(78,189,250,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(78,189,250,0.04) 1px, transparent 1px); background-size: 60px 60px; -webkit-mask-image: radial-gradient(ellipse at center, black 40%, transparent 75%); mask-image: radial-gradient(ellipse at center, black 40%, transparent 75%); }
     .dark-section > .container { position: relative; z-index: 1; }
-    .page-hero { padding: 5rem 0 5.5rem; overflow: visible; }
+    .page-hero { padding: 7.5rem 0 8rem; overflow: visible; }
     .hero-grid {
       display: grid;
-      grid-template-columns: 1.05fr 1fr;
-      gap: 3rem;
+      grid-template-columns: 1.1fr 1fr;
+      gap: 4rem;
       align-items: center;
     }
     .page-hero h1 { color: var(--white); margin: 1rem 0 1.2rem; max-width: 36rem; }
     .page-hero .lead { color: rgba(243,243,243,0.78); max-width: 36rem; margin-bottom: 2rem; }
     .page-hero-ctas { display: flex; gap: 0.75rem; flex-wrap: wrap; }
-    .hero-visual { position: relative; z-index: 2; }
-    .hero-shot {
-      margin: 0;
+
+    .hero-dashboard {
+      position: relative;
+      perspective: 1500px;
+      transform-style: preserve-3d;
+      animation: heroFloat 6s ease-in-out infinite;
+    }
+    @keyframes heroFloat {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-8px); }
+    }
+    .hero-dashboard-glow {
+      position: absolute;
+      inset: 10% -5% -10% -5%;
+      background: radial-gradient(ellipse at center, rgba(78, 189, 250, 0.25) 0%, transparent 65%);
+      filter: blur(40px);
+      z-index: 0;
+      pointer-events: none;
+    }
+    .hero-dashboard-img {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      height: auto;
+      display: block;
       border-radius: 8px;
-      overflow: hidden;
-      border: 1px solid rgba(78, 189, 250, 0.28);
-      background: rgba(255, 255, 255, 0.04);
-      box-shadow: 0 16px 40px rgba(5, 12, 29, 0.35);
-      transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.45s ease, border-color 0.35s ease;
-      transform-origin: center center;
-      cursor: default;
+      box-shadow:
+        0 30px 60px rgba(0, 0, 0, 0.4),
+        0 0 0 1px rgba(78, 189, 250, 0.15);
+      transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
     }
-    .hero-shot img { width: 100%; height: auto; display: block; vertical-align: middle; }
-    .hero-visual:hover .hero-shot,
-    .hero-shot.is-engaged,
-    .hero-shot:focus-within {
-      transform: scale(1.07) translateY(-10px);
-      box-shadow: 0 32px 64px rgba(5, 12, 29, 0.55);
-      border-color: rgba(78, 189, 250, 0.55);
+    .hero-dashboard.tilt .hero-dashboard-img {
+      transform: rotateY(var(--ry, 0deg)) rotateX(var(--rx, 0deg));
     }
+    .pulse {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #2fb878;
+      z-index: 2;
+      pointer-events: none;
+    }
+    .pulse::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      background: #2fb878;
+      animation: pulseRing 2.2s ease-out infinite;
+    }
+    @keyframes pulseRing {
+      0% { transform: scale(1); opacity: 0.6; }
+      100% { transform: scale(4); opacity: 0; }
+    }
+    .pulse-1 { top: 18%; left: 22%; }
+    .pulse-2 { top: 18%; left: 52%; }
+    .pulse-2::before { animation-delay: 0.7s; }
+    .pulse-3 { top: 60%; right: 12%; }
+    .pulse-3::before { animation-delay: 1.4s; }
+    .ticker {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      z-index: 3;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 2px;
+      background: rgba(5, 12, 29, 0.85);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid rgba(78, 189, 250, 0.3);
+      border-radius: 6px;
+      padding: 8px 14px;
+      font-family: 'Roboto', sans-serif;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    }
+    .ticker-label {
+      font-size: 0.65rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: rgba(243, 243, 243, 0.6);
+    }
+    .ticker-value {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #2fb878;
+      font-variant-numeric: tabular-nums;
+      transition: opacity 0.2s ease;
+    }
+    .ticker-value.flash {
+      animation: tickerFlash 0.4s ease;
+    }
+    @keyframes tickerFlash {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.1); color: #4ebdfa; }
+      100% { transform: scale(1); color: #2fb878; }
+    }
+
     .screenshot-thumb-link {
       display: block;
       border-radius: 6px;
@@ -136,15 +217,26 @@
     .step-card p { color: var(--text-muted); font-size: 0.86rem; line-height: 1.5; }
     @media (max-width: 900px) {
       .hero-grid { grid-template-columns: 1fr; gap: 2.5rem; }
-      .hero-visual:hover .hero-shot { transform: none; }
+      .hero-dashboard {
+        margin-top: 2.5rem;
+        animation: none;
+      }
+      .ticker { top: 8px; right: 8px; padding: 6px 10px; }
+      .ticker-value { font-size: 0.95rem; }
+      .hero-dashboard-img { transform: none !important; }
       .feature-grid, .feature-grid.cols-4, .screenshot-grid, .footer-grid { grid-template-columns: 1fr; }
       .step-grid { grid-template-columns: 1fr 1fr; }
       .nav, .header-cta .btn { display: none; }
-      .page-hero { padding: 3.5rem 0 4rem; }
+      .page-hero { padding: 4.5rem 0 5.5rem; }
       .section { padding: 4rem 0; }
       .cta .container { flex-direction: column; align-items: flex-start; }
     }
     @media (max-width: 500px) { .step-grid { grid-template-columns: 1fr; } }
+    @media (prefers-reduced-motion: reduce) {
+      .hero-dashboard { animation: none; }
+      .pulse::before { animation: none; }
+      .ticker-value.flash { animation: none; }
+    }
   </style>
 </head>
 <body>
@@ -177,17 +269,24 @@
           <a href="demo.html" class="btn btn-primary">Book a demo <span class="arrow">→</span></a>
         </div>
       </div>
-      <div class="hero-visual" aria-label="Operations hub dashboard preview">
-        <figure class="hero-shot" tabindex="0">
-          <img
-            src="operations-hub-screenshot-CuQ2uPt-.png"
-            alt="Nodal Shop Floor operations hub dashboard showing live production visibility"
-            width="1200"
-            height="750"
-            loading="eager"
-            decoding="async"
-          />
-        </figure>
+      <div class="hero-dashboard" aria-label="Operations hub dashboard preview">
+        <div class="hero-dashboard-glow" aria-hidden="true"></div>
+        <img
+          src="operations-hub-screenshot-CuQ2uPt-.png"
+          alt="Nodal Shop Floor dashboard"
+          class="hero-dashboard-img"
+          width="1200"
+          height="750"
+          loading="eager"
+          decoding="async"
+        />
+        <div class="pulse pulse-1" aria-hidden="true"></div>
+        <div class="pulse pulse-2" aria-hidden="true"></div>
+        <div class="pulse pulse-3" aria-hidden="true"></div>
+        <div class="ticker" aria-live="polite">
+          <span class="ticker-label">Packs scanned today</span>
+          <span class="ticker-value" id="tickerValue">142</span>
+        </div>
       </div>
     </div>
   </section>
@@ -372,24 +471,52 @@
   </footer>
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
-
+  </script>
+  <script>
     (function () {
-      const heroShot = document.querySelector('.hero-shot');
-      const triggers = document.querySelectorAll('.hero-visual, .screenshot-thumb-link');
-      if (!heroShot || !triggers.length) return;
+      const card = document.querySelector('.hero-dashboard');
+      const img = document.querySelector('.hero-dashboard-img');
+      const ticker = document.getElementById('tickerValue');
 
-      function engage() { heroShot.classList.add('is-engaged'); }
-      function release() {
-        if (!heroShot.matches(':hover') && !document.querySelector('.hero-visual:hover, .screenshot-thumb-link:hover')) {
-          heroShot.classList.remove('is-engaged');
-        }
+      if (!card || !img) return;
+
+      const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const canTilt = !prefersReduced && window.matchMedia('(min-width: 901px)').matches;
+
+      if (canTilt) {
+        card.classList.add('tilt');
+        const maxY = 10;
+        const maxX = 6;
+
+        card.addEventListener('mousemove', (e) => {
+          const rect = card.getBoundingClientRect();
+          const x = (e.clientX - rect.left) / rect.width - 0.5;
+          const y = (e.clientY - rect.top) / rect.height - 0.5;
+          card.style.setProperty('--ry', `${(x * maxY).toFixed(2)}deg`);
+          card.style.setProperty('--rx', `${(-y * maxX).toFixed(2)}deg`);
+        });
+
+        card.addEventListener('mouseleave', () => {
+          card.style.setProperty('--ry', '0deg');
+          card.style.setProperty('--rx', '0deg');
+        });
+      } else {
+        card.classList.remove('tilt');
       }
 
-      triggers.forEach(el => {
-        el.addEventListener('mouseenter', engage);
-        el.addEventListener('mouseleave', () => setTimeout(release, 40));
-      });
-      heroShot.addEventListener('mouseleave', () => setTimeout(release, 40));
+      if (ticker && !prefersReduced) {
+        let count = parseInt(ticker.textContent, 10) || 142;
+
+        function bumpTicker() {
+          count += Math.floor(Math.random() * 4) + 1;
+          ticker.textContent = count;
+          ticker.classList.remove('flash');
+          void ticker.offsetWidth;
+          ticker.classList.add('flash');
+        }
+
+        setInterval(bumpTicker, 2800 + Math.floor(Math.random() * 2200));
+      }
     })();
   </script>
 
