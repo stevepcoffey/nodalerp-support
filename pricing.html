@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Pricing — NodalERP</title>
-  <meta name="description" content="Per-facility pricing. All features included. No per-seat fees, no module unlocks, no usage charges. Up and running in 7 days." />
+  <title>Pricing — Nodal Shop Floor</title>
+  <meta name="description" content="Per-facility pricing for Nodal Shop Floor. All features included. No per-seat fees. Live in 7 days." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
@@ -77,6 +77,22 @@
     .compare-card.nodal .compare-list .mark { color: var(--blue-light); }
     .cost-savings { margin-top: 2rem; padding: 1.25rem 1.5rem; background: rgba(78,189,250,0.06); border: 1px solid rgba(78,189,250,0.2); border-radius: 6px; font-size: 0.95rem; color: rgba(243,243,243,0.78); font-weight: 300; max-width: 48rem; }
     .cost-savings strong { color: var(--white); font-weight: 500; }
+    .enterprise-copy { max-width: 48rem; }
+    .enterprise-copy p { color: rgba(243,243,243,0.78); font-size: 1.05rem; font-weight: 300; line-height: 1.6; margin: 0; }
+    .quote-calc-section { padding: 5.5rem 0; background: var(--white); }
+    .quote-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
+    .quote-form { display: flex; flex-direction: column; gap: 1.25rem; }
+    .quote-field label { display: block; font-size: 0.88rem; font-weight: 500; margin-bottom: 0.4rem; color: var(--text); }
+    .quote-field input[type="number"] { width: 100%; max-width: 12rem; padding: 0.65rem 0.8rem; border: 1px solid var(--border); border-radius: 4px; font-size: 1rem; font-family: inherit; }
+    .quote-radios { display: flex; flex-direction: column; gap: 0.55rem; }
+    .quote-radios label { display: flex; align-items: flex-start; gap: 0.6rem; font-weight: 400; cursor: pointer; font-size: 0.92rem; color: var(--text-muted); line-height: 1.45; }
+    .quote-radios input { margin-top: 3px; flex-shrink: 0; }
+    .quote-results { padding: 1.5rem; background: var(--gray); border-radius: 6px; border: 1px solid var(--border); }
+    .quote-line { display: flex; justify-content: space-between; padding: 0.55rem 0; font-size: 0.95rem; color: var(--text-muted); border-bottom: 1px solid var(--border); }
+    .quote-line:last-child { border-bottom: none; }
+    .quote-line strong { color: var(--text); font-weight: 600; }
+    .quote-disclaimer { font-size: 0.88rem; color: var(--text-muted); font-style: italic; margin: 1.25rem 0; }
+    .annual-callout { margin: 0 0 2rem; padding: 1rem 1.25rem; background: rgba(0,86,181,0.06); border: 1px solid rgba(0,86,181,0.2); border-radius: 6px; font-size: 0.92rem; color: var(--text); line-height: 1.5; }
     .section { padding: 5.5rem 0; }
     .section.light { background: var(--white); }
     .section.gray { background: var(--gray); }
@@ -113,7 +129,7 @@
     .footer-bottom-links { display: flex; gap: 1.5rem; }
     .footer-bottom-links a:hover { color: var(--blue-light); }
     @media (max-width: 900px) {
-      .compare-grid { grid-template-columns: 1fr; }
+      .compare-grid, .quote-layout { grid-template-columns: 1fr; }
       .feature-grid, .feature-grid.cols-2, .feature-grid.cols-4, .footer-grid { grid-template-columns: 1fr; }
       .nav, .header-cta .btn { display: none; }
       .page-hero { padding: 3.5rem 0 4rem; }
@@ -217,14 +233,12 @@
 
   <header class="header">
     <div class="container">
-      <a href="index.html" class="brand"><img src="nodalerp-logo-light.png" alt="NodalERP" class="brand-logo" /></a>
+      <a href="index.html" class="brand"><img src="nodalerp-logo-light.png" alt="Nodal Shop Floor" class="brand-logo" /></a>
       <div class="nav-wrap">
         <nav class="nav">
-          <a href="platform.html" >Platform</a>
-          <a href="orchestration.html" >Orchestration</a>
-          <a href="shopfloor.html" >Shop Floor</a>
+          <a href="index.html">Shop Floor</a>
           <a href="pricing.html" class="active">Pricing</a>
-          <a href="demo.html">Demo</a>
+          <a href="about.html">About</a>
         </nav>
         <div class="header-cta">
           <a href="support.html" class="support-link">Support</a>
@@ -239,10 +253,53 @@
     <div class="container">
       <span class="eyebrow">Pricing</span>
       <h1>Per-facility pricing. <span class="gradient-text">All features included.</span></h1>
-      <p class="lead">No per-seat fees. No module unlocks. No usage-based charges. One price per location, and everything's in the box — including 7-day onboarding.</p>
+      <p class="lead">No per-seat fees. No module unlocks. No usage-based charges. One price per location, and everything's in the box, including 7-day onboarding.</p>
       <div class="page-hero-ctas">
-        <a href="demo.html" class="btn btn-primary">Get a quote <span class="arrow">→</span></a>
+        <a href="#quote-calculator" class="btn btn-primary">Get a quote <span class="arrow">→</span></a>
         <a href="#whats-included" class="btn btn-ghost">See what's included</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="quote-calc-section" id="quote-calculator">
+    <div class="container">
+      <div class="section-head">
+        <span class="section-number">01: Estimate Your Price</span>
+        <h2>Get an approximate quote.</h2>
+        <p class="lead">Adjust the inputs below to see a ballpark monthly subscription and one-time hardware cost.</p>
+      </div>
+      <div class="quote-layout">
+        <form class="quote-form" id="quoteForm" onsubmit="return false;">
+          <div class="quote-field">
+            <label for="calcFacilities">Number of facilities</label>
+            <input type="number" id="calcFacilities" name="facilities" min="1" value="1" />
+          </div>
+          <div class="quote-field">
+            <label for="calcLines">Number of production lines</label>
+            <input type="number" id="calcLines" name="lines" min="1" value="1" />
+          </div>
+          <div class="quote-field">
+            <label for="calcUsers">Number of users</label>
+            <input type="number" id="calcUsers" name="users" min="1" value="10" />
+          </div>
+          <div class="quote-field">
+            <span style="display:block;font-size:0.88rem;font-weight:500;margin-bottom:0.5rem;color:var(--text);">Hardware needed</span>
+            <div class="quote-radios">
+              <label><input type="radio" name="hardware" value="0" checked /> No, I'll use my own</label>
+              <label><input type="radio" name="hardware" value="800" /> Yes, scanning guns only ($800 per facility, one-time)</label>
+              <label><input type="radio" name="hardware" value="4000" /> Yes, full Floor-Ready Kit ($4,000 per facility, one-time)</label>
+            </div>
+          </div>
+        </form>
+        <div>
+          <div class="quote-results" id="quoteResults" aria-live="polite">
+            <div class="quote-line"><span>Monthly subscription</span><strong id="outMonthly">$1,500</strong></div>
+            <div class="quote-line"><span>Annual subscription</span><strong id="outAnnual">$18,000</strong></div>
+            <div class="quote-line"><span>One-time hardware</span><strong id="outHardware">$0</strong></div>
+          </div>
+          <p class="quote-disclaimer">This is not a final quote, this is where the conversation begins.</p>
+          <a href="demo.html" class="btn btn-primary">Talk to us about this quote <span class="arrow">→</span></a>
+        </div>
       </div>
     </div>
   </section>
@@ -251,45 +308,24 @@
     <div class="deco-glow alt"></div><div class="deco-grid"></div>
     <div class="container">
       <div class="section-head">
-        <span class="section-number on-dark">Industry vs. Nodal</span>
-        <h2>Enterprise capability. <span class="gradient-text">Not enterprise pricing.</span></h2>
-        <p class="lead">The average manufacturer spends over $200K a year on ERP software, licenses, and maintenance. Nodal's Starter tier — one facility, every feature — runs your operation for a fraction of that.</p>
+        <span class="section-number on-dark">Value</span>
+        <h2>Enterprise capability, without the enterprise price tag.</h2>
       </div>
-      <div class="compare-grid">
-        <div class="compare-card">
-          <div class="compare-label">Industry average</div>
-          <h3>$210,000 / year</h3>
-          <div class="compare-time">Typical ERP total cost of ownership</div>
-          <ul class="compare-list">
-            <li><span class="mark">—</span>Per-seat licenses that scale with headcount</li>
-            <li><span class="mark">—</span>Module fees for MRP, shop floor, reporting</li>
-            <li><span class="mark">—</span>Annual maintenance and support renewals</li>
-            <li><span class="mark">—</span>Add-on costs for integrations and APIs</li>
-          </ul>
-        </div>
-        <div class="compare-card nodal">
-          <div class="compare-label">NodalERP — Starter</div>
-          <h3>$18,000 / year</h3>
-          <div class="compare-time">All-in annual · 1 facility · unlimited users</div>
-          <ul class="compare-list">
-            <li><span class="mark">→</span>One price — no per-seat surprises</li>
-            <li><span class="mark">→</span>Production, inventory, and purchasing included</li>
-            <li><span class="mark">→</span>Orchestration layer and shop floor app included</li>
-            <li><span class="mark">→</span>API-first integrations without license tiers</li>
-          </ul>
-        </div>
+      <div class="enterprise-copy">
+        <p>For the equivalent capabilities Nodal provides, ERP vendors typically charge $50,000 to $70,000 per year. Smaller, cheaper apps don't have the built-in functionality Nodal does. Nodal Shop Floor has no feature tiers. Every feature runs on every deployment. One facility. Unlimited users.</p>
       </div>
-      <p class="cost-savings"><strong>$192,000 less per year</strong> than the industry average — so budget goes to production, not software overhead.</p>
     </div>
   </section>
 
   <section class="section light">
     <div class="container">
       <div class="section-head">
-        <span class="section-number">01 — Choose a Tier</span>
+        <span class="section-number">02: Choose a Tier</span>
         <h2>One product. Three sizes. Everything included in all of them.</h2>
-        <p class="lead">Tier is determined by how many facilities you operate. Every tier ships with every feature — pick the one that matches your footprint.</p>
+        <p class="lead">Tier is determined by how many facilities or production lines you operate. Every tier ships with every feature, pick the one that matches your footprint.</p>
       </div>
+
+      <p class="annual-callout">Save 10% with annual billing. Talk to a rep about discounted pricing.</p>
 
       <div class="tier-grid">
 
@@ -300,27 +336,27 @@
             <span class="tier-price">$1,500</span>
             <span class="tier-per">/month</span>
           </div>
-          <div class="tier-annual">$18,000 billed annually</div>
+          <div class="tier-annual">$1,500 billed monthly</div>
           <div class="tier-divider"></div>
           <ul class="tier-features">
-            <li><svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Everything in NodalERP</li>
+            <li><svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Everything in Nodal Shop Floor</li>
             <li><svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Unlimited users</li>
             <li><svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>7-day onboarding included</li>
             <li><svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Standard CRM/ERP integrations</li>
             <li><svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Web-based help desk</li>
           </ul>
-          <a href="demo.html" class="btn tier-cta ghost">Get started</a>
+          <a href="#quote-calculator" class="btn btn-primary tier-cta">Get a quote</a>
         </div>
 
         <div class="tier-card featured">
           <span class="tier-badge">Most popular</span>
           <div class="tier-name">Growth</div>
-          <div class="tier-profile">2–4 facilities</div>
+          <div class="tier-profile">2 to 4 facilities</div>
           <div class="tier-price-row">
             <span class="tier-price">$2,500</span>
             <span class="tier-per">/month</span>
           </div>
-          <div class="tier-annual">$30,000 billed annually</div>
+          <div class="tier-annual">$2,500 billed monthly</div>
           <div class="tier-divider"></div>
           <ul class="tier-features">
             <li><svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Everything in Starter</li>
@@ -329,7 +365,7 @@
             <li><svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Priority onboarding</li>
             <li><svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Standard CRM/ERP integrations</li>
           </ul>
-          <a href="demo.html" class="btn btn-primary tier-cta">Get a quote</a>
+          <a href="#quote-calculator" class="btn btn-primary tier-cta">Get a quote</a>
         </div>
 
         <div class="tier-card">
@@ -339,7 +375,7 @@
             <span class="tier-price">$4,500</span>
             <span class="tier-per">/month</span>
           </div>
-          <div class="tier-annual">$54,000 billed annually</div>
+          <div class="tier-annual">$4,500 billed monthly</div>
           <div class="tier-divider"></div>
           <ul class="tier-features">
             <li><svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Everything in Growth</li>
@@ -348,7 +384,7 @@
             <li><svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Custom integration support</li>
             <li><svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>SLA-backed support</li>
           </ul>
-          <a href="demo.html" class="btn tier-cta ghost">Talk to us</a>
+          <a href="#quote-calculator" class="btn btn-primary tier-cta">Get a quote</a>
         </div>
 
       </div>
@@ -365,7 +401,7 @@
   <section class="section gray" id="whats-included">
     <div class="container">
       <div class="section-head">
-        <span class="section-number">02 — What's Included</span>
+        <span class="section-number">03: What's Included</span>
         <h2>The full product. Every tier.</h2>
         <p class="lead">No "Pro" upsell. No premium features locked behind a button. Every customer gets the entire Nodal feature set from day one.</p>
       </div>
@@ -382,7 +418,7 @@
           <span class="check-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
           <div class="item-text">
             <strong>Materials &amp; pack management</strong>
-            <span>Raw materials in, finished goods out — and everything in between.</span>
+            <span>Raw materials in, finished goods out, and everything in between.</span>
           </div>
         </div>
         <div class="included-item">
@@ -431,7 +467,7 @@
           <span class="check-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
           <div class="item-text">
             <strong>Web-based help desk</strong>
-            <span>Submit tickets, browse help topics, get answers — without leaving Nodal.</span>
+            <span>Submit tickets, browse help topics, get answers without leaving Nodal.</span>
           </div>
         </div>
         <div class="included-item">
@@ -448,16 +484,16 @@
   <section class="section light">
     <div class="container">
       <div class="section-head">
-        <span class="section-number">03 — Onboarding</span>
+        <span class="section-number">04: Onboarding</span>
         <h2>Live in a week. Not a quarter.</h2>
-        <p class="lead">Most ERPs quote a separate $5K–$15K implementation fee and tell you to clear your schedule for the next six months. We include onboarding in the subscription and finish in seven days.</p>
+        <p class="lead">Most reps quote a separate $15,000 implementation fee for a module with Shop Floor's capabilities. We include onboarding in the subscription and finish in seven days.</p>
       </div>
 
       <div class="onboard-card">
         <div class="deco-glow-inner"></div>
         <div>
           <h3>7-day onboarding, included.</h3>
-          <p>We configure Nodal to your stations, inventory, and workflows. We load your data. We train your supervisors and operators. We go live. All inside one week — and it's already in the subscription price.</p>
+          <p>We configure Nodal to your stations, inventory, and workflows. We load your data. We train your supervisors and operators. We go live. All inside one week, and it's already in the subscription price.</p>
         </div>
         <div class="onboard-stats">
           <div class="onboard-stat">
@@ -473,8 +509,8 @@
             <div class="stat-label">Floor team uploading inventory</div>
           </div>
           <div class="onboard-stat">
-            <div class="stat-value">$2,500</div>
-            <div class="stat-label">Flat fee for added facility later</div>
+            <div class="stat-value">Discounted</div>
+            <div class="stat-label">Pricing for adding facilities later</div>
           </div>
         </div>
       </div>
@@ -484,7 +520,7 @@
   <section class="section gray">
     <div class="container">
       <div class="section-head">
-        <span class="section-number">04 — Optional: Floor-Ready Kit</span>
+        <span class="section-number">05: Optional: Floor-Ready Kit</span>
         <h2>Hardware, if you want it.</h2>
         <p class="lead">Nodal runs on your existing iPads, phones, and PCs. But if you want shop-floor-ready hardware shipped and configured, we offer a turnkey bundle. Per facility.</p>
       </div>
@@ -497,8 +533,8 @@
           </div>
           <div class="hardware-price">
             <div class="hp-label">Optional bundle</div>
-            <div class="hp-amount">$3,500–$4,500</div>
-            <div class="hp-per">per facility</div>
+            <div class="hp-amount">$3,500 to $4,500</div>
+            <div class="hp-per">per workstation</div>
           </div>
         </div>
 
@@ -526,69 +562,12 @@
     </div>
   </section>
 
-  <section class="section light" id="early-access">
-    <div class="container">
-      <div class="section-head">
-        <span class="section-number">05 — Founding Customer Offer</span>
-        <h2>Help us build the playbook. Get founding pricing.</h2>
-        <p class="lead">We're working with a small cohort of early customers whose feedback shapes the product. If that's you, you get a structured pilot and locked-in pricing — and we get a reference relationship.</p>
-      </div>
-
-      <div class="ea-card">
-        <div class="ea-bg"></div>
-        <div class="ea-header">
-          <div>
-            <span class="ea-tag">Limited cohort</span>
-            <h2>Founding customer terms.</h2>
-            <p class="lead">Real commercial protections in exchange for being part of building this.</p>
-          </div>
-        </div>
-
-        <div class="ea-grid">
-          <div class="ea-item">
-            <span class="ea-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
-            <div class="ea-text">
-              <strong>90-day pilot at $500/month</strong>
-              <span>Nominal — not free. Establishes the commercial relationship while you prove fit.</span>
-            </div>
-          </div>
-          <div class="ea-item">
-            <span class="ea-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
-            <div class="ea-text">
-              <strong>15% founding discount</strong>
-              <span>Lock your tier pricing for two years at a 15% discount if you convert within 30 days of pilot.</span>
-            </div>
-          </div>
-          <div class="ea-item">
-            <span class="ea-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
-            <div class="ea-text">
-              <strong>Direct product input</strong>
-              <span>Quarterly feedback sessions with the team building Nodal. Your operation shapes the roadmap.</span>
-            </div>
-          </div>
-          <div class="ea-item">
-            <span class="ea-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
-            <div class="ea-text">
-              <strong>Priority implementation</strong>
-              <span>Dedicated implementation lead during pilot. Hardware configured and shipped on us if needed.</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="ea-footer">
-          <p>In exchange: reference customer rights, case study participation, logo use, and 2–3 reference calls per quarter once you're in production.</p>
-          <a href="demo.html" class="btn btn-primary">Discuss the pilot <span class="arrow">→</span></a>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <section class="dark-section cta">
     <div class="deco-glow"></div><div class="deco-grid"></div>
     <div class="container">
       <div>
         <h2>Have questions about which tier fits?</h2>
-        <p>Tell us how many facilities you run, what systems you use today, and what you're trying to track. We'll come back with a tier recommendation and a quote — usually within one business day.</p>
+        <p>Tell us how many facilities you run, what systems you use today, and what you're trying to track. We'll come back with a tier recommendation and a quote, usually within one business day.</p>
       </div>
       <div class="cta-buttons">
         <a href="demo.html" class="btn btn-primary">Get a quote <span class="arrow">→</span></a>
@@ -601,17 +580,16 @@
     <div class="container">
       <div class="footer-grid">
         <div>
-          <img src="nodalerp-logo-light.png" alt="NodalERP" class="footer-logo" />
+          <img src="nodalerp-logo-light.png" alt="Nodal Shop Floor" class="footer-logo" />
           <p class="footer-tagline">Control made simple.</p>
-          <p class="footer-blurb">The lightest, most integration-friendly ERP for modern manufacturers. Built by Coffey &amp; Co.</p>
+          <p class="footer-blurb">Standalone shop floor software for modern manufacturers. Built by Coffey &amp; Co.</p>
         </div>
         <div>
           <h4>Product</h4>
           <ul>
-            <li><a href="platform.html">NodalERP</a></li>
-            <li><a href="orchestration.html">Orchestration</a></li>
-            <li><a href="shopfloor.html">Shop Floor</a></li>
+            <li><a href="index.html">Shop Floor</a></li>
             <li><a href="pricing.html">Pricing</a></li>
+            <li><a href="about.html">About</a></li>
             <li><a href="demo.html">Book a demo</a></li>
           </ul>
         </div>
@@ -642,7 +620,39 @@
       </div>
     </div>
   </footer>
-  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    function formatMoney(n) {
+      return '$' + n.toLocaleString('en-US');
+    }
+
+    function updateQuote() {
+      const facilities = Math.max(1, parseInt(document.getElementById('calcFacilities').value, 10) || 1);
+      const hwRadio = document.querySelector('input[name="hardware"]:checked');
+      const hwPerFacility = hwRadio ? parseInt(hwRadio.value, 10) : 0;
+
+      let monthly;
+      if (facilities === 1) monthly = 1500;
+      else if (facilities <= 4) monthly = 2500;
+      else monthly = 4500;
+
+      const annual = monthly * 12;
+      const hardware = facilities * hwPerFacility;
+
+      document.getElementById('outMonthly').textContent = formatMoney(monthly);
+      document.getElementById('outAnnual').textContent = formatMoney(annual);
+      document.getElementById('outHardware').textContent = formatMoney(hardware);
+    }
+
+    ['calcFacilities', 'calcLines', 'calcUsers'].forEach(id => {
+      document.getElementById(id).addEventListener('input', updateQuote);
+    });
+    document.querySelectorAll('input[name="hardware"]').forEach(el => {
+      el.addEventListener('change', updateQuote);
+    });
+    updateQuote();
+  </script>
 
 </body>
 </html>

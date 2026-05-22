@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Book a Demo — NodalERP</title>
-  <meta name="description" content="Book a 30-minute working session with the NodalERP team. Not a sales demo — a walkthrough in the context of your actual operation." />
+  <title>Book a Demo — Nodal Shop Floor</title>
+  <meta name="description" content="Book a 30-minute working session with the Nodal Shop Floor team. Not a sales demo: a walkthrough in the context of your actual operation." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
@@ -139,14 +139,12 @@
 
   <header class="header">
     <div class="container">
-      <a href="index.html" class="brand"><img src="nodalerp-logo-light.png" alt="NodalERP" class="brand-logo" /></a>
+      <a href="index.html" class="brand"><img src="nodalerp-logo-light.png" alt="Nodal Shop Floor" class="brand-logo" /></a>
       <div class="nav-wrap">
         <nav class="nav">
-          <a href="platform.html" >Platform</a>
-          <a href="orchestration.html" >Orchestration</a>
-          <a href="shopfloor.html" >Shop Floor</a>
+          <a href="index.html">Shop Floor</a>
           <a href="pricing.html">Pricing</a>
-          <a href="demo.html" class="active">Demo</a>
+          <a href="about.html">About</a>
         </nav>
         <div class="header-cta">
           <a href="support.html" class="support-link">Support</a>
@@ -161,7 +159,7 @@
     <div class="container">
       <span class="eyebrow">Book a Demo</span>
       <h1>30 minutes. <span class="gradient-text">Your operation.</span></h1>
-      <p class="lead">Not a sales deck. Tell us what you make and how you run your floor. We'll walk through Nodal in the context of your actual workflow — order intake, inventory, planning, production, integrations.</p>
+      <p class="lead">Not a sales deck. Tell us what you make and how you run your floor. We'll walk through Nodal Shop Floor in the context of your actual workflow: order intake, inventory, planning, production, and integrations.</p>
     </div>
   </section>
 
@@ -185,7 +183,7 @@
               <span class="num">02</span>
               <div class="text">
                 <strong>We show Nodal against your workflow</strong>
-                <span>Order intake, MRP, shop floor, integrations — using examples that look like yours.</span>
+                <span>Order intake, MRP, shop floor, integrations, using examples that look like yours.</span>
               </div>
             </li>
             <li>
@@ -223,7 +221,7 @@
 
         <div class="demo-form-card">
           <div class="success-banner" id="successBanner">
-            <strong>Thanks — we'll be in touch.</strong>
+            <strong>Thanks, we'll be in touch.</strong>
             We'll reach out within one business day to set up your session.
           </div>
 
@@ -276,10 +274,10 @@
               <label for="interest">Which surface are you most interested in?</label>
               <select id="interest" name="interest">
                 <option value="">Choose one...</option>
-                <option>NodalERP — the full platform</option>
-                <option>Orchestration Layer — integrations</option>
-                <option>Shop Floor App — production execution</option>
-                <option>Not sure yet — want the overview</option>
+                <option>Nodal Shop Floor (full application)</option>
+                <option>Integrations with my ERP</option>
+                <option>Production execution on the floor</option>
+                <option>Not sure yet, want the overview</option>
               </select>
             </div>
 
@@ -307,10 +305,10 @@
     <div class="container">
       <div>
         <h2>Not ready to book a demo?</h2>
-        <p>That's fine. Take a look at the platform, the orchestration layer, or the shop floor app — and reach out when you are.</p>
+        <p>That's fine. Browse pricing or read about how we work with customers like Arbor Wood, and reach out when you are.</p>
       </div>
       <div class="cta-buttons">
-        <a href="platform.html" class="btn btn-primary">Explore the platform <span class="arrow">→</span></a>
+        <a href="pricing.html" class="btn btn-primary">See pricing <span class="arrow">→</span></a>
         <a href="mailto:steve@coffeyandco.com" class="btn btn-ghost">Just say hi</a>
       </div>
     </div>
@@ -320,17 +318,16 @@
     <div class="container">
       <div class="footer-grid">
         <div>
-          <img src="nodalerp-logo-light.png" alt="NodalERP" class="footer-logo" />
+          <img src="nodalerp-logo-light.png" alt="Nodal Shop Floor" class="footer-logo" />
           <p class="footer-tagline">Control made simple.</p>
-          <p class="footer-blurb">The lightest, most integration-friendly ERP for modern manufacturers. Built by Coffey &amp; Co.</p>
+          <p class="footer-blurb">Standalone shop floor software for modern manufacturers. Built by Coffey &amp; Co.</p>
         </div>
         <div>
           <h4>Product</h4>
           <ul>
-            <li><a href="platform.html">NodalERP</a></li>
-            <li><a href="orchestration.html">Orchestration</a></li>
-            <li><a href="shopfloor.html">Shop Floor</a></li>
+            <li><a href="index.html">Shop Floor</a></li>
             <li><a href="pricing.html">Pricing</a></li>
+            <li><a href="about.html">About</a></li>
             <li><a href="demo.html">Book a demo</a></li>
           </ul>
         </div>
@@ -364,7 +361,7 @@
   <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
 
   <script>
-    // Demo form — placeholder handler. Wire up to Formspree later.
+    // Demo form: placeholder handler. Wire up to Formspree later.
     const form = document.getElementById('demoForm');
     const banner = document.getElementById('successBanner');
     form.addEventListener('submit', function(e) {

@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>NodalERP Support — Control made simple.</title>
-  <meta name="description" content="Real support for real operations. Submit a ticket and we'll route it to the right team — fast." />
+  <title>Nodal Shop Floor Support: Control made simple.</title>
+  <meta name="description" content="Real support for real operations. Submit a ticket and we'll route it to the right team, fast." />
 
   <!-- Roboto from Google Fonts (only external dependency) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -227,6 +227,21 @@
       letter-spacing: 0.22em;
       color: var(--blue-light);
     }
+    .nav-wrap { display: flex; align-items: center; gap: 2rem; }
+    .header-cta { display: inline-flex; gap: 0.7rem; align-items: center; }
+    .support-link {
+      font-size: 0.88rem;
+      color: rgba(243, 243, 243, 0.75);
+      padding: 0.45rem 1rem;
+      border: 1px solid rgba(78, 189, 250, 0.25);
+      border-radius: 4px;
+      transition: all 0.2s ease;
+    }
+    .support-link:hover, .support-link.active {
+      color: var(--blue-light);
+      border-color: var(--blue-light);
+    }
+    .header-cta .btn { padding: 0.55rem 1.2rem; font-size: 0.88rem; }
     .header-end {
       display: flex;
       align-items: center;
@@ -358,6 +373,15 @@
       font-weight: 500;
     }
     .info-card .value.urgent { color: var(--blue-light); }
+    .response-note {
+      margin-top: 1.1rem;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(78, 189, 250, 0.1);
+      font-size: 0.82rem;
+      font-style: italic;
+      color: rgba(243, 243, 243, 0.55);
+      line-height: 1.45;
+    }
 
     /* =====================================================
        9. QUICK HELP SECTION (light)
@@ -703,6 +727,13 @@
       margin-bottom: 2.5rem;
     }
     .footer-logo { height: 28px; margin-bottom: 0.9rem; }
+    .footer-blurb {
+      font-size: 0.88rem;
+      color: rgba(243, 243, 243, 0.55);
+      max-width: 22rem;
+      line-height: 1.55;
+      font-weight: 300;
+    }
     .footer-tagline {
       font-style: italic;
       font-size: 0.88rem;
@@ -751,12 +782,10 @@
         grid-template-columns: 1fr;
       }
       .hero-grid { gap: 2.5rem; }
-      .nav,
-      .brand-divider,
-      .brand-label {
+      .nav-wrap .nav,
+      .header-cta .btn {
         display: none;
       }
-      .header-end { gap: 0; }
       .hero { padding: 3.5rem 0 4rem; }
       .ticket { padding: 4rem 0; }
       .quick-help, .faq { padding: 4rem 0; }
@@ -764,7 +793,7 @@
       .submit-row .btn { width: 100%; }
     }
 
-    /* Subtle fallback when logos are missing — keeps layout clean */
+    /* Subtle fallback when logos are missing: keeps layout clean */
     img[alt][src=""],
     img:not([src]),
     img[src*="nodalerp-logo"]:not([data-loaded]) {
@@ -785,7 +814,7 @@
         All systems operational
       </span>
       <div class="topbar-right">
-        Mon–Fri 8am–8pm ET · <a href="tel:+15550102204" class="phone">+1 (555) 010-2204</a>
+        Mon-Fri 8am-8pm ET · <a href="tel:+15550102204" class="phone">+1 (555) 010-2204</a>
       </div>
     </div>
   </div>
@@ -795,19 +824,19 @@
        ===================================================== -->
   <header class="header">
     <div class="container">
-      <a href="#" class="brand" aria-label="NodalERP Support — home">
-        <img src="nodalerp-logo-light.png" alt="NodalERP" class="brand-logo" />
-        <span class="brand-divider" aria-hidden="true"></span>
-        <span class="brand-label">Support</span>
+      <a href="index.html" class="brand" aria-label="Nodal Shop Floor home">
+        <img src="nodalerp-logo-light.png" alt="Nodal Shop Floor" class="brand-logo" />
       </a>
-      <div class="header-end">
+      <div class="nav-wrap">
         <nav class="nav" aria-label="Primary">
-          <a href="help.html">Help Topics</a>
-          <a href="#ticket">Submit a Ticket</a>
-          <a href="#faq">FAQ</a>
-          <a href="#contact">Contact</a>
+          <a href="index.html">Shop Floor</a>
+          <a href="pricing.html">Pricing</a>
+          <a href="about.html">About</a>
         </nav>
-        <a href="index.html" class="btn btn-ghost header-back">← Main site</a>
+        <div class="header-cta">
+          <a href="support.html" class="support-link active">Support</a>
+          <a href="demo.html" class="btn btn-primary">Book a demo</a>
+        </div>
       </div>
     </div>
   </header>
@@ -825,7 +854,7 @@
           <h1>How can we <span class="gradient-text">help?</span></h1>
           <p class="lead">
             Real support for real operations. When production stops, we don't.
-            Submit a ticket and we'll route it to the right team — fast.
+            Submit a ticket and we'll route it to the right team, fast.
           </p>
           <div class="hero-ctas">
             <a href="#ticket" class="btn btn-primary">
@@ -841,8 +870,9 @@
             <li><span class="label-text">General questions</span><span class="value">&lt; 4 hours</span></li>
             <li><span class="label-text">Technical issues</span><span class="value">&lt; 8 hours</span></li>
             <li><span class="label-text">Production down</span><span class="value urgent">&lt; 30 min</span></li>
-            <li><span class="label-text">Feature requests</span><span class="value">2–3 days</span></li>
+            <li><span class="label-text">Feature requests</span><span class="value">2 to 3 days</span></li>
           </ul>
+          <p class="response-note">You will talk to a real human. These are our target response times.</p>
         </aside>
       </div>
     </div>
@@ -854,8 +884,10 @@
   <section class="quick-help" id="help-topics">
     <div class="container">
       <div class="section-head">
-        <span class="section-number">01 — Help Topics</span>
-        <h2>What do you need help with?</h2>
+        <span class="eyebrow" style="color: var(--blue); letter-spacing: 0.2em; font-size: 0.75rem; text-transform: uppercase; margin-bottom: 0.6rem;">Quick look-up</span>
+        <span class="section-number">01: Help Topics</span>
+        <h2>Start here for an answer first.</h2>
+        <p class="lead" style="color: var(--text-muted); font-size: 1.05rem; font-weight: 300; margin-top: 0.5rem;">If you don't find what you need below, open a ticket.</p>
       </div>
 
       <div class="help-grid">
@@ -941,26 +973,12 @@
     <div class="deco-grid" aria-hidden="true"></div>
     <div class="container">
       <div class="section-head">
-        <span class="section-number on-dark">02 — Submit a Ticket</span>
+        <span class="section-number on-dark">02: Submit a Ticket</span>
         <h2>Open a ticket</h2>
       </div>
 
-      <div class="route-toggle" role="tablist" aria-label="Route ticket to">
-        <button type="button" class="route-btn active" data-route="cs" role="tab" aria-selected="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
-          </svg>
-          Customer Service
-        </button>
-        <button type="button" class="route-btn" data-route="dev" role="tab" aria-selected="false">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>
-          </svg>
-          Development Team
-        </button>
-      </div>
-
       <form class="ticket-form" id="ticketForm" novalidate>
+        <input type="hidden" name="route" id="routeField" value="cs" />
         <div class="field">
           <label for="fullName">Full name <span class="req">*</span></label>
           <input type="text" id="fullName" name="fullName" placeholder="Jamie Chen" required />
@@ -973,13 +991,18 @@
 
         <div class="field">
           <label for="company">Company / Plant</label>
-          <input type="text" id="company" name="company" placeholder="Acme Manufacturing — Plant 3" />
+          <input type="text" id="company" name="company" placeholder="Acme Manufacturing: Plant 3" />
         </div>
 
         <div class="field">
           <label for="category">Category</label>
           <select id="category" name="category">
-            <!-- options injected by JS based on route -->
+            <option value="production">Production &amp; Scheduling</option>
+            <option value="inventory">Inventory &amp; Purchasing</option>
+            <option value="integration">Integrations &amp; API</option>
+            <option value="billing">Account &amp; Billing</option>
+            <option value="how-do-i">How do I…</option>
+            <option value="other">Other</option>
           </select>
         </div>
 
@@ -1039,7 +1062,7 @@
         <div class="contact-card">
           <div class="contact-label">Phone</div>
           <a class="contact-value" href="tel:+15550102204">+1 (555) 010-2204</a>
-          <p class="contact-sub">Mon–Fri, 8am–8pm ET.</p>
+          <p class="contact-sub">Mon-Fri, 8am-8pm ET.</p>
         </div>
         <div class="contact-card">
           <div class="contact-label">Production Down</div>
@@ -1056,7 +1079,7 @@
   <section class="faq" id="faq">
     <div class="container">
       <div class="section-head">
-        <span class="section-number">03 — FAQ</span>
+        <span class="section-number">03: FAQ</span>
         <h2>Frequently asked</h2>
       </div>
 
@@ -1068,25 +1091,23 @@
           </summary>
           <p class="faq-answer">
             General questions get a reply in under 4 hours during business hours. Technical issues, under 8.
-            If your line is down and you're on an active plan, we're on it in 30 minutes or less — 24/7.
+            If your line is down and you're on an active plan, we're on it in 30 minutes or less: 24/7.
           </p>
         </details>
 
         <details class="faq-item">
           <summary>
-            What's the difference between Customer Service and Development?
+            How is my ticket routed?
             <span class="faq-icon" aria-hidden="true"></span>
           </summary>
           <p class="faq-answer">
-            Customer Service handles day-to-day questions: how to use the system, billing, account changes, training,
-            and most operational issues. Development handles bugs, integration work, API questions, performance issues,
-            and feature requests. Not sure which? Pick Customer Service — we'll re-route if needed.
+            We route tickets automatically from the category you pick. Production, inventory, and billing go to Customer Service. Integrations and API go to Development. Choose the closest match and we will adjust if needed.
           </p>
         </details>
 
         <details class="faq-item">
           <summary>
-            My line is down right now — what do I do?
+            My line is down right now: what do I do?
             <span class="faq-icon" aria-hidden="true"></span>
           </summary>
           <p class="faq-answer">
@@ -1113,7 +1134,7 @@
             <span class="faq-icon" aria-hidden="true"></span>
           </summary>
           <p class="faq-answer">
-            We do. Standard connectors — QuickBooks, Shopify, common EDI flows — are supported out of the box.
+            We do. Standard connectors: QuickBooks, Shopify, common EDI flows: are supported out of the box.
             For custom integrations, route your ticket to the Development team and include the system and the
             data you need to move. We'll come back with scope and timing.
           </p>
@@ -1140,30 +1161,39 @@
     <div class="container">
       <div class="footer-grid">
         <div>
-          <img src="nodalerp-logo-light.png" alt="NodalERP" class="footer-logo" />
+          <img src="nodalerp-logo-light.png" alt="Nodal Shop Floor" class="footer-logo" />
           <p class="footer-tagline">Control made simple.</p>
+          <p class="footer-blurb">Standalone shop floor software for modern manufacturers. Built by Coffey &amp; Co.</p>
         </div>
         <div>
-          <h4>Support</h4>
+          <h4>Product</h4>
           <ul>
-            <li><a href="#help-topics">Help Topics</a></li>
-            <li><a href="#ticket">Submit a Ticket</a></li>
-            <li><a href="#faq">FAQ</a></li>
-            <li><a href="#contact">Contact</a></li>
+            <li><a href="index.html">Shop Floor</a></li>
+            <li><a href="pricing.html">Pricing</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="demo.html">Book a demo</a></li>
           </ul>
         </div>
         <div>
           <h4>Resources</h4>
           <ul>
-            <li><a href="#">Documentation</a></li>
-            <li><a href="#">System Status</a></li>
-            <li><a href="#">Release Notes</a></li>
-            <li><a href="#">API Reference</a></li>
+            <li><a href="support.html">Support</a></li>
+            <li><a href="help.html">Help topics</a></li>
+            <li><a href="#">API docs</a></li>
+            <li><a href="#">Status</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Contact</h4>
+          <ul>
+            <li><a href="mailto:steve@coffeyandco.com">steve@coffeyandco.com</a></li>
+            <li><a href="tel:+15402394115">540-239-4115</a></li>
+            <li><a href="demo.html">Schedule a demo</a></li>
           </ul>
         </div>
       </div>
       <div class="footer-bottom">
-        <span>&copy; <span id="year"></span> NodalERP. All rights reserved.</span>
+        <span>&copy; <span id="year"></span> Coffey &amp; Co. All rights reserved.</span>
         <div class="footer-bottom-links">
           <a href="#">Privacy</a>
           <a href="#">Terms</a>
@@ -1179,51 +1209,25 @@
     // ---------- Year in footer ----------
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // ---------- Category options per route ----------
-    const CATEGORIES = {
-      cs: [
-        { value: 'production', label: 'Production & Scheduling' },
-        { value: 'inventory',  label: 'Inventory & Purchasing' },
-        { value: 'billing',    label: 'Account & Billing' },
-        { value: 'how-do-i',   label: 'How do I…' },
-        { value: 'other',      label: 'Other' }
-      ],
-      dev: [
-        { value: 'bug',         label: 'Bug report' },
-        { value: 'integration', label: 'Integration / API' },
-        { value: 'performance', label: 'Performance issue' },
-        { value: 'feature',     label: 'Feature request' },
-        { value: 'other',       label: 'Other' }
-      ]
+    const ROUTE_BY_CATEGORY = {
+      production: 'cs',
+      inventory: 'cs',
+      integration: 'dev',
+      billing: 'cs',
+      'how-do-i': 'cs',
+      other: 'cs'
     };
 
     let currentRoute = 'cs';
 
-    function populateCategory(route, preselect) {
-      const select = document.getElementById('category');
-      const opts = CATEGORIES[route] || [];
-      select.innerHTML = opts
-        .map(o => `<option value="${o.value}">${o.label}</option>`)
-        .join('');
-      if (preselect && opts.some(o => o.value === preselect)) {
-        select.value = preselect;
-      }
+    function setRouteFromCategory() {
+      const cat = document.getElementById('category').value;
+      currentRoute = ROUTE_BY_CATEGORY[cat] || 'cs';
+      document.getElementById('routeField').value = currentRoute;
     }
 
-    function setRoute(route, preselectCategory) {
-      currentRoute = route;
-      document.querySelectorAll('.route-btn').forEach(btn => {
-        const isActive = btn.dataset.route === route;
-        btn.classList.toggle('active', isActive);
-        btn.setAttribute('aria-selected', isActive ? 'true' : 'false');
-      });
-      populateCategory(route, preselectCategory);
-    }
-
-    // ---------- Route toggle ----------
-    document.querySelectorAll('.route-btn').forEach(btn => {
-      btn.addEventListener('click', () => setRoute(btn.dataset.route));
-    });
+    document.getElementById('category').addEventListener('change', setRouteFromCategory);
+    setRouteFromCategory();
 
     // ---------- Priority chips (single-select) ----------
     document.querySelectorAll('.chip').forEach(chip => {
@@ -1274,7 +1278,7 @@
       };
 
       /* ===========================================================
-         🔌 BACKEND HOOK — REPLACE THIS BLOCK WITH A REAL POST
+         🔌 BACKEND HOOK: REPLACE THIS BLOCK WITH A REAL POST
          -----------------------------------------------------------
          This demo just fakes success locally. To wire up a real
          backend (Zendesk, Freshdesk, Formspree, a Supabase function,
@@ -1306,11 +1310,8 @@
         c.classList.toggle('active', c.dataset.priority === 'normal');
         c.setAttribute('aria-checked', c.dataset.priority === 'normal' ? 'true' : 'false');
       });
-      setRoute(currentRoute);
+      setRouteFromCategory();
     });
-
-    // ---------- Initial category population ----------
-    populateCategory(currentRoute);
   </script>
 
 </body>

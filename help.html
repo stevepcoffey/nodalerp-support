@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Help Topics — NodalERP Support</title>
-  <meta name="description" content="Browse help topics for NodalERP — production, inventory, integrations, and billing." />
+  <title>Help Topics: Nodal Shop Floor Support</title>
+  <meta name="description" content="Browse help topics for Nodal Shop Floor. Production, inventory, integrations, and billing." />
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -212,6 +212,21 @@
       font-size: 0.78rem;
       flex-shrink: 0;
     }
+    .nav-wrap { display: flex; align-items: center; gap: 2rem; }
+    .header-cta { display: inline-flex; gap: 0.7rem; align-items: center; }
+    .support-link {
+      font-size: 0.88rem;
+      color: rgba(243, 243, 243, 0.75);
+      padding: 0.45rem 1rem;
+      border: 1px solid rgba(78, 189, 250, 0.25);
+      border-radius: 4px;
+      transition: all 0.2s ease;
+    }
+    .support-link:hover, .support-link.active {
+      color: var(--blue-light);
+      border-color: var(--blue-light);
+    }
+    .header-cta .btn { padding: 0.55rem 1.2rem; font-size: 0.88rem; }
 
     /* Hero (smaller than home) */
     .hero {
@@ -447,6 +462,13 @@
       margin-bottom: 2.5rem;
     }
     .footer-logo { height: 28px; margin-bottom: 0.9rem; }
+    .footer-blurb {
+      font-size: 0.88rem;
+      color: rgba(243, 243, 243, 0.55);
+      max-width: 22rem;
+      line-height: 1.55;
+      font-weight: 300;
+    }
     .footer-tagline {
       font-style: italic;
       font-size: 0.88rem;
@@ -507,7 +529,7 @@
         All systems operational
       </span>
       <div class="topbar-right">
-        Mon–Fri 8am–8pm ET · <a href="tel:+15550102204" class="phone">+1 (555) 010-2204</a>
+        Mon-Fri 8am-8pm ET · <a href="tel:+15550102204" class="phone">+1 (555) 010-2204</a>
       </div>
     </div>
   </div>
@@ -515,19 +537,19 @@
   <!-- Header -->
   <header class="header">
     <div class="container">
-      <a href="support.html" class="brand" aria-label="NodalERP Support — home">
-        <img src="nodalerp-logo-light.png" alt="NodalERP" class="brand-logo" />
-        <span class="brand-divider" aria-hidden="true"></span>
-        <span class="brand-label">Support</span>
+      <a href="index.html" class="brand" aria-label="Nodal Shop Floor home">
+        <img src="nodalerp-logo-light.png" alt="Nodal Shop Floor" class="brand-logo" />
       </a>
-      <div class="header-end">
+      <div class="nav-wrap">
         <nav class="nav" aria-label="Primary">
-          <a href="help.html" class="active">Help Topics</a>
-          <a href="support.html#ticket">Submit a Ticket</a>
-          <a href="support.html#faq">FAQ</a>
-          <a href="support.html#contact">Contact</a>
+          <a href="index.html">Shop Floor</a>
+          <a href="pricing.html">Pricing</a>
+          <a href="about.html">About</a>
         </nav>
-        <a href="index.html" class="btn btn-ghost header-back">← Main site</a>
+        <div class="header-cta">
+          <a href="support.html" class="support-link active">Support</a>
+          <a href="demo.html" class="btn btn-primary">Book a demo</a>
+        </div>
       </div>
     </div>
   </header>
@@ -541,7 +563,7 @@
       <h1>Find an <span class="gradient-text">answer.</span></h1>
       <p class="lead">
         Browse by topic. Each section covers the questions we hear most often.
-        If you can't find what you need, open a ticket — we'll get you sorted.
+        If you can't find what you need, open a ticket and we'll get you sorted.
       </p>
     </div>
   </section>
@@ -596,10 +618,10 @@
           </svg>
         </span>
         <div>
-          <span class="section-number">01 — Production &amp; Scheduling</span>
+          <span class="section-number">01: Production &amp; Scheduling</span>
           <h2>Work orders, routings, and the shop floor</h2>
           <p class="cat-intro">
-            Everything related to running production — creating work orders, building routings,
+            Everything related to running production: creating work orders, building routings,
             scheduling jobs across machines, and tracking what's happening on the floor.
           </p>
         </div>
@@ -611,7 +633,7 @@
             <span class="topic-icon" aria-hidden="true"></span>
           </summary>
           <div class="topic-answer">
-            <p>From the main dashboard, go to <strong>Production → Work Orders → New</strong>. Select the item you're producing, the quantity, and the due date. NodalERP will auto-populate the routing and BOM based on the item's setup.</p>
+            <p>From the main dashboard, go to <strong>Production → Work Orders → New</strong>. Select the item you're producing, the quantity, and the due date. Nodal Shop Floor will auto-populate the routing and BOM based on the item's setup.</p>
             <p>If the item doesn't have a routing yet, you'll be prompted to either pick a template or build one inline.</p>
           </div>
         </details>
@@ -631,7 +653,7 @@
             <span class="topic-icon" aria-hidden="true"></span>
           </summary>
           <div class="topic-answer">
-            <p>Drag and drop on the schedule view. Or open the work order and edit the start date directly. NodalERP will warn you if the change conflicts with material availability or another job on the same machine.</p>
+            <p>Drag and drop on the schedule view. Or open the work order and edit the start date directly. Nodal Shop Floor will warn you if the change conflicts with material availability or another job on the same machine.</p>
           </div>
         </details>
 
@@ -640,7 +662,7 @@
             <span class="topic-icon" aria-hidden="true"></span>
           </summary>
           <div class="topic-answer">
-            <p>Open the work order, click the routing step you want to assign, and pick the work center from the dropdown. If multiple machines can run the step, NodalERP defaults to the one with the earliest available slot.</p>
+            <p>Open the work order, click the routing step you want to assign, and pick the work center from the dropdown. If multiple machines can run the step, Nodal Shop Floor defaults to the one with the earliest available slot.</p>
           </div>
         </details>
 
@@ -651,9 +673,9 @@
           <div class="topic-answer">
             <p>Three common reasons:</p>
             <ol>
-              <li>The work order is still in <code>Draft</code> status — it needs to be <code>Released</code> to appear on the floor.</li>
+              <li>The work order is still in <code>Draft</code> status: it needs to be <code>Released</code> to appear on the floor.</li>
               <li>The routing isn't assigned to a work center, or the work center isn't tied to the terminal.</li>
-              <li>The scheduled start date is in the future — terminals show today's queue by default.</li>
+              <li>The scheduled start date is in the future: terminals show today's queue by default.</li>
             </ol>
           </div>
         </details>
@@ -685,7 +707,7 @@
           </svg>
         </span>
         <div>
-          <span class="section-number">02 — Inventory &amp; Purchasing</span>
+          <span class="section-number">02: Inventory &amp; Purchasing</span>
           <h2>Stock, POs, vendors, and BOMs</h2>
           <p class="cat-intro">
             Managing what's on the shelf, what's on order, and what goes into what.
@@ -710,7 +732,7 @@
             <span class="topic-icon" aria-hidden="true"></span>
           </summary>
           <div class="topic-answer">
-            <p>Two ways. From <strong>Purchasing → New PO</strong>, pick a vendor and add line items manually. Or from the Reorder Suggestions view, select recommended items and NodalERP generates POs grouped by vendor.</p>
+            <p>Two ways. From <strong>Purchasing → New PO</strong>, pick a vendor and add line items manually. Or from the Reorder Suggestions view, select recommended items and Nodal Shop Floor generates POs grouped by vendor.</p>
           </div>
         </details>
 
@@ -728,7 +750,7 @@
             <span class="topic-icon" aria-hidden="true"></span>
           </summary>
           <div class="topic-answer">
-            <p>Open the PO, click <strong>Receive</strong>, and enter the quantity received against each line. Partial receipts are supported — the PO stays open until everything is in.</p>
+            <p>Open the PO, click <strong>Receive</strong>, and enter the quantity received against each line. Partial receipts are supported: the PO stays open until everything is in.</p>
             <p>Receiving updates stock levels immediately and creates the inventory transactions that flow to your accounting system.</p>
           </div>
         </details>
@@ -738,7 +760,7 @@
             <span class="topic-icon" aria-hidden="true"></span>
           </summary>
           <div class="topic-answer">
-            <p>Open the parent item, click the <strong>BOM</strong> tab, and add or remove components. Changes apply to new work orders only — work orders already in progress keep their original BOM snapshot.</p>
+            <p>Open the parent item, click the <strong>BOM</strong> tab, and add or remove components. Changes apply to new work orders only: work orders already in progress keep their original BOM snapshot.</p>
             <p>For versioned BOMs, create a new revision instead of overwriting the existing one.</p>
           </div>
         </details>
@@ -749,7 +771,7 @@
           </summary>
           <div class="topic-answer">
             <p>On any item, go to the <strong>Inventory Settings</strong> tab. Set the reorder point (when to reorder) and the reorder quantity (how much to order). Safety stock is a separate field for the buffer you want to keep on hand.</p>
-            <p>NodalERP uses these to generate reorder suggestions daily.</p>
+            <p>Nodal Shop Floor uses these to generate reorder suggestions daily.</p>
           </div>
         </details>
       </div>
@@ -771,7 +793,7 @@
           </svg>
         </span>
         <div>
-          <span class="section-number">03 — Integrations &amp; API</span>
+          <span class="section-number">03: Integrations &amp; API</span>
           <h2>Connect the rest of your stack</h2>
           <p class="cat-intro">
             Standard connectors for the systems you already use, plus a REST API and webhooks
@@ -786,8 +808,8 @@
             <span class="topic-icon" aria-hidden="true"></span>
           </summary>
           <div class="topic-answer">
-            <p>Go to <strong>Settings → Integrations → QuickBooks</strong>. Click Connect and sign into your QuickBooks account. NodalERP will pull your chart of accounts, customers, and vendors automatically.</p>
-            <p>Sync runs every 15 minutes by default. Push direction (NodalERP → QuickBooks or both ways) is configurable per data type.</p>
+            <p>Go to <strong>Settings → Integrations → QuickBooks</strong>. Click Connect and sign into your QuickBooks account. Nodal Shop Floor will pull your chart of accounts, customers, and vendors automatically.</p>
+            <p>Sync runs every 15 minutes by default. Push direction (Nodal Shop Floor → QuickBooks or both ways) is configurable per data type.</p>
           </div>
         </details>
 
@@ -796,8 +818,8 @@
             <span class="topic-icon" aria-hidden="true"></span>
           </summary>
           <div class="topic-answer">
-            <p>From <strong>Settings → Integrations → Shopify</strong>, enter your Shopify store URL and authorize the connection. You'll be asked to map Shopify product SKUs to NodalERP item codes.</p>
-            <p>Once mapped, orders flow into NodalERP as sales orders, and inventory updates push back to Shopify in near real-time.</p>
+            <p>From <strong>Settings → Integrations → Shopify</strong>, enter your Shopify store URL and authorize the connection. You'll be asked to map Shopify product SKUs to Nodal Shop Floor item codes.</p>
+            <p>Once mapped, orders flow into Nodal Shop Floor as sales orders, and inventory updates push back to Shopify in near real-time.</p>
           </div>
         </details>
 
@@ -816,7 +838,7 @@
             <span class="topic-icon" aria-hidden="true"></span>
           </summary>
           <div class="topic-answer">
-            <p>Go to <strong>Settings → Developer → API Keys</strong>. Click Generate New Key, give it a name, and pick the permission scope. Store the key somewhere safe — you won't be able to see it again after this screen.</p>
+            <p>Go to <strong>Settings → Developer → API Keys</strong>. Click Generate New Key, give it a name, and pick the permission scope. Store the key somewhere safe: you won't be able to see it again after this screen.</p>
             <p>Keys can be revoked at any time without affecting other keys.</p>
           </div>
         </details>
@@ -827,7 +849,7 @@
           </summary>
           <div class="topic-answer">
             <p>From <strong>Settings → Developer → Webhooks</strong>, add your endpoint URL and pick the events you want to subscribe to. Use the <strong>Send Test</strong> button to fire a sample payload to your endpoint.</p>
-            <p>The Recent Deliveries log shows every webhook attempt with full request and response data — useful for debugging.</p>
+            <p>The Recent Deliveries log shows every webhook attempt with full request and response data: useful for debugging.</p>
           </div>
         </details>
 
@@ -837,7 +859,7 @@
           </summary>
           <div class="topic-answer">
             <p>Standard plans get 60 requests per minute per API key. Higher tiers get 600 per minute. Webhook deliveries don't count against the limit.</p>
-            <p>If you're pushing batch loads of data, use the bulk endpoints instead — they accept up to 1,000 records per request.</p>
+            <p>If you're pushing batch loads of data, use the bulk endpoints instead: they accept up to 1,000 records per request.</p>
           </div>
         </details>
       </div>
@@ -857,10 +879,10 @@
           </svg>
         </span>
         <div>
-          <span class="section-number">04 — Account &amp; Billing</span>
+          <span class="section-number">04: Account &amp; Billing</span>
           <h2>Invoices, seats, plans, and renewals</h2>
           <p class="cat-intro">
-            Everything related to your NodalERP subscription — managing users, updating payment
+            Everything related to your Nodal Shop Floor subscription: managing users, updating payment
             methods, changing plans, and accessing past invoices.
           </p>
         </div>
@@ -920,7 +942,7 @@
             <span class="topic-icon" aria-hidden="true"></span>
           </summary>
           <div class="topic-answer">
-            <p>From <strong>Settings → Billing → Plan → Cancel Subscription</strong>. Your account stays active until the end of the current billing period — you won't lose data or access mid-cycle.</p>
+            <p>From <strong>Settings → Billing → Plan → Cancel Subscription</strong>. Your account stays active until the end of the current billing period: you won't lose data or access mid-cycle.</p>
             <p>If you're cancelling because something isn't working, email support@nodalerp.com first. We'd rather fix the problem than lose you.</p>
           </div>
         </details>
@@ -935,7 +957,7 @@
     <div class="container">
       <div>
         <h2>Still need help?</h2>
-        <p>Didn't find an answer? Open a ticket and we'll route it to the right team — fast.</p>
+        <p>Didn't find an answer? Open a ticket and we'll route it to the right team, fast.</p>
       </div>
       <div class="cta-buttons">
         <a href="support.html#ticket" class="btn btn-primary">
@@ -951,30 +973,39 @@
     <div class="container">
       <div class="footer-grid">
         <div>
-          <img src="nodalerp-logo-light.png" alt="NodalERP" class="footer-logo" />
+          <img src="nodalerp-logo-light.png" alt="Nodal Shop Floor" class="footer-logo" />
           <p class="footer-tagline">Control made simple.</p>
+          <p class="footer-blurb">Standalone shop floor software for modern manufacturers. Built by Coffey &amp; Co.</p>
         </div>
         <div>
-          <h4>Support</h4>
+          <h4>Product</h4>
           <ul>
-            <li><a href="help.html">Help Topics</a></li>
-            <li><a href="support.html#ticket">Submit a Ticket</a></li>
-            <li><a href="support.html#faq">FAQ</a></li>
-            <li><a href="support.html#contact">Contact</a></li>
+            <li><a href="index.html">Shop Floor</a></li>
+            <li><a href="pricing.html">Pricing</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="demo.html">Book a demo</a></li>
           </ul>
         </div>
         <div>
           <h4>Resources</h4>
           <ul>
-            <li><a href="#">Documentation</a></li>
-            <li><a href="#">System Status</a></li>
-            <li><a href="#">Release Notes</a></li>
-            <li><a href="#">API Reference</a></li>
+            <li><a href="support.html">Support</a></li>
+            <li><a href="help.html">Help topics</a></li>
+            <li><a href="#">API docs</a></li>
+            <li><a href="#">Status</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Contact</h4>
+          <ul>
+            <li><a href="mailto:steve@coffeyandco.com">steve@coffeyandco.com</a></li>
+            <li><a href="tel:+15402394115">540-239-4115</a></li>
+            <li><a href="demo.html">Schedule a demo</a></li>
           </ul>
         </div>
       </div>
       <div class="footer-bottom">
-        <span>&copy; <span id="year"></span> NodalERP. All rights reserved.</span>
+        <span>&copy; <span id="year"></span> Coffey &amp; Co. All rights reserved.</span>
         <div class="footer-bottom-links">
           <a href="#">Privacy</a>
           <a href="#">Terms</a>
