@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shop Floor App — Built for the floor, not the office | NodalERP</title>
+  <meta name="description" content="Tablet-native shop floor app. Badge scan login, big buttons, scan-driven workflows. Real-time data captured at the station, not on a clipboard." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root { --navy: #050C1D; --blue-light: #4ebdfa; --blue: #0056b5; --gray: #f3f3f3; --white: #ffffff; --text: #050C1D; --text-muted: #5a6478; --border: #d8dce4; --gradient: linear-gradient(135deg, #4ebdfa 0%, #0056b5 100%); --container: 1200px; }
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+    body { margin: 0; font-family: 'Roboto', system-ui, sans-serif; font-size: 16px; font-weight: 400; line-height: 1.55; color: var(--text); background: var(--white); -webkit-font-smoothing: antialiased; }
+    img { display: block; max-width: 100%; height: auto; }
+    a { color: inherit; text-decoration: none; }
+    .container { max-width: var(--container); margin: 0 auto; padding: 0 1.5rem; }
+    h1, h2, h3 { margin: 0; font-weight: 700; letter-spacing: -0.015em; }
+    h1 { font-size: clamp(2.2rem, 4.5vw, 3.4rem); line-height: 1.08; }
+    h2 { font-size: clamp(1.7rem, 2.8vw, 2.2rem); line-height: 1.18; }
+    h3 { font-size: 1.1rem; letter-spacing: normal; }
+    p { margin: 0; }
+    .lead { font-size: 1.12rem; font-weight: 300; line-height: 1.55; }
+    .gradient-text { background: var(--gradient); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: transparent; }
+    .eyebrow, .section-number { display: inline-flex; align-items: center; font-size: 0.78rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.22em; margin: 0; }
+    .eyebrow { font-size: 0.75rem; letter-spacing: 0.2em; color: var(--blue-light); }
+    .section-number { color: var(--blue); margin-bottom: 0.8rem; }
+    .section-number.on-dark { color: var(--blue-light); }
+    .eyebrow::before, .section-number::before { content: ""; display: inline-block; width: 8px; height: 8px; background: var(--gradient); transform: rotate(45deg) translateY(-1px); margin-right: 0.6rem; }
+    .eyebrow::before { width: 10px; height: 10px; }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; padding: 0.9rem 1.7rem; font-size: 0.94rem; font-weight: 500; border: none; border-radius: 4px; transition: all 0.2s ease; white-space: nowrap; font-family: inherit; cursor: pointer; }
+    .btn .arrow { display: inline-block; transition: transform 0.2s ease; }
+    .btn:hover .arrow { transform: translateX(3px); }
+    .btn-primary { background: linear-gradient(90deg, #2DD4BF 0%, #2563EB 100%); color: var(--white); font-family: 'Montserrat', sans-serif; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; }
+    .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 8px 24px rgba(37, 99, 235, 0.4); }
+    .btn-ghost { background: transparent; color: var(--blue-light); border: 1px solid rgba(78,189,250,0.35); }
+    .btn-ghost:hover { background: rgba(78,189,250,0.08); border-color: var(--blue-light); }
+    .btn-ghost-light { background: transparent; color: var(--blue); border: 1px solid rgba(0,86,181,0.3); }
+    .btn-ghost-light:hover { background: rgba(0,86,181,0.05); border-color: var(--blue); }
+    .header { background: var(--navy); padding: 1.1rem 0; border-bottom: 1px solid rgba(78,189,250,0.12); position: sticky; top: 0; z-index: 100; }
+    .header .container { display: flex; justify-content: space-between; align-items: center; }
+    .brand { display: inline-flex; align-items: center; }
+    .brand-logo { height: 32px; }
+    .nav-wrap { display: flex; align-items: center; gap: 2rem; }
+    .nav { display: flex; gap: 1.8rem; }
+    .nav a { font-size: 0.92rem; color: #f3f3f3; padding-bottom: 2px; border-bottom: 1px solid transparent; transition: all 0.2s ease; }
+    .nav a:hover, .nav a.active { color: var(--blue-light); border-bottom-color: var(--blue-light); }
+    .header-cta { display: inline-flex; gap: 0.7rem; align-items: center; }
+    .support-link { font-size: 0.88rem; color: rgba(243,243,243,0.75); padding: 0.45rem 1rem; border: 1px solid rgba(78,189,250,0.25); border-radius: 4px; transition: all 0.2s ease; }
+    .support-link:hover { color: var(--blue-light); border-color: var(--blue-light); }
+    .header-cta .btn { padding: 0.55rem 1.2rem; font-size: 0.88rem; }
+    .dark-section { position: relative; background: var(--navy); color: #f3f3f3; overflow: hidden; }
+    .deco-glow, .deco-grid { position: absolute; inset: 0; pointer-events: none; }
+    .deco-glow { background-image: radial-gradient(circle at 20% 30%, rgba(78,189,250,0.08) 0%, transparent 40%), radial-gradient(circle at 80% 70%, rgba(0,86,181,0.18) 0%, transparent 45%); }
+    .deco-glow.alt { background-image: radial-gradient(circle at 85% 20%, rgba(78,189,250,0.1) 0%, transparent 40%), radial-gradient(circle at 15% 85%, rgba(0,86,181,0.18) 0%, transparent 45%); }
+    .deco-grid { background-image: linear-gradient(rgba(78,189,250,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(78,189,250,0.04) 1px, transparent 1px); background-size: 60px 60px; -webkit-mask-image: radial-gradient(ellipse at center, black 40%, transparent 75%); mask-image: radial-gradient(ellipse at center, black 40%, transparent 75%); }
+    .dark-section > .container { position: relative; z-index: 1; }
+    .page-hero { padding: 5rem 0 5.5rem; }
+    .page-hero h1 { color: var(--white); margin: 1rem 0 1.2rem; max-width: 30rem; }
+    .page-hero .lead { color: rgba(243,243,243,0.78); max-width: 38rem; margin-bottom: 2rem; }
+    .page-hero-ctas { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+    .section { padding: 5.5rem 0; }
+    .section.light { background: var(--white); }
+    .section.gray { background: var(--gray); }
+    .section-head { margin-bottom: 3rem; max-width: 48rem; }
+    .section-head h2 { color: var(--text); margin-bottom: 0.8rem; }
+    .section-head .lead { color: var(--text-muted); }
+    .dark-section .section-head h2 { color: var(--white); }
+    .dark-section .section-head .lead { color: rgba(243,243,243,0.78); }
+    .feature-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+    .feature-grid.cols-2 { grid-template-columns: 1fr 1fr; }
+    .feature-grid.cols-4 { grid-template-columns: repeat(4, 1fr); gap: 1.2rem; }
+    .feature-card { background: var(--white); border: 1px solid var(--border); border-radius: 6px; padding: 2rem 1.8rem; transition: all 0.25s ease; }
+    .section.gray .feature-card { background: var(--white); }
+    .feature-card:hover { border-color: var(--blue-light); transform: translateY(-2px); box-shadow: 0 8px 20px rgba(5,12,29,0.06); }
+    .feature-icon { width: 44px; height: 44px; border-radius: 4px; background: rgba(78,189,250,0.08); display: inline-flex; align-items: center; justify-content: center; color: var(--blue); margin-bottom: 1.2rem; }
+    .feature-icon svg { width: 22px; height: 22px; }
+    .feature-card h3 { color: var(--text); margin-bottom: 0.5rem; font-size: 1.15rem; }
+    .feature-card p { color: var(--text-muted); font-size: 0.94rem; line-height: 1.55; }
+    .cta { padding: 5rem 0; }
+    .cta .container { display: flex; justify-content: space-between; align-items: center; gap: 2rem; flex-wrap: wrap; }
+    .cta h2 { color: var(--white); margin-bottom: 0.6rem; }
+    .cta p { color: rgba(243,243,243,0.7); max-width: 36rem; font-size: 1.05rem; font-weight: 300; }
+    .cta-buttons { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+    .footer { background: var(--navy); color: rgba(243,243,243,0.7); padding: 4rem 0 2rem; border-top: 1px solid rgba(78,189,250,0.1); }
+    .footer-grid { display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr; gap: 3rem; margin-bottom: 3rem; }
+    .footer-logo { height: 28px; margin-bottom: 1rem; }
+    .footer-tagline { font-style: italic; font-size: 0.9rem; color: rgba(243,243,243,0.55); margin-bottom: 1.2rem; }
+    .footer-blurb { font-size: 0.88rem; color: rgba(243,243,243,0.55); max-width: 22rem; line-height: 1.55; font-weight: 300; }
+    .footer h4 { font-size: 0.75rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.2em; color: var(--blue-light); margin: 0 0 1.1rem; }
+    .footer ul { list-style: none; padding: 0; margin: 0; }
+    .footer li a { display: block; padding: 0.35rem 0; color: rgba(243,243,243,0.7); font-size: 0.92rem; transition: color 0.2s ease; }
+    .footer li a:hover { color: var(--blue-light); }
+    .footer-bottom { display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; border-top: 1px solid rgba(78,189,250,0.1); padding-top: 1.5rem; font-size: 0.83rem; color: rgba(243,243,243,0.5); }
+    .footer-bottom-links { display: flex; gap: 1.5rem; }
+    .footer-bottom-links a:hover { color: var(--blue-light); }
+    @media (max-width: 900px) {
+      .feature-grid, .feature-grid.cols-2, .feature-grid.cols-4, .footer-grid { grid-template-columns: 1fr; }
+      .nav, .header-cta .btn { display: none; }
+      .page-hero { padding: 3.5rem 0 4rem; }
+      .section { padding: 4rem 0; }
+      .cta .container { flex-direction: column; align-items: flex-start; }
+    }
+    @media (max-width: 600px) { .feature-grid.cols-4 { grid-template-columns: 1fr 1fr; } }
+    /* Shop floor extras */
+    .step-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1rem; }
+    .step-card { position: relative; background: var(--white); border: 1px solid var(--border); border-radius: 6px; padding: 1.5rem 1.2rem; transition: all 0.25s ease; }
+    .step-card:hover { border-color: var(--blue-light); transform: translateY(-2px); }
+    .step-num { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: var(--blue); margin-bottom: 0.6rem; display: block; }
+    .step-card h3 { color: var(--text); margin-bottom: 0.4rem; font-size: 1rem; }
+    .step-card p { color: var(--text-muted); font-size: 0.86rem; line-height: 1.5; }
+    @media (max-width: 900px) { .step-grid { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 500px) { .step-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+
+  <header class="header">
+    <div class="container">
+      <a href="index.html" class="brand"><img src="nodalerp-logo-light.png" alt="NodalERP" class="brand-logo" /></a>
+      <div class="nav-wrap">
+        <nav class="nav">
+          <a href="platform.html" >Platform</a>
+          <a href="orchestration.html" >Orchestration</a>
+          <a href="shopfloor.html" class="active">Shop Floor</a>
+          <a href="pricing.html">Pricing</a>
+          <a href="demo.html" >Demo</a>
+        </nav>
+        <div class="header-cta">
+          <a href="support.html" class="support-link">Support</a>
+          <a href="demo.html" class="btn btn-primary">Book a demo</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section class="dark-section page-hero">
+    <div class="deco-glow"></div><div class="deco-grid"></div>
+    <div class="container">
+      <span class="eyebrow">The Floor App</span>
+      <h1>Built for the floor, <span class="gradient-text">not the office.</span></h1>
+      <p class="lead">A tablet-native shop floor app designed for the people doing the work. Badge scan login, big buttons, scan-driven workflows. No ERP training. No clipboards. Data captured where it happens, the moment it happens.</p>
+      <div class="page-hero-ctas">
+        <a href="demo.html" class="btn btn-primary">Book a demo <span class="arrow">→</span></a>
+        <a href="#workflow" class="btn btn-ghost">See the workflow</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section light" id="workflow">
+    <div class="container">
+      <div class="section-head">
+        <span class="section-number">01 — The Operator Workflow</span>
+        <h2>From badge to finished good — five taps.</h2>
+        <p class="lead">A floor operator's workflow shouldn't feel like an ERP. It should feel like a tool. Here's what an operator actually does, station-side, in the course of a job.</p>
+      </div>
+      <div class="step-grid">
+        <div class="step-card"><span class="step-num">01</span><h3>Badge in</h3><p>Scan badge at the tablet. No passwords. Logged in with role-based permissions.</p></div>
+        <div class="step-card"><span class="step-num">02</span><h3>Pick a work order</h3><p>See assigned jobs. Tap to open. Routing and BOM are right there.</p></div>
+        <div class="step-card"><span class="step-num">03</span><h3>Clock into operation</h3><p>One tap to start. Labor time captured automatically against the work order.</p></div>
+        <div class="step-card"><span class="step-num">04</span><h3>Scan materials</h3><p>Scan as you consume. Real-time inventory deduction. Full lot traceability.</p></div>
+        <div class="step-card"><span class="step-num">05</span><h3>Report &amp; complete</h3><p>Log quality, scrap, or completion. Next operation gets the handoff automatically.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="dark-section section">
+    <div class="deco-glow alt"></div><div class="deco-grid"></div>
+    <div class="container">
+      <div class="section-head">
+        <span class="section-number on-dark">02 — Built for the Floor</span>
+        <h2>Designed by people who've stood at the station.</h2>
+        <p class="lead">Generic business software wasn't built for a noisy, dimly-lit, gloved-hand environment. Every screen on the Nodal shop floor app was — because we've watched the people who'd use it actually use it.</p>
+      </div>
+      <div class="feature-grid">
+        <div class="feature-card" style="background: rgba(255,255,255,0.03); border-color: rgba(78,189,250,0.18); color: #f3f3f3;">
+          <span class="feature-icon" style="background: rgba(78,189,250,0.12); color: var(--blue-light);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>
+          <h3 style="color: #fff;">Badge scan login</h3>
+          <p style="color: rgba(243,243,243,0.7);">No passwords to forget or share. Badge scan logs in with role-based permissions and personal time tracking.</p>
+        </div>
+        <div class="feature-card" style="background: rgba(255,255,255,0.03); border-color: rgba(78,189,250,0.18); color: #f3f3f3;">
+          <span class="feature-icon" style="background: rgba(78,189,250,0.12); color: var(--blue-light);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="9" height="9"/><rect x="13" y="2" width="9" height="9"/><rect x="2" y="13" width="9" height="9"/><rect x="13" y="13" width="9" height="9"/></svg></span>
+          <h3 style="color: #fff;">Big buttons</h3>
+          <p style="color: rgba(243,243,243,0.7);">Designed for gloved hands and quick taps. No tiny menus, no buried screens, no need to slow down to navigate.</p>
+        </div>
+        <div class="feature-card" style="background: rgba(255,255,255,0.03); border-color: rgba(78,189,250,0.18); color: #f3f3f3;">
+          <span class="feature-icon" style="background: rgba(78,189,250,0.12); color: var(--blue-light);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></span>
+          <h3 style="color: #fff;">Dark mode</h3>
+          <p style="color: rgba(243,243,243,0.7);">Built for overhead lighting and screen glare. High contrast. Easy on the eyes through a full shift.</p>
+        </div>
+        <div class="feature-card" style="background: rgba(255,255,255,0.03); border-color: rgba(78,189,250,0.18); color: #f3f3f3;">
+          <span class="feature-icon" style="background: rgba(78,189,250,0.12); color: var(--blue-light);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h6v6H4z"/><path d="M14 4h6v6h-6z"/><path d="M4 14h6v6H4z"/><path d="M14 14h6v6h-6z"/></svg></span>
+          <h3 style="color: #fff;">Scan-driven everything</h3>
+          <p style="color: rgba(243,243,243,0.7);">Materials, work orders, locations, lots. Barcode scanning drives every workflow — no typing, no lookups, no errors.</p>
+        </div>
+        <div class="feature-card" style="background: rgba(255,255,255,0.03); border-color: rgba(78,189,250,0.18); color: #f3f3f3;">
+          <span class="feature-icon" style="background: rgba(78,189,250,0.12); color: var(--blue-light);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span>
+          <h3 style="color: #fff;">10-second scrap logging</h3>
+          <p style="color: rgba(243,243,243,0.7);">Failed quality check? Tap a reason code, enter quantity, done. Scrap captured immediately. Quality trends visible the same minute.</p>
+        </div>
+        <div class="feature-card" style="background: rgba(78,189,250,0.04); border-color: rgba(78,189,250,0.4); color: #f3f3f3;">
+          <span class="feature-icon" style="background: var(--gradient); color: var(--white);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></span>
+          <h3 style="color: #fff;">Real-time, everywhere</h3>
+          <p style="color: rgba(243,243,243,0.7);">When an operator completes a step, the work order status updates for everyone. No batch processing. No end-of-shift catch-up.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section gray">
+    <div class="container">
+      <div class="section-head">
+        <span class="section-number">03 — Why It Matters</span>
+        <h2>Accurate data starts where the work happens.</h2>
+        <p class="lead">When operators log production at their station — not on a clipboard that gets entered at the end of shift — you get something your current system probably can't deliver: data that's current, accurate, and trustworthy enough to make decisions on.</p>
+      </div>
+      <div class="feature-grid">
+        <div class="feature-card">
+          <h3>Operators stay productive</h3>
+          <p>No leaving the station to find a computer. No paperwork piling up to enter later. Less time on overhead, more time on the job.</p>
+        </div>
+        <div class="feature-card">
+          <h3>Leadership sees the truth</h3>
+          <p>Live dashboards reflect what's actually happening on the floor — not a version of reality from yesterday's data entry batch.</p>
+        </div>
+        <div class="feature-card">
+          <h3>Quality issues surface immediately</h3>
+          <p>Scrap and quality fails feed trend reporting in real time. Spot recurring problems in days, not at month-end review.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section light">
+    <div class="container">
+      <div class="section-head">
+        <span class="section-number">04 — Deployment</span>
+        <h2>Live on one line in weeks.</h2>
+        <p class="lead">The shop floor app can deploy standalone — pilot one production line, prove it works, then expand. No need to roll out the whole ERP first.</p>
+      </div>
+      <div class="feature-grid cols-4">
+        <div class="feature-card"><h3>Week 1</h3><p>Scope a single line. Configure stages, work centers, user roles, and badge scans.</p></div>
+        <div class="feature-card"><h3>Week 2</h3><p>Load products, materials, and work orders. Train supervisors and operators.</p></div>
+        <div class="feature-card"><h3>Week 3</h3><p>Run the pilot. Watch where people get stuck. Adjust screens and workflows.</p></div>
+        <div class="feature-card"><h3>Week 4</h3><p>Go live. Then add lines, integrations, and modules as the team's ready.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="dark-section cta">
+    <div class="deco-glow"></div><div class="deco-grid"></div>
+    <div class="container">
+      <div>
+        <h2>See the floor app in action.</h2>
+        <p>30 minutes. Real workflows. Show us your production process and we'll walk through how operators would use Nodal on the tablet.</p>
+      </div>
+      <div class="cta-buttons">
+        <a href="demo.html" class="btn btn-primary">Book a demo <span class="arrow">→</span></a>
+        <a href="platform.html" class="btn btn-ghost">See the platform</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <img src="nodalerp-logo-light.png" alt="NodalERP" class="footer-logo" />
+          <p class="footer-tagline">Control made simple.</p>
+          <p class="footer-blurb">The lightest, most integration-friendly ERP for modern manufacturers. Built by Coffey &amp; Co.</p>
+        </div>
+        <div>
+          <h4>Product</h4>
+          <ul>
+            <li><a href="platform.html">NodalERP</a></li>
+            <li><a href="orchestration.html">Orchestration</a></li>
+            <li><a href="shopfloor.html">Shop Floor</a></li>
+            <li><a href="pricing.html">Pricing</a></li>
+            <li><a href="demo.html">Book a demo</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Resources</h4>
+          <ul>
+            <li><a href="support.html">Support</a></li>
+            <li><a href="help.html">Help topics</a></li>
+            <li><a href="#">API docs</a></li>
+            <li><a href="#">Status</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Contact</h4>
+          <ul>
+            <li><a href="mailto:steve@coffeyandco.com">steve@coffeyandco.com</a></li>
+            <li><a href="tel:+15402394115">540-239-4115</a></li>
+            <li><a href="demo.html">Schedule a demo</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; <span id="year"></span> Coffey &amp; Co. All rights reserved.</span>
+        <div class="footer-bottom-links">
+          <a href="#">Privacy</a>
+          <a href="#">Terms</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+
+</body>
+</html>

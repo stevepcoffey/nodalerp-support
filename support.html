@@ -1,0 +1,1303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NodalERP Support — Control made simple.</title>
+  <meta name="description" content="Real support for real operations. Submit a ticket and we'll route it to the right team — fast." />
+
+  <!-- Roboto from Google Fonts (only external dependency) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,400&family=Montserrat:wght@700&display=swap" rel="stylesheet">
+
+  <style>
+    /* =====================================================
+       1. DESIGN TOKENS
+       ===================================================== */
+    :root {
+      --navy: #050C1D;
+      --blue-light: #4ebdfa;
+      --blue: #0056b5;
+      --gray: #f3f3f3;
+      --white: #ffffff;
+      --text: #050C1D;
+      --text-muted: #5a6478;
+      --text-dim: #8993a4;
+      --border: #d8dce4;
+      --ok: #2fb878;
+
+      --gradient: linear-gradient(135deg, #4ebdfa 0%, #0056b5 100%);
+      --gradient-urgent: linear-gradient(135deg, #f5a524 0%, #ef4444 100%);
+
+      --container: 1200px;
+    }
+
+    /* =====================================================
+       2. RESET / BASE
+       ===================================================== */
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: 'Roboto', system-ui, -apple-system, sans-serif;
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 1.55;
+      color: var(--text);
+      background: var(--white);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    img { display: block; max-width: 100%; height: auto; }
+    a { color: inherit; text-decoration: none; }
+    button { font-family: inherit; cursor: pointer; }
+
+    .container {
+      max-width: var(--container);
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    /* =====================================================
+       3. TYPOGRAPHY HELPERS
+       ===================================================== */
+    h1, h2, h3 { margin: 0; font-weight: 700; letter-spacing: -0.015em; }
+    h1 { font-size: clamp(2.2rem, 4.5vw, 3.5rem); line-height: 1.08; }
+    h2 { font-size: clamp(1.6rem, 2.6vw, 2.1rem); line-height: 1.2; }
+    h3 { font-size: 1rem; letter-spacing: normal; }
+    p { margin: 0; }
+
+    .lead {
+      font-size: 1.1rem;
+      font-weight: 300;
+      line-height: 1.5;
+    }
+
+    /* Gradient text highlight (for the word in the headline) */
+    .gradient-text {
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      color: transparent;
+    }
+
+    /* Eyebrow + section number labels */
+    .eyebrow,
+    .section-number {
+      display: inline-flex;
+      align-items: center;
+      font-size: 0.78rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.22em;
+      margin: 0;
+    }
+    .eyebrow { font-size: 0.75rem; letter-spacing: 0.2em; color: var(--blue-light); }
+    .section-number { color: var(--blue); margin-bottom: 0.8rem; }
+    .section-number.on-dark { color: var(--blue-light); }
+
+    /* Diamond accent (rotated gradient square) before eyebrow / section number */
+    .eyebrow::before,
+    .section-number::before {
+      content: "";
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      background: var(--gradient);
+      transform: rotate(45deg) translateY(-1px);
+      margin-right: 0.6rem;
+    }
+    .eyebrow::before { width: 10px; height: 10px; }
+
+    /* =====================================================
+       4. BUTTONS
+       ===================================================== */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.85rem 1.6rem;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.92rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      border: none;
+      border-radius: 4px;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+    .btn .arrow {
+      display: inline-block;
+      transition: transform 0.2s ease;
+    }
+    .btn:hover .arrow { transform: translateX(3px); }
+
+    .btn-primary {
+      background: linear-gradient(90deg, #2DD4BF 0%, #2563EB 100%);
+      color: var(--white);
+    }
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 8px 24px rgba(0, 86, 181, 0.35);
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--blue-light);
+      border: 1px solid rgba(78, 189, 250, 0.35);
+    }
+    .btn-ghost:hover {
+      background: rgba(78, 189, 250, 0.08);
+      border-color: var(--blue-light);
+    }
+
+    /* =====================================================
+       5. TOP STATUS BAR
+       ===================================================== */
+    .topbar {
+      background: var(--navy);
+      color: var(--gray);
+      font-size: 0.83rem;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid rgba(78, 189, 250, 0.1);
+    }
+    .topbar .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      padding: 0.18rem 0.6rem;
+      background: rgba(47, 184, 120, 0.15);
+      border: 1px solid rgba(47, 184, 120, 0.35);
+      border-radius: 999px;
+      font-size: 0.8rem;
+    }
+    .status-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--ok);
+      animation: pulse 2.2s infinite;
+    }
+    @keyframes pulse {
+      0%   { box-shadow: 0 0 0 0 rgba(47, 184, 120, 0.6); }
+      70%  { box-shadow: 0 0 0 8px rgba(47, 184, 120, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(47, 184, 120, 0); }
+    }
+    .topbar-right .phone { color: var(--blue-light); }
+
+    /* =====================================================
+       6. HEADER
+       ===================================================== */
+    .header {
+      background: var(--navy);
+      padding: 1.1rem 0;
+      border-bottom: 1px solid rgba(78, 189, 250, 0.12);
+    }
+    .header .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .brand-logo { height: 32px; }
+    .brand-divider {
+      width: 1px;
+      height: 22px;
+      background: rgba(78, 189, 250, 0.25);
+    }
+    .brand-label {
+      font-size: 0.72rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.22em;
+      color: var(--blue-light);
+    }
+    .nav {
+      display: flex;
+      gap: 2rem;
+    }
+    .nav a {
+      font-size: 0.92rem;
+      color: var(--gray);
+      padding-bottom: 2px;
+      border-bottom: 1px solid transparent;
+      transition: all 0.2s ease;
+    }
+    .nav a:hover {
+      color: var(--blue-light);
+      border-bottom-color: var(--blue-light);
+    }
+
+    /* =====================================================
+       7. DARK SECTION DECORATIONS (hero + ticket form)
+       ===================================================== */
+    .dark-section {
+      position: relative;
+      background: var(--navy);
+      color: var(--gray);
+      overflow: hidden;
+    }
+    .dark-section .deco-glow,
+    .dark-section .deco-grid {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+    .deco-glow {
+      background-image:
+        radial-gradient(circle at 20% 30%, rgba(78, 189, 250, 0.08) 0%, transparent 40%),
+        radial-gradient(circle at 80% 70%, rgba(0, 86, 181, 0.15) 0%, transparent 45%);
+    }
+    .deco-glow.alt {
+      background-image:
+        radial-gradient(circle at 80% 20%, rgba(78, 189, 250, 0.08) 0%, transparent 40%),
+        radial-gradient(circle at 15% 85%, rgba(0, 86, 181, 0.15) 0%, transparent 45%);
+    }
+    .deco-grid {
+      background-image:
+        linear-gradient(rgba(78, 189, 250, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(78, 189, 250, 0.04) 1px, transparent 1px);
+      background-size: 60px 60px;
+      -webkit-mask-image: radial-gradient(ellipse at center, black 40%, transparent 75%);
+              mask-image: radial-gradient(ellipse at center, black 40%, transparent 75%);
+    }
+    .dark-section > .container { position: relative; z-index: 1; }
+
+    /* =====================================================
+       8. HERO
+       ===================================================== */
+    .hero { padding: 5rem 0 6rem; }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.3fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+    .hero h1 { margin: 0.8rem 0 1.2rem; color: var(--white); }
+    .hero .lead {
+      color: rgba(243, 243, 243, 0.78);
+      max-width: 34rem;
+      margin-bottom: 2rem;
+    }
+    .hero-ctas {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    /* Hero info card (response times) */
+    .info-card {
+      position: relative;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(78, 189, 250, 0.18);
+      border-radius: 6px;
+      padding: 1.8rem;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+    .info-card::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--blue-light), transparent);
+    }
+    .info-card-title {
+      font-size: 0.78rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--blue-light);
+      margin-bottom: 1.1rem;
+    }
+    .info-card ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .info-card li {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.75rem 0;
+      border-bottom: 1px solid rgba(78, 189, 250, 0.1);
+      font-size: 0.92rem;
+    }
+    .info-card li:last-child { border-bottom: none; }
+    .info-card .label-text {
+      color: rgba(243, 243, 243, 0.65);
+      font-weight: 300;
+    }
+    .info-card .value {
+      color: var(--white);
+      font-weight: 500;
+    }
+    .info-card .value.urgent { color: var(--blue-light); }
+
+    /* =====================================================
+       9. QUICK HELP SECTION (light)
+       ===================================================== */
+    .quick-help { padding: 5rem 0; background: var(--white); }
+    .section-head { margin-bottom: 2.5rem; }
+    .section-head h2 { color: var(--text); }
+
+    .help-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+    }
+    .help-card {
+      position: relative;
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 1.6rem;
+      cursor: pointer;
+      overflow: hidden;
+      text-align: left;
+      width: 100%;
+      text-decoration: none;
+      color: inherit;
+      transition: all 0.25s ease;
+    }
+    .help-card::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: var(--gradient);
+      transform: translateX(-100%);
+      transition: transform 0.3s ease;
+    }
+    .help-card:hover {
+      border-color: var(--blue-light);
+      transform: translateY(-3px);
+      box-shadow: 0 12px 28px rgba(5, 12, 29, 0.08);
+    }
+    .help-card:hover::before { transform: translateX(0); }
+
+    .help-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 4px;
+      background: rgba(78, 189, 250, 0.08);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--blue);
+      margin-bottom: 1.2rem;
+      transition: all 0.25s ease;
+    }
+    .help-icon svg { width: 20px; height: 20px; }
+    .help-card:hover .help-icon {
+      background: var(--gradient);
+      color: var(--white);
+    }
+    .help-card h3 { color: var(--text); margin-bottom: 0.4rem; }
+    .help-desc {
+      font-size: 0.86rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+    .help-arrow {
+      position: absolute;
+      top: 1.4rem;
+      right: 1.4rem;
+      color: var(--text-dim);
+      transition: all 0.25s ease;
+    }
+    .help-card:hover .help-arrow {
+      color: var(--blue);
+      transform: translateX(4px);
+    }
+
+    /* =====================================================
+       10. TICKET FORM SECTION (dark)
+       ===================================================== */
+    .ticket { padding: 6rem 0; }
+    .ticket .section-head { margin-bottom: 2rem; }
+    .ticket h2 { color: var(--white); }
+
+    .route-toggle {
+      display: inline-flex;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(78, 189, 250, 0.2);
+      padding: 4px;
+      border-radius: 6px;
+      margin-bottom: 2rem;
+      gap: 4px;
+    }
+    .route-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.7rem 1.5rem;
+      background: transparent;
+      color: rgba(243, 243, 243, 0.65);
+      font-size: 0.9rem;
+      font-weight: 500;
+      border: none;
+      border-radius: 4px;
+      transition: all 0.2s ease;
+    }
+    .route-btn svg { width: 14px; height: 14px; }
+    .route-btn.active {
+      background: var(--gradient);
+      color: var(--white);
+      box-shadow: 0 4px 12px rgba(0, 86, 181, 0.4);
+    }
+
+    .ticket-form {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+    .field { display: flex; flex-direction: column; }
+    .field.full { grid-column: 1 / -1; }
+
+    .field label {
+      font-size: 0.74rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: rgba(243, 243, 243, 0.6);
+      margin-bottom: 0.55rem;
+    }
+    .field label .req { color: var(--blue-light); margin-left: 2px; }
+
+    .field input,
+    .field textarea,
+    .field select {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(78, 189, 250, 0.18);
+      border-radius: 4px;
+      padding: 0.8rem 0.9rem;
+      color: var(--white);
+      font-family: inherit;
+      font-size: 0.95rem;
+      transition: all 0.2s ease;
+      width: 100%;
+    }
+    .field input::placeholder,
+    .field textarea::placeholder {
+      color: rgba(243, 243, 243, 0.35);
+    }
+    .field input:focus,
+    .field textarea:focus,
+    .field select:focus {
+      outline: none;
+      border-color: var(--blue-light);
+      background: rgba(78, 189, 250, 0.05);
+      box-shadow: 0 0 0 3px rgba(78, 189, 250, 0.1);
+    }
+    .field textarea {
+      min-height: 120px;
+      resize: vertical;
+      line-height: 1.5;
+    }
+    .field select {
+      appearance: none;
+      -webkit-appearance: none;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%234ebdfa' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'></polyline></svg>");
+      background-repeat: no-repeat;
+      background-position: right 0.9rem center;
+      padding-right: 2.2rem;
+    }
+    .field select option { background: var(--navy); color: var(--white); }
+
+    /* Priority chips */
+    .priority-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .chip {
+      padding: 0.5rem 1rem;
+      background: transparent;
+      border: 1px solid rgba(78, 189, 250, 0.25);
+      border-radius: 4px;
+      color: rgba(243, 243, 243, 0.75);
+      font-size: 0.85rem;
+      font-weight: 500;
+      transition: all 0.2s ease;
+    }
+    .chip:hover { border-color: var(--blue-light); color: var(--white); }
+    .chip.active {
+      background: var(--gradient);
+      color: var(--white);
+      border-color: transparent;
+    }
+    .chip.active[data-priority="urgent"] {
+      background: var(--gradient-urgent);
+    }
+
+    .submit-row {
+      grid-column: 1 / -1;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      border-top: 1px solid rgba(78, 189, 250, 0.1);
+      padding-top: 1.5rem;
+      margin-top: 0.5rem;
+    }
+    .submit-helper {
+      font-size: 0.82rem;
+      color: rgba(243, 243, 243, 0.5);
+      max-width: 36rem;
+    }
+
+    /* Success message */
+    .success {
+      grid-column: 1 / -1;
+      display: none;
+      align-items: center;
+      gap: 0.8rem;
+      padding: 1.1rem 1.3rem;
+      background: rgba(47, 184, 120, 0.12);
+      border: 1px solid rgba(47, 184, 120, 0.4);
+      border-radius: 6px;
+      color: var(--white);
+      font-size: 0.95rem;
+    }
+    .success.show { display: flex; }
+    .success svg { color: var(--ok); flex-shrink: 0; }
+    .success strong { color: var(--ok); }
+
+    /* =====================================================
+       11. CONTACT STRIP
+       ===================================================== */
+    .contact-strip { padding: 4rem 0; background: var(--white); }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+    .contact-card {
+      background: var(--gray);
+      padding: 2rem;
+      border-radius: 6px;
+      border-left: 3px solid;
+      border-image: linear-gradient(135deg, #4ebdfa, #0056b5) 1;
+      transition: transform 0.2s ease;
+    }
+    .contact-card:hover { transform: translateY(-2px); }
+    .contact-label {
+      font-size: 0.74rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--blue);
+      margin-bottom: 0.6rem;
+    }
+    .contact-value {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 0.4rem;
+      letter-spacing: -0.01em;
+      word-break: break-word;
+    }
+    .contact-sub {
+      font-size: 0.86rem;
+      color: var(--text-muted);
+    }
+
+    /* =====================================================
+       12. FAQ
+       ===================================================== */
+    .faq { padding: 5rem 0; background: var(--gray); }
+    .faq-list { max-width: 50rem; }
+    .faq-item {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      margin-bottom: 0.8rem;
+      transition: all 0.2s ease;
+    }
+    .faq-item:hover { border-color: var(--blue-light); }
+    .faq-item[open] {
+      border-color: var(--blue);
+      box-shadow: 0 4px 16px rgba(5, 12, 29, 0.06);
+    }
+    .faq-item summary {
+      list-style: none;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      padding: 1.2rem 1.5rem;
+      font-size: 1.02rem;
+      font-weight: 500;
+      color: var(--text);
+    }
+    .faq-item summary::-webkit-details-marker { display: none; }
+    .faq-icon {
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+      color: var(--blue);
+      position: relative;
+      transition: transform 0.25s ease;
+    }
+    .faq-icon::before,
+    .faq-icon::after {
+      content: "";
+      position: absolute;
+      background: currentColor;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+    }
+    .faq-icon::before { width: 14px; height: 2px; }
+    .faq-icon::after { width: 2px; height: 14px; transition: transform 0.25s ease; }
+    .faq-item[open] .faq-icon::after { transform: translate(-50%, -50%) scaleY(0); }
+    .faq-item[open] .faq-icon { transform: rotate(180deg); }
+    .faq-answer {
+      padding: 0 1.5rem 1.4rem;
+      color: var(--text-muted);
+      font-size: 0.94rem;
+      line-height: 1.6;
+      max-width: 50rem;
+    }
+
+    /* =====================================================
+       13. FOOTER
+       ===================================================== */
+    .footer {
+      background: var(--navy);
+      color: rgba(243, 243, 243, 0.7);
+      padding: 3rem 0 2rem;
+      border-top: 1px solid rgba(78, 189, 250, 0.1);
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.3fr 1fr 1fr;
+      gap: 3rem;
+      margin-bottom: 2.5rem;
+    }
+    .footer-logo { height: 28px; margin-bottom: 0.9rem; }
+    .footer-tagline {
+      font-style: italic;
+      font-size: 0.88rem;
+      color: rgba(243, 243, 243, 0.55);
+    }
+    .footer h4 {
+      font-size: 0.75rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--blue-light);
+      margin: 0 0 1rem;
+    }
+    .footer ul { list-style: none; padding: 0; margin: 0; }
+    .footer li a {
+      display: block;
+      padding: 0.35rem 0;
+      color: rgba(243, 243, 243, 0.7);
+      font-size: 0.92rem;
+      transition: color 0.2s ease;
+    }
+    .footer li a:hover { color: var(--blue-light); }
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+      border-top: 1px solid rgba(78, 189, 250, 0.1);
+      padding-top: 1.5rem;
+      font-size: 0.83rem;
+      color: rgba(243, 243, 243, 0.5);
+    }
+    .footer-bottom-links { display: flex; gap: 1.5rem; }
+    .footer-bottom-links a:hover { color: var(--blue-light); }
+
+    /* =====================================================
+       14. RESPONSIVE
+       ===================================================== */
+    @media (max-width: 900px) {
+      .hero-grid,
+      .help-grid,
+      .ticket-form,
+      .contact-grid,
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+      .hero-grid { gap: 2.5rem; }
+      .nav,
+      .brand-divider,
+      .brand-label {
+        display: none;
+      }
+      .hero { padding: 3.5rem 0 4rem; }
+      .ticket { padding: 4rem 0; }
+      .quick-help, .faq { padding: 4rem 0; }
+      .submit-row { flex-direction: column; align-items: stretch; }
+      .submit-row .btn { width: 100%; }
+    }
+
+    /* Subtle fallback when logos are missing — keeps layout clean */
+    img[alt][src=""],
+    img:not([src]),
+    img[src*="nodalerp-logo"]:not([data-loaded]) {
+      min-width: 1px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- =====================================================
+       TOP STATUS BAR
+       ===================================================== -->
+  <div class="topbar">
+    <div class="container">
+      <span class="status-pill">
+        <span class="status-dot" aria-hidden="true"></span>
+        All systems operational
+      </span>
+      <div class="topbar-right">
+        Mon–Fri 8am–8pm ET · <a href="tel:+15550102204" class="phone">+1 (555) 010-2204</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- =====================================================
+       HEADER
+       ===================================================== -->
+  <header class="header">
+    <div class="container">
+      <a href="#" class="brand" aria-label="NodalERP Support — home">
+        <img src="nodalerp-logo-light.png" alt="NodalERP" class="brand-logo" />
+        <span class="brand-divider" aria-hidden="true"></span>
+        <span class="brand-label">Support</span>
+      </a>
+      <nav class="nav" aria-label="Primary">
+        <a href="help.html">Help Topics</a>
+        <a href="#ticket">Submit a Ticket</a>
+        <a href="#faq">FAQ</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- =====================================================
+       HERO
+       ===================================================== -->
+  <section class="dark-section hero">
+    <div class="deco-glow" aria-hidden="true"></div>
+    <div class="deco-grid" aria-hidden="true"></div>
+    <div class="container">
+      <div class="hero-grid">
+        <div>
+          <span class="eyebrow">Customer Support</span>
+          <h1>How can we <span class="gradient-text">help?</span></h1>
+          <p class="lead">
+            Real support for real operations. When production stops, we don't.
+            Submit a ticket and we'll route it to the right team — fast.
+          </p>
+          <div class="hero-ctas">
+            <a href="#ticket" class="btn btn-primary">
+              Open a ticket <span class="arrow">→</span>
+            </a>
+            <a href="#faq" class="btn btn-ghost">Browse FAQ</a>
+          </div>
+        </div>
+
+        <aside class="info-card" aria-label="Response times">
+          <div class="info-card-title">Response Times</div>
+          <ul>
+            <li><span class="label-text">General questions</span><span class="value">&lt; 4 hours</span></li>
+            <li><span class="label-text">Technical issues</span><span class="value">&lt; 8 hours</span></li>
+            <li><span class="label-text">Production down</span><span class="value urgent">&lt; 30 min</span></li>
+            <li><span class="label-text">Feature requests</span><span class="value">2–3 days</span></li>
+          </ul>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- =====================================================
+       QUICK HELP
+       ===================================================== -->
+  <section class="quick-help" id="help-topics">
+    <div class="container">
+      <div class="section-head">
+        <span class="section-number">01 — Help Topics</span>
+        <h2>What do you need help with?</h2>
+      </div>
+
+      <div class="help-grid">
+        <a class="help-card" href="help.html#production">
+          <span class="help-icon" aria-hidden="true">
+            <!-- factory / production -->
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 21V9l5 3V9l5 3V9l8 4v8z"/>
+              <path d="M7 17h.01M11 17h.01M15 17h.01M19 17h.01"/>
+            </svg>
+          </span>
+          <span class="help-arrow" aria-hidden="true">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
+            </svg>
+          </span>
+          <h3>Production &amp; Scheduling</h3>
+          <p class="help-desc">Work orders, routings, plant scheduling, shop floor.</p>
+        </a>
+
+        <a class="help-card" href="help.html#inventory">
+          <span class="help-icon" aria-hidden="true">
+            <!-- inventory / boxes -->
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+              <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
+              <line x1="12" y1="22.08" x2="12" y2="12"/>
+            </svg>
+          </span>
+          <span class="help-arrow" aria-hidden="true">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
+            </svg>
+          </span>
+          <h3>Inventory &amp; Purchasing</h3>
+          <p class="help-desc">Stock levels, POs, vendors, receiving, BOMs.</p>
+        </a>
+
+        <a class="help-card" href="help.html#integrations">
+          <span class="help-icon" aria-hidden="true">
+            <!-- integrations / nodes -->
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="6" cy="6" r="2"/><circle cx="18" cy="6" r="2"/>
+              <circle cx="6" cy="18" r="2"/><circle cx="18" cy="18" r="2"/>
+              <line x1="8" y1="6" x2="16" y2="6"/><line x1="6" y1="8" x2="6" y2="16"/>
+              <line x1="18" y1="8" x2="18" y2="16"/><line x1="8" y1="18" x2="16" y2="18"/>
+            </svg>
+          </span>
+          <span class="help-arrow" aria-hidden="true">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
+            </svg>
+          </span>
+          <h3>Integrations &amp; API</h3>
+          <p class="help-desc">Connect to QuickBooks, Shopify, EDI, custom.</p>
+        </a>
+
+        <a class="help-card" href="help.html#billing">
+          <span class="help-icon" aria-hidden="true">
+            <!-- card / billing -->
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="5" width="20" height="14" rx="2"/>
+              <line x1="2" y1="10" x2="22" y2="10"/>
+            </svg>
+          </span>
+          <span class="help-arrow" aria-hidden="true">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
+            </svg>
+          </span>
+          <h3>Account &amp; Billing</h3>
+          <p class="help-desc">Invoices, seats, plan changes, renewals.</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- =====================================================
+       TICKET FORM
+       ===================================================== -->
+  <section class="dark-section ticket" id="ticket">
+    <div class="deco-glow alt" aria-hidden="true"></div>
+    <div class="deco-grid" aria-hidden="true"></div>
+    <div class="container">
+      <div class="section-head">
+        <span class="section-number on-dark">02 — Submit a Ticket</span>
+        <h2>Open a ticket</h2>
+      </div>
+
+      <div class="route-toggle" role="tablist" aria-label="Route ticket to">
+        <button type="button" class="route-btn active" data-route="cs" role="tab" aria-selected="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+          </svg>
+          Customer Service
+        </button>
+        <button type="button" class="route-btn" data-route="dev" role="tab" aria-selected="false">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>
+          </svg>
+          Development Team
+        </button>
+      </div>
+
+      <form class="ticket-form" id="ticketForm" novalidate>
+        <div class="field">
+          <label for="fullName">Full name <span class="req">*</span></label>
+          <input type="text" id="fullName" name="fullName" placeholder="Jamie Chen" required />
+        </div>
+
+        <div class="field">
+          <label for="email">Email <span class="req">*</span></label>
+          <input type="email" id="email" name="email" placeholder="jamie@yourplant.com" required />
+        </div>
+
+        <div class="field">
+          <label for="company">Company / Plant</label>
+          <input type="text" id="company" name="company" placeholder="Acme Manufacturing — Plant 3" />
+        </div>
+
+        <div class="field">
+          <label for="category">Category</label>
+          <select id="category" name="category">
+            <!-- options injected by JS based on route -->
+          </select>
+        </div>
+
+        <div class="field full">
+          <label for="subject">Subject <span class="req">*</span></label>
+          <input type="text" id="subject" name="subject" placeholder="Short summary of the issue" required />
+        </div>
+
+        <div class="field full">
+          <label for="description">Description <span class="req">*</span></label>
+          <textarea id="description" name="description" placeholder="What's happening? Include work order numbers, error messages, or steps to reproduce." required></textarea>
+        </div>
+
+        <div class="field full">
+          <label>Priority</label>
+          <div class="priority-chips" role="radiogroup" aria-label="Priority">
+            <button type="button" class="chip" data-priority="low" role="radio" aria-checked="false">Low</button>
+            <button type="button" class="chip active" data-priority="normal" role="radio" aria-checked="true">Normal</button>
+            <button type="button" class="chip" data-priority="high" role="radio" aria-checked="false">High</button>
+            <button type="button" class="chip" data-priority="urgent" role="radio" aria-checked="false">Production Down</button>
+          </div>
+        </div>
+
+        <div class="success" id="successMsg" role="status" aria-live="polite">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/>
+          </svg>
+          <span>
+            Ticket received. Your reference is <strong id="refNumber">NDL-000000</strong>.
+            We'll be in touch shortly.
+          </span>
+        </div>
+
+        <div class="submit-row">
+          <p class="submit-helper">
+            By submitting, you agree to our support terms. We reply in hours, not days.
+          </p>
+          <button type="submit" class="btn btn-primary">
+            Submit ticket <span class="arrow">→</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- =====================================================
+       CONTACT STRIP
+       ===================================================== -->
+  <section class="contact-strip" id="contact">
+    <div class="container">
+      <div class="contact-grid">
+        <div class="contact-card">
+          <div class="contact-label">Email</div>
+          <a class="contact-value" href="mailto:support@nodalerp.com">support@nodalerp.com</a>
+          <p class="contact-sub">General questions and follow-ups.</p>
+        </div>
+        <div class="contact-card">
+          <div class="contact-label">Phone</div>
+          <a class="contact-value" href="tel:+15550102204">+1 (555) 010-2204</a>
+          <p class="contact-sub">Mon–Fri, 8am–8pm ET.</p>
+        </div>
+        <div class="contact-card">
+          <div class="contact-label">Production Down</div>
+          <a class="contact-value" href="mailto:urgent@nodalerp.com">urgent@nodalerp.com</a>
+          <p class="contact-sub">24/7 line for active customers with outages.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =====================================================
+       FAQ
+       ===================================================== -->
+  <section class="faq" id="faq">
+    <div class="container">
+      <div class="section-head">
+        <span class="section-number">03 — FAQ</span>
+        <h2>Frequently asked</h2>
+      </div>
+
+      <div class="faq-list">
+        <details class="faq-item">
+          <summary>
+            How quickly will I get a response?
+            <span class="faq-icon" aria-hidden="true"></span>
+          </summary>
+          <p class="faq-answer">
+            General questions get a reply in under 4 hours during business hours. Technical issues, under 8.
+            If your line is down and you're on an active plan, we're on it in 30 minutes or less — 24/7.
+          </p>
+        </details>
+
+        <details class="faq-item">
+          <summary>
+            What's the difference between Customer Service and Development?
+            <span class="faq-icon" aria-hidden="true"></span>
+          </summary>
+          <p class="faq-answer">
+            Customer Service handles day-to-day questions: how to use the system, billing, account changes, training,
+            and most operational issues. Development handles bugs, integration work, API questions, performance issues,
+            and feature requests. Not sure which? Pick Customer Service — we'll re-route if needed.
+          </p>
+        </details>
+
+        <details class="faq-item">
+          <summary>
+            My line is down right now — what do I do?
+            <span class="faq-icon" aria-hidden="true"></span>
+          </summary>
+          <p class="faq-answer">
+            Two options. Email <a href="mailto:urgent@nodalerp.com" style="color: var(--blue);">urgent@nodalerp.com</a> with
+            "PRODUCTION DOWN" in the subject, or open a ticket above and mark the priority as "Production Down."
+            Either way, you'll get a real person, fast. On active plans, this is a 24/7 line.
+          </p>
+        </details>
+
+        <details class="faq-item">
+          <summary>
+            Can I attach files, screenshots, or work orders?
+            <span class="faq-icon" aria-hidden="true"></span>
+          </summary>
+          <p class="faq-answer">
+            Yes. Once your ticket is opened, the confirmation email will include a secure upload link.
+            Screenshots, exports, PDFs of work orders, and log files all help us move faster.
+          </p>
+        </details>
+
+        <details class="faq-item">
+          <summary>
+            Do you help with integrations to other systems?
+            <span class="faq-icon" aria-hidden="true"></span>
+          </summary>
+          <p class="faq-answer">
+            We do. Standard connectors — QuickBooks, Shopify, common EDI flows — are supported out of the box.
+            For custom integrations, route your ticket to the Development team and include the system and the
+            data you need to move. We'll come back with scope and timing.
+          </p>
+        </details>
+
+        <details class="faq-item">
+          <summary>
+            How do I check the status of an existing ticket?
+            <span class="faq-icon" aria-hidden="true"></span>
+          </summary>
+          <p class="faq-answer">
+            Every ticket gets a reference number (e.g. NDL-482910) in the confirmation email. Reply to that thread
+            to add information or check status, or email support@nodalerp.com with the reference in the subject.
+          </p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- =====================================================
+       FOOTER
+       ===================================================== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <img src="nodalerp-logo-light.png" alt="NodalERP" class="footer-logo" />
+          <p class="footer-tagline">Control made simple.</p>
+        </div>
+        <div>
+          <h4>Support</h4>
+          <ul>
+            <li><a href="#help-topics">Help Topics</a></li>
+            <li><a href="#ticket">Submit a Ticket</a></li>
+            <li><a href="#faq">FAQ</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Resources</h4>
+          <ul>
+            <li><a href="#">Documentation</a></li>
+            <li><a href="#">System Status</a></li>
+            <li><a href="#">Release Notes</a></li>
+            <li><a href="#">API Reference</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; <span id="year"></span> NodalERP. All rights reserved.</span>
+        <div class="footer-bottom-links">
+          <a href="#">Privacy</a>
+          <a href="#">Terms</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- =====================================================
+       JAVASCRIPT
+       ===================================================== -->
+  <script>
+    // ---------- Year in footer ----------
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // ---------- Category options per route ----------
+    const CATEGORIES = {
+      cs: [
+        { value: 'production', label: 'Production & Scheduling' },
+        { value: 'inventory',  label: 'Inventory & Purchasing' },
+        { value: 'billing',    label: 'Account & Billing' },
+        { value: 'how-do-i',   label: 'How do I…' },
+        { value: 'other',      label: 'Other' }
+      ],
+      dev: [
+        { value: 'bug',         label: 'Bug report' },
+        { value: 'integration', label: 'Integration / API' },
+        { value: 'performance', label: 'Performance issue' },
+        { value: 'feature',     label: 'Feature request' },
+        { value: 'other',       label: 'Other' }
+      ]
+    };
+
+    let currentRoute = 'cs';
+
+    function populateCategory(route, preselect) {
+      const select = document.getElementById('category');
+      const opts = CATEGORIES[route] || [];
+      select.innerHTML = opts
+        .map(o => `<option value="${o.value}">${o.label}</option>`)
+        .join('');
+      if (preselect && opts.some(o => o.value === preselect)) {
+        select.value = preselect;
+      }
+    }
+
+    function setRoute(route, preselectCategory) {
+      currentRoute = route;
+      document.querySelectorAll('.route-btn').forEach(btn => {
+        const isActive = btn.dataset.route === route;
+        btn.classList.toggle('active', isActive);
+        btn.setAttribute('aria-selected', isActive ? 'true' : 'false');
+      });
+      populateCategory(route, preselectCategory);
+    }
+
+    // ---------- Route toggle ----------
+    document.querySelectorAll('.route-btn').forEach(btn => {
+      btn.addEventListener('click', () => setRoute(btn.dataset.route));
+    });
+
+    // ---------- Priority chips (single-select) ----------
+    document.querySelectorAll('.chip').forEach(chip => {
+      chip.addEventListener('click', () => {
+        document.querySelectorAll('.chip').forEach(c => {
+          c.classList.remove('active');
+          c.setAttribute('aria-checked', 'false');
+        });
+        chip.classList.add('active');
+        chip.setAttribute('aria-checked', 'true');
+      });
+    });
+
+    // ---------- Form submit ----------
+    const form = document.getElementById('ticketForm');
+    const successMsg = document.getElementById('successMsg');
+    const refNumberEl = document.getElementById('refNumber');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      // Basic required-field validation
+      const required = ['fullName', 'email', 'subject', 'description'];
+      let ok = true;
+      required.forEach(name => {
+        const el = form.elements[name];
+        if (!el.value.trim()) {
+          el.style.borderColor = '#ef4444';
+          ok = false;
+        } else {
+          el.style.borderColor = '';
+        }
+      });
+      if (!ok) return;
+
+      // Gather payload (the developer hook below uses this)
+      const activeChip = document.querySelector('.chip.active');
+      const payload = {
+        route:       currentRoute, // 'cs' or 'dev'
+        fullName:    form.elements.fullName.value.trim(),
+        email:       form.elements.email.value.trim(),
+        company:     form.elements.company.value.trim(),
+        category:    form.elements.category.value,
+        subject:     form.elements.subject.value.trim(),
+        description: form.elements.description.value.trim(),
+        priority:    activeChip ? activeChip.dataset.priority : 'normal',
+        submittedAt: new Date().toISOString()
+      };
+
+      /* ===========================================================
+         🔌 BACKEND HOOK — REPLACE THIS BLOCK WITH A REAL POST
+         -----------------------------------------------------------
+         This demo just fakes success locally. To wire up a real
+         backend (Zendesk, Freshdesk, Formspree, a Supabase function,
+         your own /api/tickets endpoint, etc.), replace the block
+         below with something like:
+
+           const res = await fetch('/api/tickets', {
+             method: 'POST',
+             headers: { 'Content-Type': 'application/json' },
+             body: JSON.stringify(payload)
+           });
+           if (!res.ok) throw new Error('Request failed');
+           const data = await res.json();
+           const reference = data.reference;
+
+         Then use `reference` in place of the fake one below.
+         =========================================================== */
+      const reference = 'NDL-' + Math.floor(100000 + Math.random() * 900000);
+
+      // Show success message
+      refNumberEl.textContent = reference;
+      successMsg.classList.add('show');
+      successMsg.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+      // Reset form (but keep success visible)
+      form.reset();
+      // Restore default priority + route after reset
+      document.querySelectorAll('.chip').forEach(c => {
+        c.classList.toggle('active', c.dataset.priority === 'normal');
+        c.setAttribute('aria-checked', c.dataset.priority === 'normal' ? 'true' : 'false');
+      });
+      setRoute(currentRoute);
+    });
+
+    // ---------- Initial category population ----------
+    populateCategory(currentRoute);
+  </script>
+
+</body>
+</html>

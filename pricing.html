@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pricing — NodalERP</title>
+  <meta name="description" content="Per-facility pricing. All features included. No per-seat fees, no module unlocks, no usage charges. Up and running in 7 days." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root { --navy: #050C1D; --blue-light: #4ebdfa; --blue: #0056b5; --gray: #f3f3f3; --white: #ffffff; --text: #050C1D; --text-muted: #5a6478; --border: #d8dce4; --gradient: linear-gradient(135deg, #4ebdfa 0%, #0056b5 100%); --container: 1200px; }
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+    body { margin: 0; font-family: 'Roboto', system-ui, sans-serif; font-size: 16px; font-weight: 400; line-height: 1.55; color: var(--text); background: var(--white); -webkit-font-smoothing: antialiased; }
+    img { display: block; max-width: 100%; height: auto; }
+    a { color: inherit; text-decoration: none; }
+    .container { max-width: var(--container); margin: 0 auto; padding: 0 1.5rem; }
+    h1, h2, h3 { margin: 0; font-weight: 700; letter-spacing: -0.015em; }
+    h1 { font-size: clamp(2.2rem, 4.5vw, 3.4rem); line-height: 1.08; }
+    h2 { font-size: clamp(1.7rem, 2.8vw, 2.2rem); line-height: 1.18; }
+    h3 { font-size: 1.1rem; letter-spacing: normal; }
+    p { margin: 0; }
+    .lead { font-size: 1.12rem; font-weight: 300; line-height: 1.55; }
+    .gradient-text { background: var(--gradient); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: transparent; }
+    .eyebrow, .section-number { display: inline-flex; align-items: center; font-size: 0.78rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.22em; margin: 0; }
+    .eyebrow { font-size: 0.75rem; letter-spacing: 0.2em; color: var(--blue-light); }
+    .section-number { color: var(--blue); margin-bottom: 0.8rem; }
+    .section-number.on-dark { color: var(--blue-light); }
+    .eyebrow::before, .section-number::before { content: ""; display: inline-block; width: 8px; height: 8px; background: var(--gradient); transform: rotate(45deg) translateY(-1px); margin-right: 0.6rem; }
+    .eyebrow::before { width: 10px; height: 10px; }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; padding: 0.9rem 1.7rem; font-size: 0.94rem; font-weight: 500; border: none; border-radius: 4px; transition: all 0.2s ease; white-space: nowrap; font-family: inherit; cursor: pointer; }
+    .btn .arrow { display: inline-block; transition: transform 0.2s ease; }
+    .btn:hover .arrow { transform: translateX(3px); }
+    .btn-primary { background: linear-gradient(90deg, #2DD4BF 0%, #2563EB 100%); color: var(--white); font-family: 'Montserrat', sans-serif; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; }
+    .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 8px 24px rgba(37, 99, 235, 0.4); }
+    .btn-ghost { background: transparent; color: var(--blue-light); border: 1px solid rgba(78,189,250,0.35); }
+    .btn-ghost:hover { background: rgba(78,189,250,0.08); border-color: var(--blue-light); }
+    .btn-ghost-light { background: transparent; color: var(--blue); border: 1px solid rgba(0,86,181,0.3); }
+    .btn-ghost-light:hover { background: rgba(0,86,181,0.05); border-color: var(--blue); }
+    .header { background: var(--navy); padding: 1.1rem 0; border-bottom: 1px solid rgba(78,189,250,0.12); position: sticky; top: 0; z-index: 100; }
+    .header .container { display: flex; justify-content: space-between; align-items: center; }
+    .brand { display: inline-flex; align-items: center; }
+    .brand-logo { height: 32px; }
+    .nav-wrap { display: flex; align-items: center; gap: 2rem; }
+    .nav { display: flex; gap: 1.8rem; }
+    .nav a { font-size: 0.92rem; color: #f3f3f3; padding-bottom: 2px; border-bottom: 1px solid transparent; transition: all 0.2s ease; }
+    .nav a:hover, .nav a.active { color: var(--blue-light); border-bottom-color: var(--blue-light); }
+    .header-cta { display: inline-flex; gap: 0.7rem; align-items: center; }
+    .support-link { font-size: 0.88rem; color: rgba(243,243,243,0.75); padding: 0.45rem 1rem; border: 1px solid rgba(78,189,250,0.25); border-radius: 4px; transition: all 0.2s ease; }
+    .support-link:hover { color: var(--blue-light); border-color: var(--blue-light); }
+    .header-cta .btn { padding: 0.55rem 1.2rem; font-size: 0.88rem; }
+    .dark-section { position: relative; background: var(--navy); color: #f3f3f3; overflow: hidden; }
+    .deco-glow, .deco-grid { position: absolute; inset: 0; pointer-events: none; }
+    .deco-glow { background-image: radial-gradient(circle at 20% 30%, rgba(78,189,250,0.08) 0%, transparent 40%), radial-gradient(circle at 80% 70%, rgba(0,86,181,0.18) 0%, transparent 45%); }
+    .deco-glow.alt { background-image: radial-gradient(circle at 85% 20%, rgba(78,189,250,0.1) 0%, transparent 40%), radial-gradient(circle at 15% 85%, rgba(0,86,181,0.18) 0%, transparent 45%); }
+    .deco-grid { background-image: linear-gradient(rgba(78,189,250,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(78,189,250,0.04) 1px, transparent 1px); background-size: 60px 60px; -webkit-mask-image: radial-gradient(ellipse at center, black 40%, transparent 75%); mask-image: radial-gradient(ellipse at center, black 40%, transparent 75%); }
+    .dark-section > .container { position: relative; z-index: 1; }
+    .page-hero { padding: 5rem 0 5.5rem; }
+    .page-hero h1 { color: var(--white); margin: 1rem 0 1.2rem; max-width: 30rem; }
+    .page-hero .lead { color: rgba(243,243,243,0.78); max-width: 38rem; margin-bottom: 2rem; }
+    .page-hero-ctas { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+    .section { padding: 5.5rem 0; }
+    .section.light { background: var(--white); }
+    .section.gray { background: var(--gray); }
+    .section-head { margin-bottom: 3rem; max-width: 48rem; }
+    .section-head h2 { color: var(--text); margin-bottom: 0.8rem; }
+    .section-head .lead { color: var(--text-muted); }
+    .dark-section .section-head h2 { color: var(--white); }
+    .dark-section .section-head .lead { color: rgba(243,243,243,0.78); }
+    .feature-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+    .feature-grid.cols-2 { grid-template-columns: 1fr 1fr; }
+    .feature-grid.cols-4 { grid-template-columns: repeat(4, 1fr); gap: 1.2rem; }
+    .feature-card { background: var(--white); border: 1px solid var(--border); border-radius: 6px; padding: 2rem 1.8rem; transition: all 0.25s ease; }
+    .section.gray .feature-card { background: var(--white); }
+    .feature-card:hover { border-color: var(--blue-light); transform: translateY(-2px); box-shadow: 0 8px 20px rgba(5,12,29,0.06); }
+    .feature-icon { width: 44px; height: 44px; border-radius: 4px; background: rgba(78,189,250,0.08); display: inline-flex; align-items: center; justify-content: center; color: var(--blue); margin-bottom: 1.2rem; }
+    .feature-icon svg { width: 22px; height: 22px; }
+    .feature-card h3 { color: var(--text); margin-bottom: 0.5rem; font-size: 1.15rem; }
+    .feature-card p { color: var(--text-muted); font-size: 0.94rem; line-height: 1.55; }
+    .cta { padding: 5rem 0; }
+    .cta .container { display: flex; justify-content: space-between; align-items: center; gap: 2rem; flex-wrap: wrap; }
+    .cta h2 { color: var(--white); margin-bottom: 0.6rem; }
+    .cta p { color: rgba(243,243,243,0.7); max-width: 36rem; font-size: 1.05rem; font-weight: 300; }
+    .cta-buttons { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+    .footer { background: var(--navy); color: rgba(243,243,243,0.7); padding: 4rem 0 2rem; border-top: 1px solid rgba(78,189,250,0.1); }
+    .footer-grid { display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr; gap: 3rem; margin-bottom: 3rem; }
+    .footer-logo { height: 28px; margin-bottom: 1rem; }
+    .footer-tagline { font-style: italic; font-size: 0.9rem; color: rgba(243,243,243,0.55); margin-bottom: 1.2rem; }
+    .footer-blurb { font-size: 0.88rem; color: rgba(243,243,243,0.55); max-width: 22rem; line-height: 1.55; font-weight: 300; }
+    .footer h4 { font-size: 0.75rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.2em; color: var(--blue-light); margin: 0 0 1.1rem; }
+    .footer ul { list-style: none; padding: 0; margin: 0; }
+    .footer li a { display: block; padding: 0.35rem 0; color: rgba(243,243,243,0.7); font-size: 0.92rem; transition: color 0.2s ease; }
+    .footer li a:hover { color: var(--blue-light); }
+    .footer-bottom { display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; border-top: 1px solid rgba(78,189,250,0.1); padding-top: 1.5rem; font-size: 0.83rem; color: rgba(243,243,243,0.5); }
+    .footer-bottom-links { display: flex; gap: 1.5rem; }
+    .footer-bottom-links a:hover { color: var(--blue-light); }
+    @media (max-width: 900px) {
+      .feature-grid, .feature-grid.cols-2, .feature-grid.cols-4, .footer-grid { grid-template-columns: 1fr; }
+      .nav, .header-cta .btn { display: none; }
+      .page-hero { padding: 3.5rem 0 4rem; }
+      .section { padding: 4rem 0; }
+      .cta .container { flex-direction: column; align-items: flex-start; }
+    }
+    @media (max-width: 600px) { .feature-grid.cols-4 { grid-template-columns: 1fr 1fr; } }
+    /* Pricing tier cards */
+    .tier-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; align-items: stretch; }
+    .tier-card { position: relative; background: var(--white); border: 1px solid var(--border); border-radius: 8px; padding: 2.2rem 1.8rem 2rem; display: flex; flex-direction: column; transition: all 0.25s ease; }
+    .tier-card:hover { border-color: var(--blue-light); transform: translateY(-3px); box-shadow: 0 12px 28px rgba(5,12,29,0.08); }
+    .tier-card.featured { border-color: var(--blue); border-width: 2px; box-shadow: 0 12px 32px rgba(0,86,181,0.12); padding-top: 2.6rem; }
+    .tier-card.featured::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--gradient); border-radius: 8px 8px 0 0; }
+    .tier-badge { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: var(--gradient); color: var(--white); font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em; padding: 0.4rem 1rem; border-radius: 999px; font-family: 'Montserrat', sans-serif; }
+    .tier-name { font-size: 1.4rem; font-weight: 700; color: var(--text); margin-bottom: 0.3rem; letter-spacing: -0.01em; }
+    .tier-profile { font-size: 0.92rem; color: var(--text-muted); margin-bottom: 1.5rem; }
+    .tier-price-row { display: flex; align-items: baseline; gap: 0.4rem; margin-bottom: 0.2rem; }
+    .tier-price { font-size: 2.6rem; font-weight: 700; color: var(--text); letter-spacing: -0.02em; line-height: 1; }
+    .tier-card.featured .tier-price { color: var(--blue); }
+    .tier-per { font-size: 0.95rem; color: var(--text-muted); font-weight: 400; }
+    .tier-annual { font-size: 0.88rem; color: var(--text-muted); margin-bottom: 1.5rem; font-weight: 300; }
+    .tier-divider { border-top: 1px solid var(--border); margin: 0 0 1.3rem; }
+    .tier-features { list-style: none; padding: 0; margin: 0 0 1.8rem; flex-grow: 1; }
+    .tier-features li { padding: 0.5rem 0; font-size: 0.92rem; color: var(--text); display: flex; align-items: flex-start; gap: 0.6rem; line-height: 1.45; }
+    .tier-features .check { flex-shrink: 0; width: 16px; height: 16px; color: var(--blue); margin-top: 3px; }
+    .tier-cta { width: 100%; }
+    .tier-cta.ghost { background: transparent; color: var(--blue); border: 1px solid var(--border); font-family: 'Montserrat', sans-serif; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; }
+    .tier-cta.ghost:hover { border-color: var(--blue); background: rgba(0,86,181,0.04); }
+
+    /* Included features section */
+    .included-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.8rem 2rem; max-width: 56rem; margin-top: 1rem; }
+    .included-item { display: flex; align-items: flex-start; gap: 0.7rem; padding: 0.5rem 0; }
+    .included-item .check-icon { flex-shrink: 0; width: 22px; height: 22px; border-radius: 4px; background: rgba(0,86,181,0.08); color: var(--blue); display: inline-flex; align-items: center; justify-content: center; margin-top: 1px; }
+    .included-item .check-icon svg { width: 12px; height: 12px; }
+    .included-item .item-text strong { display: block; color: var(--text); font-size: 0.95rem; font-weight: 500; margin-bottom: 0.1rem; }
+    .included-item .item-text span { color: var(--text-muted); font-size: 0.88rem; line-height: 1.45; }
+
+    /* No-fees callout */
+    .no-fees { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 2rem; padding: 1.2rem 1.5rem; background: var(--gray); border-radius: 6px; border-left: 3px solid var(--blue); }
+    .no-fees-item { display: flex; align-items: center; gap: 0.5rem; font-size: 0.92rem; color: var(--text); font-weight: 500; }
+    .no-fees-item::before { content: "✕"; color: var(--blue); font-weight: 700; }
+
+    /* Onboarding callout */
+    .onboard-card { background: var(--navy); color: var(--white); border-radius: 8px; padding: 2.5rem; display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; align-items: center; position: relative; overflow: hidden; }
+    .onboard-card::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--gradient); }
+    .onboard-card .deco-glow-inner { position: absolute; inset: 0; background-image: radial-gradient(circle at 85% 30%, rgba(78,189,250,0.1) 0%, transparent 45%); pointer-events: none; }
+    .onboard-card > * { position: relative; z-index: 1; }
+    .onboard-card h3 { color: var(--white); font-size: 1.8rem; margin-bottom: 0.6rem; letter-spacing: -0.015em; }
+    .onboard-card p { color: rgba(243,243,243,0.78); font-size: 1.02rem; line-height: 1.55; font-weight: 300; }
+    .onboard-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+    .onboard-stat { padding: 1.2rem; background: rgba(255,255,255,0.04); border: 1px solid rgba(78,189,250,0.18); border-radius: 6px; }
+    .onboard-stat .stat-value { font-size: 1.8rem; font-weight: 700; color: var(--blue-light); margin-bottom: 0.2rem; letter-spacing: -0.02em; line-height: 1; }
+    .onboard-stat .stat-label { font-size: 0.8rem; color: rgba(243,243,243,0.6); font-weight: 300; }
+
+    /* Hardware section */
+    .hardware-card { background: var(--white); border: 1px solid var(--border); border-radius: 8px; padding: 2.5rem; max-width: 64rem; }
+    .hardware-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 2rem; flex-wrap: wrap; margin-bottom: 2rem; }
+    .hardware-header h3 { font-size: 1.5rem; margin-bottom: 0.4rem; color: var(--text); }
+    .hardware-header p { color: var(--text-muted); max-width: 32rem; font-size: 0.95rem; line-height: 1.55; }
+    .hardware-price { text-align: right; flex-shrink: 0; }
+    .hardware-price .hp-label { font-size: 0.72rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.2em; color: var(--blue); margin-bottom: 0.3rem; }
+    .hardware-price .hp-amount { font-size: 1.6rem; font-weight: 700; color: var(--text); letter-spacing: -0.01em; line-height: 1; }
+    .hardware-price .hp-per { font-size: 0.85rem; color: var(--text-muted); margin-top: 0.2rem; }
+    .hardware-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.6rem 2rem; border-top: 1px solid var(--border); padding-top: 1.5rem; }
+    .hardware-item { display: flex; justify-content: space-between; padding: 0.5rem 0; font-size: 0.92rem; }
+    .hardware-item .hw-name { color: var(--text); font-weight: 500; }
+    .hardware-item .hw-spec { color: var(--text-muted); font-size: 0.85rem; }
+    .hardware-note { margin-top: 1.2rem; padding-top: 1.2rem; border-top: 1px solid var(--border); font-size: 0.88rem; color: var(--text-muted); font-style: italic; }
+
+    /* Founding customer */
+    .ea-card { background: var(--navy); color: #f3f3f3; border-radius: 8px; padding: 3rem; position: relative; overflow: hidden; }
+    .ea-card::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--gradient); }
+    .ea-card .ea-bg { position: absolute; inset: 0; background-image: radial-gradient(circle at 85% 30%, rgba(78,189,250,0.1) 0%, transparent 45%), radial-gradient(circle at 15% 80%, rgba(0,86,181,0.18) 0%, transparent 50%); pointer-events: none; }
+    .ea-card > * { position: relative; z-index: 1; }
+    .ea-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 2rem; margin-bottom: 2rem; flex-wrap: wrap; }
+    .ea-header h2 { color: var(--white); margin-bottom: 0.5rem; max-width: 30rem; }
+    .ea-header .lead { color: rgba(243,243,243,0.78); max-width: 36rem; }
+    .ea-tag { display: inline-block; background: rgba(78,189,250,0.12); color: var(--blue-light); font-size: 0.72rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.2em; padding: 0.4rem 0.9rem; border-radius: 999px; margin-bottom: 1rem; font-family: 'Montserrat', sans-serif; }
+    .ea-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem 2rem; padding-top: 2rem; border-top: 1px solid rgba(78,189,250,0.15); }
+    .ea-item { display: flex; align-items: flex-start; gap: 0.8rem; padding: 0.8rem 0; }
+    .ea-item .ea-check { flex-shrink: 0; width: 22px; height: 22px; border-radius: 4px; background: rgba(78,189,250,0.15); color: var(--blue-light); display: inline-flex; align-items: center; justify-content: center; margin-top: 1px; }
+    .ea-item .ea-check svg { width: 12px; height: 12px; }
+    .ea-item .ea-text strong { display: block; color: var(--white); font-size: 0.95rem; margin-bottom: 0.15rem; font-weight: 500; }
+    .ea-item .ea-text span { color: rgba(243,243,243,0.65); font-size: 0.88rem; line-height: 1.45; }
+    .ea-footer { margin-top: 2rem; padding-top: 2rem; border-top: 1px solid rgba(78,189,250,0.15); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+    .ea-footer p { color: rgba(243,243,243,0.7); font-size: 0.92rem; max-width: 36rem; }
+
+    @media (max-width: 900px) {
+      .tier-grid { grid-template-columns: 1fr; }
+      .included-grid, .ea-grid, .hardware-list { grid-template-columns: 1fr; }
+      .onboard-card { grid-template-columns: 1fr; padding: 2rem; }
+      .ea-card { padding: 2rem 1.5rem; }
+      .ea-header { flex-direction: column; gap: 1rem; }
+      .hardware-card { padding: 2rem 1.5rem; }
+      .hardware-header { flex-direction: column; }
+      .hardware-price { text-align: left; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="header">
+    <div class="container">
+      <a href="index.html" class="brand"><img src="nodalerp-logo-light.png" alt="NodalERP" class="brand-logo" /></a>
+      <div class="nav-wrap">
+        <nav class="nav">
+          <a href="platform.html" >Platform</a>
+          <a href="orchestration.html" >Orchestration</a>
+          <a href="shopfloor.html" >Shop Floor</a>
+          <a href="pricing.html" class="active">Pricing</a>
+          <a href="demo.html">Demo</a>
+        </nav>
+        <div class="header-cta">
+          <a href="support.html" class="support-link">Support</a>
+          <a href="demo.html" class="btn btn-primary">Book a demo</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section class="dark-section page-hero">
+    <div class="deco-glow"></div><div class="deco-grid"></div>
+    <div class="container">
+      <span class="eyebrow">Pricing</span>
+      <h1>Per-facility pricing. <span class="gradient-text">All features included.</span></h1>
+      <p class="lead">No per-seat fees. No module unlocks. No usage-based charges. One price per location, and everything's in the box — including 7-day onboarding.</p>
+      <div class="page-hero-ctas">
+        <a href="demo.html" class="btn btn-primary">Get a quote <span class="arrow">→</span></a>
+        <a href="#whats-included" class="btn btn-ghost">See what's included</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section light">
+    <div class="container">
+      <div class="section-head">
+        <span class="section-number">01 — Choose a Tier</span>
+        <h2>One product. Three sizes. Everything included in all of them.</h2>
+        <p class="lead">Tier is determined by how many facilities you operate. Every tier ships with every feature — pick the one that matches your footprint.</p>
+      </div>
+
+      <div class="tier-grid">
+
+        <div class="tier-card">
+          <div class="tier-name">Starter</div>
+          <div class="tier-profile">1 facility</div>
+          <div class="tier-price-row">
+            <span class="tier-price">$1,500</span>
+            <span class="tier-per">/month</span>
+          </div>
+          <div class="tier-annual">$18,000 billed annually</div>
+          <div class="tier-divider"></div>
+          <ul class="tier-features">
+            <li><svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Everything in NodalERP</li>
+            <li><svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Unlimited users</li>
+            <li><svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>7-day onboarding included</li>
+            <li><svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Standard CRM/ERP integrations</li>
+            <li><svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Web-based help desk</li>
+          </ul>
+          <a href="demo.html" class="btn tier-cta ghost">Get started</a>
+        </div>
+
+        <div class="tier-card featured">
+          <span class="tier-badge">Most popular</span>
+          <div class="tier-name">Growth</div>
+          <div class="tier-profile">2–4 facilities</div>
+          <div class="tier-price-row">
+            <span class="tier-price">$2,500</span>
+            <span class="tier-per">/month</span>
+          </div>
+          <div class="tier-annual">$30,000 billed annually</div>
+          <div class="tier-divider"></div>
+          <ul class="tier-features">
+            <li><svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Everything in Starter</li>
+            <li><svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Up to 4 facilities</li>
+            <li><svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Cross-facility dashboards</li>
+            <li><svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Priority onboarding</li>
+            <li><svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Standard CRM/ERP integrations</li>
+          </ul>
+          <a href="demo.html" class="btn btn-primary tier-cta">Get a quote</a>
+        </div>
+
+        <div class="tier-card">
+          <div class="tier-name">Multi-Site</div>
+          <div class="tier-profile">5+ facilities</div>
+          <div class="tier-price-row">
+            <span class="tier-price">$4,500</span>
+            <span class="tier-per">/month</span>
+          </div>
+          <div class="tier-annual">$54,000 billed annually</div>
+          <div class="tier-divider"></div>
+          <ul class="tier-features">
+            <li><svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Everything in Growth</li>
+            <li><svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Unlimited facilities</li>
+            <li><svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Dedicated implementation lead</li>
+            <li><svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Custom integration support</li>
+            <li><svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>SLA-backed support</li>
+          </ul>
+          <a href="demo.html" class="btn tier-cta ghost">Talk to us</a>
+        </div>
+
+      </div>
+
+      <div class="no-fees">
+        <div class="no-fees-item">Per-seat fees</div>
+        <div class="no-fees-item">Module unlocks</div>
+        <div class="no-fees-item">Usage-based charges</div>
+        <div class="no-fees-item">Surprise implementation invoices</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section gray" id="whats-included">
+    <div class="container">
+      <div class="section-head">
+        <span class="section-number">02 — What's Included</span>
+        <h2>The full product. Every tier.</h2>
+        <p class="lead">No "Pro" upsell. No premium features locked behind a button. Every customer gets the entire Nodal feature set from day one.</p>
+      </div>
+
+      <div class="included-grid">
+        <div class="included-item">
+          <span class="check-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+          <div class="item-text">
+            <strong>Production forms &amp; tracking</strong>
+            <span>Pack tracking, work-in-process status, station-by-station visibility.</span>
+          </div>
+        </div>
+        <div class="included-item">
+          <span class="check-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+          <div class="item-text">
+            <strong>Materials &amp; pack management</strong>
+            <span>Raw materials in, finished goods out — and everything in between.</span>
+          </div>
+        </div>
+        <div class="included-item">
+          <span class="check-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+          <div class="item-text">
+            <strong>QR label printing</strong>
+            <span>Print and scan packs on standard hardware. No proprietary tags.</span>
+          </div>
+        </div>
+        <div class="included-item">
+          <span class="check-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+          <div class="item-text">
+            <strong>Quality inspections</strong>
+            <span>Inspection workflows tied to work orders. Pass/fail with reason codes.</span>
+          </div>
+        </div>
+        <div class="included-item">
+          <span class="check-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+          <div class="item-text">
+            <strong>Scrap tracking</strong>
+            <span>Log scrap and cutbacks at the station. Trend reporting included.</span>
+          </div>
+        </div>
+        <div class="included-item">
+          <span class="check-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+          <div class="item-text">
+            <strong>Real-time dashboards &amp; KPIs</strong>
+            <span>Live production status. Schedule attainment. Throughput. Variance.</span>
+          </div>
+        </div>
+        <div class="included-item">
+          <span class="check-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+          <div class="item-text">
+            <strong>Configured reporting</strong>
+            <span>Pre-built reports for ops, finance, and leadership. One-click export.</span>
+          </div>
+        </div>
+        <div class="included-item">
+          <span class="check-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+          <div class="item-text">
+            <strong>Standard integrations</strong>
+            <span>Commercial CRMs and ERPs with open APIs. Custom integrations quoted.</span>
+          </div>
+        </div>
+        <div class="included-item">
+          <span class="check-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+          <div class="item-text">
+            <strong>Web-based help desk</strong>
+            <span>Submit tickets, browse help topics, get answers — without leaving Nodal.</span>
+          </div>
+        </div>
+        <div class="included-item">
+          <span class="check-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+          <div class="item-text">
+            <strong>7-day onboarding</strong>
+            <span>Configuration, data loading, training, go-live. Included in Year 1.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section light">
+    <div class="container">
+      <div class="section-head">
+        <span class="section-number">03 — Onboarding</span>
+        <h2>Live in a week. Not a quarter.</h2>
+        <p class="lead">Most ERPs quote a separate $5K–$15K implementation fee and tell you to clear your schedule for the next six months. We include onboarding in the subscription and finish in seven days.</p>
+      </div>
+
+      <div class="onboard-card">
+        <div class="deco-glow-inner"></div>
+        <div>
+          <h3>7-day onboarding, included.</h3>
+          <p>We configure Nodal to your stations, inventory, and workflows. We load your data. We train your supervisors and operators. We go live. All inside one week — and it's already in the subscription price.</p>
+        </div>
+        <div class="onboard-stats">
+          <div class="onboard-stat">
+            <div class="stat-value">7 days</div>
+            <div class="stat-label">Configuration to go-live</div>
+          </div>
+          <div class="onboard-stat">
+            <div class="stat-value">$0</div>
+            <div class="stat-label">Separate implementation fee</div>
+          </div>
+          <div class="onboard-stat">
+            <div class="stat-value">Day 1</div>
+            <div class="stat-label">Floor team uploading inventory</div>
+          </div>
+          <div class="onboard-stat">
+            <div class="stat-value">$2,500</div>
+            <div class="stat-label">Flat fee for added facility later</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section gray">
+    <div class="container">
+      <div class="section-head">
+        <span class="section-number">04 — Optional: Floor-Ready Kit</span>
+        <h2>Hardware, if you want it.</h2>
+        <p class="lead">Nodal runs on your existing iPads, phones, and PCs. But if you want shop-floor-ready hardware shipped and configured, we offer a turnkey bundle. Per facility.</p>
+      </div>
+
+      <div class="hardware-card">
+        <div class="hardware-header">
+          <div>
+            <h3>Floor-Ready Kit</h3>
+            <p>Pre-configured rugged hardware, packed and shipped to your facility. Plug in, scan a code, you're tracking packs.</p>
+          </div>
+          <div class="hardware-price">
+            <div class="hp-label">Optional bundle</div>
+            <div class="hp-amount">$3,500–$4,500</div>
+            <div class="hp-per">per facility</div>
+          </div>
+        </div>
+
+        <div class="hardware-list">
+          <div class="hardware-item">
+            <span class="hw-name">Chromebooks (×3)</span>
+            <span class="hw-spec">Ruggedized for floor use</span>
+          </div>
+          <div class="hardware-item">
+            <span class="hw-name">QR scanning guns (×2)</span>
+            <span class="hw-spec">Honeywell or Zebra</span>
+          </div>
+          <div class="hardware-item">
+            <span class="hw-name">Label printer</span>
+            <span class="hw-spec">Zebra ZD series</span>
+          </div>
+          <div class="hardware-item">
+            <span class="hw-name">Mounting hardware</span>
+            <span class="hw-spec">Stands and brackets</span>
+          </div>
+        </div>
+
+        <p class="hardware-note">Or use your own iPads and phones. We'll note your setup during onboarding either way. Individual scanning guns also available à la carte.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section light" id="early-access">
+    <div class="container">
+      <div class="section-head">
+        <span class="section-number">05 — Founding Customer Offer</span>
+        <h2>Help us build the playbook. Get founding pricing.</h2>
+        <p class="lead">We're working with a small cohort of early customers whose feedback shapes the product. If that's you, you get a structured pilot and locked-in pricing — and we get a reference relationship.</p>
+      </div>
+
+      <div class="ea-card">
+        <div class="ea-bg"></div>
+        <div class="ea-header">
+          <div>
+            <span class="ea-tag">Limited cohort</span>
+            <h2>Founding customer terms.</h2>
+            <p class="lead">Real commercial protections in exchange for being part of building this.</p>
+          </div>
+        </div>
+
+        <div class="ea-grid">
+          <div class="ea-item">
+            <span class="ea-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+            <div class="ea-text">
+              <strong>90-day pilot at $500/month</strong>
+              <span>Nominal — not free. Establishes the commercial relationship while you prove fit.</span>
+            </div>
+          </div>
+          <div class="ea-item">
+            <span class="ea-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+            <div class="ea-text">
+              <strong>15% founding discount</strong>
+              <span>Lock your tier pricing for two years at a 15% discount if you convert within 30 days of pilot.</span>
+            </div>
+          </div>
+          <div class="ea-item">
+            <span class="ea-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+            <div class="ea-text">
+              <strong>Direct product input</strong>
+              <span>Quarterly feedback sessions with the team building Nodal. Your operation shapes the roadmap.</span>
+            </div>
+          </div>
+          <div class="ea-item">
+            <span class="ea-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+            <div class="ea-text">
+              <strong>Priority implementation</strong>
+              <span>Dedicated implementation lead during pilot. Hardware configured and shipped on us if needed.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="ea-footer">
+          <p>In exchange: reference customer rights, case study participation, logo use, and 2–3 reference calls per quarter once you're in production.</p>
+          <a href="demo.html" class="btn btn-primary">Discuss the pilot <span class="arrow">→</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="dark-section cta">
+    <div class="deco-glow"></div><div class="deco-grid"></div>
+    <div class="container">
+      <div>
+        <h2>Have questions about which tier fits?</h2>
+        <p>Tell us how many facilities you run, what systems you use today, and what you're trying to track. We'll come back with a tier recommendation and a quote — usually within one business day.</p>
+      </div>
+      <div class="cta-buttons">
+        <a href="demo.html" class="btn btn-primary">Get a quote <span class="arrow">→</span></a>
+        <a href="mailto:steve@coffeyandco.com" class="btn btn-ghost">Email us</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <img src="nodalerp-logo-light.png" alt="NodalERP" class="footer-logo" />
+          <p class="footer-tagline">Control made simple.</p>
+          <p class="footer-blurb">The lightest, most integration-friendly ERP for modern manufacturers. Built by Coffey &amp; Co.</p>
+        </div>
+        <div>
+          <h4>Product</h4>
+          <ul>
+            <li><a href="platform.html">NodalERP</a></li>
+            <li><a href="orchestration.html">Orchestration</a></li>
+            <li><a href="shopfloor.html">Shop Floor</a></li>
+            <li><a href="pricing.html">Pricing</a></li>
+            <li><a href="demo.html">Book a demo</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Resources</h4>
+          <ul>
+            <li><a href="support.html">Support</a></li>
+            <li><a href="help.html">Help topics</a></li>
+            <li><a href="#">API docs</a></li>
+            <li><a href="#">Status</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Contact</h4>
+          <ul>
+            <li><a href="mailto:steve@coffeyandco.com">steve@coffeyandco.com</a></li>
+            <li><a href="tel:+15402394115">540-239-4115</a></li>
+            <li><a href="demo.html">Schedule a demo</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; <span id="year"></span> Coffey &amp; Co. All rights reserved.</span>
+        <div class="footer-bottom-links">
+          <a href="#">Privacy</a>
+          <a href="#">Terms</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+
+</body>
+</html>
