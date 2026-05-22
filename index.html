@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Nodal Shop Floor — Built for the floor, for the office</title>
-  <meta name="description" content="Nodal Shop Floor is standalone shop floor software for production tracking. Tablet app for the floor, real-time dashboards for the office. Live in days." />
+  <title>Nodal Shop Floor — Production visibility without replacing your ERP</title>
+  <meta name="description" content="Real-time production, inventory, materials, quality, and shipping visibility without a full ERP migration. Tablet app for operators, live dashboards for managers." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
@@ -54,10 +54,46 @@
     .deco-glow.alt { background-image: radial-gradient(circle at 85% 20%, rgba(78,189,250,0.1) 0%, transparent 40%), radial-gradient(circle at 15% 85%, rgba(0,86,181,0.18) 0%, transparent 45%); }
     .deco-grid { background-image: linear-gradient(rgba(78,189,250,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(78,189,250,0.04) 1px, transparent 1px); background-size: 60px 60px; -webkit-mask-image: radial-gradient(ellipse at center, black 40%, transparent 75%); mask-image: radial-gradient(ellipse at center, black 40%, transparent 75%); }
     .dark-section > .container { position: relative; z-index: 1; }
-    .page-hero { padding: 5rem 0 5.5rem; }
-    .page-hero h1 { color: var(--white); margin: 1rem 0 1.2rem; max-width: 42rem; }
-    .page-hero .lead { color: rgba(243,243,243,0.78); max-width: 42rem; margin-bottom: 2rem; }
+    .page-hero { padding: 5rem 0 5.5rem; overflow: visible; }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.05fr 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+    .page-hero h1 { color: var(--white); margin: 1rem 0 1.2rem; max-width: 36rem; }
+    .page-hero .lead { color: rgba(243,243,243,0.78); max-width: 36rem; margin-bottom: 2rem; }
     .page-hero-ctas { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+    .hero-visual { position: relative; z-index: 2; }
+    .hero-shot {
+      margin: 0;
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid rgba(78, 189, 250, 0.28);
+      background: rgba(255, 255, 255, 0.04);
+      box-shadow: 0 16px 40px rgba(5, 12, 29, 0.35);
+      transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.45s ease, border-color 0.35s ease;
+      transform-origin: center center;
+      cursor: default;
+    }
+    .hero-shot img { width: 100%; height: auto; display: block; vertical-align: middle; }
+    .hero-visual:hover .hero-shot,
+    .hero-shot.is-engaged,
+    .hero-shot:focus-within {
+      transform: scale(1.07) translateY(-10px);
+      box-shadow: 0 32px 64px rgba(5, 12, 29, 0.55);
+      border-color: rgba(78, 189, 250, 0.55);
+    }
+    .screenshot-thumb-link {
+      display: block;
+      border-radius: 6px;
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .screenshot-thumb-link:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 28px rgba(5, 12, 29, 0.12);
+    }
     .section { padding: 5.5rem 0; }
     .section.light { background: var(--white); }
     .section.gray { background: var(--gray); }
@@ -99,6 +135,8 @@
     .step-card h3 { color: var(--text); margin-bottom: 0.4rem; font-size: 1rem; }
     .step-card p { color: var(--text-muted); font-size: 0.86rem; line-height: 1.5; }
     @media (max-width: 900px) {
+      .hero-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .hero-visual:hover .hero-shot { transform: none; }
       .feature-grid, .feature-grid.cols-4, .screenshot-grid, .footer-grid { grid-template-columns: 1fr; }
       .step-grid { grid-template-columns: 1fr 1fr; }
       .nav, .header-cta .btn { display: none; }
@@ -128,14 +166,28 @@
     </div>
   </header>
 
-  <section class="dark-section page-hero">
+  <section class="dark-section page-hero" id="hero">
     <div class="deco-glow"></div><div class="deco-grid"></div>
-    <div class="container">
-      <span class="eyebrow">Nodal Shop Floor</span>
-      <h1>Built for the floor, for the office.</h1>
-      <p class="lead">Nodal Shop Floor is a standalone software application for production tracking. The floor team uses a tablet app with big buttons, badge scan login, and scan-driven workflows. The back office gets real-time clarity into what's actually happening on the floor, with dashboards that update as the work happens. Easy onboarding. You can be live in days. Hardware is optional. Use your own iPads and scanners, or we'll ship a Floor-Ready Kit.</p>
-      <div class="page-hero-ctas">
-        <a href="demo.html" class="btn btn-primary">Book a demo <span class="arrow">→</span></a>
+    <div class="container hero-grid">
+      <div class="hero-copy">
+        <span class="eyebrow">Nodal Shop Floor</span>
+        <h1>Production floor visibility without replacing your ERP.</h1>
+        <p class="lead">Real-time visibility into production, inventory, materials, quality, and shipping without forcing a full ERP migration. Operators get a simple tablet app. Managers get live dashboards. Your back office gets cleaner data.</p>
+        <div class="page-hero-ctas">
+          <a href="demo.html" class="btn btn-primary">Book a demo <span class="arrow">→</span></a>
+        </div>
+      </div>
+      <div class="hero-visual" aria-label="Operations hub dashboard preview">
+        <figure class="hero-shot" tabindex="0">
+          <img
+            src="operations-hub-screenshot-CuQ2uPt-.png"
+            alt="Nodal Shop Floor operations hub dashboard showing live production visibility"
+            width="1200"
+            height="750"
+            loading="eager"
+            decoding="async"
+          />
+        </figure>
       </div>
     </div>
   </section>
@@ -208,9 +260,9 @@
         <p class="lead">When operators log production at their station, not on a clipboard that gets entered at the end of shift, you get something your current system probably can't deliver: data that's current, accurate, and trustworthy enough to make decisions on.</p>
       </div>
       <div class="screenshot-grid">
-        <div class="screenshot-placeholder" style="background: #f3f3f3; border: 2px dashed #d8dce4; border-radius: 6px; aspect-ratio: 16/10; display: flex; align-items: center; justify-content: center; color: #8993a4; font-size: 0.88rem; text-align: center; padding: 1rem;">
-          Dashboard screenshot<br><span style="font-size: 0.78rem;">(replace with actual image)</span>
-        </div>
+        <a href="#hero" class="screenshot-thumb-link" aria-label="View operations hub in hero">
+          <img src="operations-hub-screenshot-CuQ2uPt-.png" alt="Operations hub dashboard" style="width: 100%; height: auto; border-radius: 6px; border: 1px solid var(--border); display: block;" loading="lazy" />
+        </a>
         <div class="screenshot-placeholder" style="background: #f3f3f3; border: 2px dashed #d8dce4; border-radius: 6px; aspect-ratio: 16/10; display: flex; align-items: center; justify-content: center; color: #8993a4; font-size: 0.88rem; text-align: center; padding: 1rem;">
           Dashboard screenshot<br><span style="font-size: 0.78rem;">(replace with actual image)</span>
         </div>
@@ -318,7 +370,28 @@
       </div>
     </div>
   </footer>
-  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    (function () {
+      const heroShot = document.querySelector('.hero-shot');
+      const triggers = document.querySelectorAll('.hero-visual, .screenshot-thumb-link');
+      if (!heroShot || !triggers.length) return;
+
+      function engage() { heroShot.classList.add('is-engaged'); }
+      function release() {
+        if (!heroShot.matches(':hover') && !document.querySelector('.hero-visual:hover, .screenshot-thumb-link:hover')) {
+          heroShot.classList.remove('is-engaged');
+        }
+      }
+
+      triggers.forEach(el => {
+        el.addEventListener('mouseenter', engage);
+        el.addEventListener('mouseleave', () => setTimeout(release, 40));
+      });
+      heroShot.addEventListener('mouseleave', () => setTimeout(release, 40));
+    })();
+  </script>
 
 </body>
 </html>
