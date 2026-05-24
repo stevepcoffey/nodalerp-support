@@ -69,6 +69,43 @@
     .team-role { font-size: 0.82rem; color: var(--blue); font-weight: 500; text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 0.6rem; }
     .team-card p { color: var(--text-muted); font-size: 0.9rem; margin: 0; }
     .muted-note { font-size: 0.9rem; color: var(--text-muted); font-style: italic; }
+    .why-nodal-graph {
+      display: flex;
+      justify-content: center;
+      margin: 2.5rem 0 3rem;
+      opacity: 0.9;
+    }
+    .why-nodal-graph svg { max-width: 280px; width: 100%; height: auto; }
+    .why-nodal-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: start;
+    }
+    .why-nodal-col p {
+      color: var(--text-muted);
+      font-size: 0.94rem;
+      line-height: 1.6;
+      margin: 0 0 1rem;
+    }
+    .why-nodal-col p:last-child { margin-bottom: 0; }
+    .why-subheading {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: -0.01em;
+      margin: 0 0 1rem;
+      line-height: 1.3;
+    }
+    .why-subheading::before {
+      content: "";
+      display: block;
+      width: 28px;
+      height: 3px;
+      background: var(--gradient);
+      border-radius: 2px;
+      margin-bottom: 0.75rem;
+    }
     .prose { max-width: 48rem; }
     .prose h3 { font-size: 1.15rem; color: var(--text); margin: 2rem 0 0.75rem; }
     .prose h3:first-child { margin-top: 0; }
@@ -97,7 +134,7 @@
     .footer-bottom { display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; border-top: 1px solid rgba(78,189,250,0.1); padding-top: 1.5rem; font-size: 0.83rem; color: rgba(243,243,243,0.5); }
     .footer-bottom-links { display: flex; gap: 1.5rem; }
     @media (max-width: 900px) {
-      .team-grid, .belief-grid, .footer-grid { grid-template-columns: 1fr; }
+      .team-grid, .why-nodal-grid, .belief-grid, .footer-grid { grid-template-columns: 1fr; }
       .nav, .header-cta .btn { display: none; }
       .page-hero { padding: 3.5rem 0 4rem; }
       .section { padding: 4rem 0; }
@@ -164,10 +201,61 @@
     </div>
   </section>
 
+  <section class="section light">
+    <div class="container">
+      <div class="section-head">
+        <span class="section-number">02 — Why Nodal</span>
+        <h2>What's in the name.</h2>
+        <p class="lead">Most enterprise software is designed around a straight line. An order comes in, gets processed, and goes out. Manufacturing doesn't work that way. A production floor is a network.</p>
+      </div>
+
+      <div class="why-nodal-graph" aria-hidden="true">
+        <svg viewBox="0 0 280 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <line x1="40" y1="40" x2="100" y2="40" stroke="url(#nodeGrad)" stroke-width="2" stroke-linecap="round" opacity="0.6"/>
+          <line x1="100" y1="40" x2="180" y2="40" stroke="url(#nodeGrad)" stroke-width="2" stroke-linecap="round" opacity="0.6"/>
+          <line x1="180" y1="40" x2="240" y2="40" stroke="url(#nodeGrad)" stroke-width="2" stroke-linecap="round" opacity="0.6"/>
+          <line x1="100" y1="40" x2="100" y2="18" stroke="url(#nodeGrad)" stroke-width="2" stroke-linecap="round" opacity="0.45"/>
+          <line x1="180" y1="40" x2="180" y2="62" stroke="url(#nodeGrad)" stroke-width="2" stroke-linecap="round" opacity="0.45"/>
+          <circle cx="40" cy="40" r="10" fill="#4ebdfa" opacity="0.25"/>
+          <circle cx="40" cy="40" r="6" fill="#0056b5"/>
+          <circle cx="100" cy="40" r="10" fill="#4ebdfa" opacity="0.25"/>
+          <circle cx="100" cy="40" r="6" fill="#0056b5"/>
+          <circle cx="100" cy="18" r="8" fill="#4ebdfa" opacity="0.2"/>
+          <circle cx="100" cy="18" r="5" fill="#4ebdfa"/>
+          <circle cx="180" cy="40" r="10" fill="#4ebdfa" opacity="0.25"/>
+          <circle cx="180" cy="40" r="6" fill="#0056b5"/>
+          <circle cx="180" cy="62" r="8" fill="#4ebdfa" opacity="0.2"/>
+          <circle cx="180" cy="62" r="5" fill="#4ebdfa"/>
+          <circle cx="240" cy="40" r="10" fill="#4ebdfa" opacity="0.25"/>
+          <circle cx="240" cy="40" r="6" fill="#0056b5"/>
+          <defs>
+            <linearGradient id="nodeGrad" x1="0" y1="0" x2="280" y2="0" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#4ebdfa"/>
+              <stop offset="1" stop-color="#0056b5"/>
+            </linearGradient>
+          </defs>
+        </svg>
+      </div>
+
+      <div class="why-nodal-grid">
+        <div class="why-nodal-col">
+          <h3 class="why-subheading">Every station is a node.</h3>
+          <p>In any network, a node is a connection point where information is received, processed, and passed forward. On a factory floor, every station, team, supplier, and workflow is exactly that. A node where something happens, something changes, and the result flows into what comes next.</p>
+          <p>Raw materials arrive from multiple suppliers, move through treatment, fabrication, and inspection, get bundled, staged, and shipped. Suppliers shift, schedules change, and a bottleneck at one station ripples through everything downstream.</p>
+        </div>
+        <div class="why-nodal-col">
+          <h3 class="why-subheading">Software that matches reality.</h3>
+          <p>That complexity isn't a problem to eliminate. It's the reality of the business, and software that pretends otherwise creates more friction than it removes.</p>
+          <p>We named the company Nodal because modern manufacturing software has to reflect how production environments actually work. Coffey &amp; Co. built Nodal to give mid-market manufacturers visibility and control across every node in their operation, starting on the shop floor and expanding across the entire business.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section class="section gray">
     <div class="container">
       <div class="section-head">
-        <span class="section-number">02: Case Study</span>
+        <span class="section-number">03: Case Study</span>
         <h2>Arbor Wood: from paper to real-time visibility.</h2>
         <p class="lead">How a growing building materials manufacturer replaced pen-and-paper pack tracking with a scan-driven workflow in seven days.</p>
       </div>
@@ -193,7 +281,7 @@
   <section class="section light">
     <div class="container">
       <div class="section-head">
-        <span class="section-number">03: What we believe</span>
+        <span class="section-number">04: What we believe</span>
         <h2>Software that fits the operation.</h2>
         <p class="lead">A few principles we hold to.</p>
       </div>
