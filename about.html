@@ -62,13 +62,6 @@
     .section-head { margin-bottom: 3rem; max-width: 48rem; }
     .section-head h2 { color: var(--text); margin-bottom: 0.8rem; }
     .section-head .lead { color: var(--text-muted); }
-    .team-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-bottom: 2rem; }
-    .team-card { background: var(--white); border: 1px solid var(--border); border-radius: 6px; padding: 2rem 1.5rem; text-align: center; }
-    .team-photo { width: 120px; height: 120px; border-radius: 50%; margin: 0 auto 1.2rem; background: #f3f3f3; border: 2px dashed #d8dce4; display: flex; align-items: center; justify-content: center; color: #8993a4; font-size: 0.75rem; text-align: center; padding: 0.5rem; }
-    .team-card h3 { margin-bottom: 0.25rem; font-size: 1.05rem; }
-    .team-role { font-size: 0.82rem; color: var(--blue); font-weight: 500; text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 0.6rem; }
-    .team-card p { color: var(--text-muted); font-size: 0.9rem; margin: 0; }
-    .muted-note { font-size: 0.9rem; color: var(--text-muted); font-style: italic; }
     .coffey-link {
       color: var(--blue);
       text-decoration: underline;
@@ -210,7 +203,7 @@
     .footer-bottom { display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; border-top: 1px solid rgba(78,189,250,0.1); padding-top: 1.5rem; font-size: 0.83rem; color: rgba(243,243,243,0.5); }
     .footer-bottom-links { display: flex; gap: 1.5rem; }
     @media (max-width: 900px) {
-      .team-grid, .why-nodal-grid, .belief-grid, .footer-grid { grid-template-columns: 1fr; }
+      .why-nodal-grid, .belief-grid, .footer-grid { grid-template-columns: 1fr; }
       .nav, .header-cta .btn { display: none; }
       .page-hero { padding: 3.5rem 0 4rem; }
       .section { padding: 4rem 0; }
@@ -246,41 +239,10 @@
     </div>
   </section>
 
-  <section class="section light">
-    <div class="container">
-      <div class="section-head">
-        <span class="section-number">01: The Team</span>
-        <h2>The people building Nodal.</h2>
-        <p class="lead">A small team of operators, technologists, and designers, with combined experience across decades of building and running manufacturing businesses.</p>
-      </div>
-      <div class="team-grid">
-        <div class="team-card">
-          <div class="team-photo">Photo<br>placeholder</div>
-          <h3>Team Member</h3>
-          <div class="team-role">Title goes here</div>
-          <p>Short bio placeholder.</p>
-        </div>
-        <div class="team-card">
-          <div class="team-photo">Photo<br>placeholder</div>
-          <h3>Team Member</h3>
-          <div class="team-role">Title goes here</div>
-          <p>Short bio placeholder.</p>
-        </div>
-        <div class="team-card">
-          <div class="team-photo">Photo<br>placeholder</div>
-          <h3>Team Member</h3>
-          <div class="team-role">Title goes here</div>
-          <p>Short bio placeholder.</p>
-        </div>
-      </div>
-      <p class="muted-note">Team bios coming soon.</p>
-    </div>
-  </section>
-
   <section class="section light why-nodal-section">
     <div class="container">
       <div class="section-head">
-        <span class="section-number">02 — Why Nodal</span>
+        <span class="section-number">01 — Why Nodal</span>
         <h2>What's in the name.</h2>
         <p class="lead">Most enterprise software is designed around a straight line. An order comes in, gets processed, and goes out. Manufacturing doesn't work that way. A production floor is a network.</p>
       </div>
@@ -347,7 +309,7 @@
   <section class="section gray">
     <div class="container">
       <div class="section-head">
-        <span class="section-number">03: Case Study</span>
+        <span class="section-number">02: Case Study</span>
         <h2>Arbor Wood: from paper to real-time visibility.</h2>
         <p class="lead">How a growing building materials manufacturer replaced pen-and-paper pack tracking with a scan-driven workflow in seven days.</p>
       </div>
@@ -373,7 +335,7 @@
   <section class="section light">
     <div class="container">
       <div class="section-head">
-        <span class="section-number">04: What we believe</span>
+        <span class="section-number">03: What we believe</span>
         <h2>Software that fits the operation.</h2>
         <p class="lead">A few principles we hold to.</p>
       </div>
