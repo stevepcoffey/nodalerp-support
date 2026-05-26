@@ -69,6 +69,33 @@
     .team-role { font-size: 0.82rem; color: var(--blue); font-weight: 500; text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 0.6rem; }
     .team-card p { color: var(--text-muted); font-size: 0.9rem; margin: 0; }
     .muted-note { font-size: 0.9rem; color: var(--text-muted); font-style: italic; }
+    .coffey-link {
+      color: var(--blue);
+      text-decoration: underline;
+      text-underline-offset: 2px;
+      text-decoration-color: rgba(0, 86, 181, 0.35);
+      transition: color 0.2s ease, text-decoration-color 0.2s ease;
+    }
+    .coffey-link:hover {
+      color: #004494;
+      text-decoration-color: var(--blue);
+    }
+    .page-hero .coffey-link {
+      color: var(--blue-light);
+      text-decoration-color: rgba(78, 189, 250, 0.45);
+    }
+    .page-hero .coffey-link:hover {
+      color: #8ed4fc;
+      text-decoration-color: var(--blue-light);
+    }
+    .footer .coffey-link {
+      color: var(--blue-light);
+      text-decoration-color: rgba(78, 189, 250, 0.35);
+    }
+    .footer .coffey-link:hover {
+      color: #8ed4fc;
+      text-decoration-color: var(--blue-light);
+    }
     .why-nodal-section {
       overflow: hidden;
     }
@@ -215,7 +242,7 @@
     <div class="container">
       <span class="eyebrow">About</span>
       <h1>Built by operators, for operators.</h1>
-      <p class="lead">Nodal Shop Floor is built by Coffey &amp; Co., a consultancy that's spent years inside mid-market manufacturing operations. We saw the gap between spreadsheets and enterprise MES systems, and built the application we wished existed.</p>
+      <p class="lead">Nodal Shop Floor is built by <a href="https://www.coffeyandco.com/" class="coffey-link" target="_blank" rel="noopener noreferrer">Coffey &amp; Co.</a>, a consultancy that's spent years inside mid-market manufacturing operations. We saw the gap between spreadsheets and enterprise MES systems, and built the application we wished existed.</p>
     </div>
   </section>
 
@@ -267,7 +294,7 @@
         <div class="why-nodal-col">
           <h3 class="why-subheading">Software that matches reality.</h3>
           <p>That complexity isn't a problem to eliminate. It's the reality of the business, and software that pretends otherwise creates more friction than it removes.</p>
-          <p>We named the company Nodal because modern manufacturing software has to reflect how production environments actually work. Coffey &amp; Co. built Nodal to give mid-market manufacturers visibility and control across every node in their operation, starting on the shop floor and expanding across the entire business.</p>
+          <p>We named the company Nodal because modern manufacturing software has to reflect how production environments actually work. <a href="https://www.coffeyandco.com/" class="coffey-link" target="_blank" rel="noopener noreferrer">Coffey &amp; Co.</a> built Nodal to give mid-market manufacturers visibility and control across every node in their operation, starting on the shop floor and expanding across the entire business.</p>
         </div>
       </div>
     </div>
@@ -387,7 +414,7 @@
         <div>
           <img src="nodalerp-logo-light.png" alt="Nodal Shop Floor" class="footer-logo" />
           <p class="footer-tagline">Control made simple.</p>
-          <p class="footer-blurb">Standalone shop floor software for modern manufacturers. Built by Coffey &amp; Co.</p>
+          <p class="footer-blurb">Standalone shop floor software for modern manufacturers. Built by <a href="https://www.coffeyandco.com/" class="coffey-link" target="_blank" rel="noopener noreferrer">Coffey &amp; Co.</a></p>
         </div>
         <div>
           <h4>Product</h4>
@@ -417,7 +444,7 @@
         </div>
       </div>
       <div class="footer-bottom">
-        <span>&copy; <span id="year"></span> Coffey &amp; Co. All rights reserved.</span>
+        <span>&copy; <span id="year"></span> <a href="https://www.coffeyandco.com/" class="coffey-link" target="_blank" rel="noopener noreferrer">Coffey &amp; Co.</a> All rights reserved.</span>
         <div class="footer-bottom-links">
           <a href="#">Privacy</a>
           <a href="#">Terms</a>
