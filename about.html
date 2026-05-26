@@ -70,76 +70,58 @@
     .team-card p { color: var(--text-muted); font-size: 0.9rem; margin: 0; }
     .muted-note { font-size: 0.9rem; color: var(--text-muted); font-style: italic; }
     .why-nodal-section {
-      position: relative;
       overflow: hidden;
     }
-    .why-nodal-section .container {
-      position: relative;
-      z-index: 1;
-    }
     .why-nodal-network {
-      position: absolute;
-      top: 50%;
-      left: 0;
-      right: 0;
-      height: 400px;
-      transform: translateY(-50%);
-      z-index: 0;
+      width: 100vw;
+      position: relative;
+      left: 50%;
+      right: 50%;
+      margin-left: -50vw;
+      margin-right: -50vw;
+      margin-top: 4rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       pointer-events: none;
-      opacity: 0.42;
-      mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);
-      -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);
     }
     .why-nodal-network svg {
       width: 100%;
-      height: 100%;
+      height: auto;
+      max-height: 140px;
       display: block;
     }
     .why-nodal-network .network-line {
       stroke: #4ebdfa;
       stroke-width: 1.5;
       stroke-linecap: round;
-      stroke-opacity: 0.35;
-    }
-    .why-nodal-network .data-pulse {
-      fill: #4ebdfa;
-      filter: drop-shadow(0 0 4px rgba(78, 189, 250, 0.8));
+      stroke-opacity: 0.45;
     }
     .why-nodal-network .node {
       transform-box: fill-box;
       transform-origin: center;
-      animation: node-pulse 3.5s ease-in-out infinite;
+      opacity: 0.7;
     }
-    .why-nodal-network .node-1 { transform: translate(160px, 130px) rotate(45deg); animation-delay: 0s; }
-    .why-nodal-network .node-2 { transform: translate(380px, 130px) rotate(45deg); animation-delay: 0.4s; }
-    .why-nodal-network .node-3 { transform: translate(600px, 130px) rotate(45deg); animation-delay: 0.8s; }
-    .why-nodal-network .node-4 { transform: translate(820px, 130px) rotate(45deg); animation-delay: 1.2s; }
-    .why-nodal-network .node-5 { transform: translate(1040px, 130px) rotate(45deg); animation-delay: 1.6s; }
-    .why-nodal-network .node-6 { transform: translate(1260px, 130px) rotate(45deg); animation-delay: 2s; }
-    .why-nodal-network .node-7 { transform: translate(270px, 270px) rotate(45deg); animation-delay: 2.4s; }
-    .why-nodal-network .node-8 { transform: translate(490px, 270px) rotate(45deg); animation-delay: 2.8s; }
-    .why-nodal-network .node-9 { transform: translate(710px, 270px) rotate(45deg); animation-delay: 3.2s; }
-    .why-nodal-network .node-10 { transform: translate(930px, 270px) rotate(45deg); animation-delay: 3.6s; }
-    .why-nodal-network .node-11 { transform: translate(1150px, 270px) rotate(45deg); animation-delay: 4s; }
-    @keyframes node-pulse {
-      0%, 100% {
-        opacity: 0.75;
-        filter: drop-shadow(0 0 0 rgba(78, 189, 250, 0));
+    .why-nodal-network .node-1 { transform: translate(60px, 60px) rotate(45deg); }
+    .why-nodal-network .node-2 { transform: translate(200px, 60px) rotate(45deg); }
+    .why-nodal-network .node-3 { transform: translate(340px, 60px) rotate(45deg); }
+    .why-nodal-network .node-4 { transform: translate(480px, 60px) rotate(45deg); }
+    .why-nodal-network .node-5 { transform: translate(620px, 60px) rotate(45deg); }
+    .why-nodal-network .node-6 { transform: translate(760px, 60px) rotate(45deg); }
+    .why-nodal-network .node-7 { transform: translate(900px, 60px) rotate(45deg); }
+    .why-nodal-network .node-8 { transform: translate(1040px, 60px) rotate(45deg); }
+    .why-nodal-network .node-9 { transform: translate(1180px, 60px) rotate(45deg); }
+    .why-nodal-network .node-10 { transform: translate(1340px, 60px) rotate(45deg); }
+    @media (max-width: 600px) {
+      .why-nodal-network {
+        margin-top: 2.5rem;
       }
-      50% {
-        opacity: 1;
-        filter: drop-shadow(0 0 6px rgba(78, 189, 250, 0.6));
+      .why-nodal-network svg {
+        max-height: 80px;
       }
     }
     @media (prefers-reduced-motion: reduce) {
-      .why-nodal-network .node {
-        animation: none !important;
-      }
-      .why-nodal-network rect {
-        opacity: 0.9;
-      }
-      .why-nodal-network circle,
-      .why-nodal-network .data-pulse {
+      .why-nodal-network svg circle {
         display: none;
       }
     }
@@ -269,81 +251,6 @@
   </section>
 
   <section class="section light why-nodal-section">
-    <div class="why-nodal-network" aria-hidden="true">
-      <svg viewBox="0 0 1400 400" preserveAspectRatio="xMidYMid slice" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <defs>
-          <linearGradient id="nodeGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#4ebdfa" />
-            <stop offset="100%" stop-color="#0056b5" />
-          </linearGradient>
-        </defs>
-        <!-- Top row horizontal -->
-        <line class="network-line" x1="160" y1="130" x2="380" y2="130" />
-        <line class="network-line" x1="380" y1="130" x2="600" y2="130" />
-        <line class="network-line" x1="600" y1="130" x2="820" y2="130" />
-        <line class="network-line" x1="820" y1="130" x2="1040" y2="130" />
-        <line class="network-line" x1="1040" y1="130" x2="1260" y2="130" />
-        <!-- Bottom row horizontal -->
-        <line class="network-line" x1="270" y1="270" x2="490" y2="270" />
-        <line class="network-line" x1="490" y1="270" x2="710" y2="270" />
-        <line class="network-line" x1="710" y1="270" x2="930" y2="270" />
-        <line class="network-line" x1="930" y1="270" x2="1150" y2="270" />
-        <!-- Diagonal cross-connections -->
-        <line class="network-line" x1="160" y1="130" x2="270" y2="270" />
-        <line class="network-line" x1="380" y1="130" x2="270" y2="270" />
-        <line class="network-line" x1="380" y1="130" x2="490" y2="270" />
-        <line class="network-line" x1="600" y1="130" x2="490" y2="270" />
-        <line class="network-line" x1="600" y1="130" x2="710" y2="270" />
-        <line class="network-line" x1="820" y1="130" x2="710" y2="270" />
-        <line class="network-line" x1="820" y1="130" x2="930" y2="270" />
-        <line class="network-line" x1="1040" y1="130" x2="930" y2="270" />
-        <line class="network-line" x1="1040" y1="130" x2="1150" y2="270" />
-        <line class="network-line" x1="1260" y1="130" x2="1150" y2="270" />
-        <!-- Traveling data pulses (active lines) -->
-        <circle r="3" class="data-pulse pulse-line-1-2">
-          <animate attributeName="opacity" values="0;1;1;0" dur="2.5s" repeatCount="indefinite" begin="0s" />
-          <animate attributeName="cx" from="160" to="380" dur="2.5s" repeatCount="indefinite" begin="0s" />
-          <animate attributeName="cy" from="130" to="130" dur="2.5s" repeatCount="indefinite" begin="0s" />
-        </circle>
-        <circle r="3" class="data-pulse pulse-line-3-8">
-          <animate attributeName="opacity" values="0;1;1;0" dur="2.5s" repeatCount="indefinite" begin="0.4s" />
-          <animate attributeName="cx" from="600" to="490" dur="2.5s" repeatCount="indefinite" begin="0.4s" />
-          <animate attributeName="cy" from="130" to="270" dur="2.5s" repeatCount="indefinite" begin="0.4s" />
-        </circle>
-        <circle r="3" class="data-pulse pulse-line-5-10">
-          <animate attributeName="opacity" values="0;1;1;0" dur="2.5s" repeatCount="indefinite" begin="0.9s" />
-          <animate attributeName="cx" from="1040" to="930" dur="2.5s" repeatCount="indefinite" begin="0.9s" />
-          <animate attributeName="cy" from="130" to="270" dur="2.5s" repeatCount="indefinite" begin="0.9s" />
-        </circle>
-        <circle r="3" class="data-pulse pulse-line-7-8">
-          <animate attributeName="opacity" values="0;1;1;0" dur="2.5s" repeatCount="indefinite" begin="1.3s" />
-          <animate attributeName="cx" from="270" to="490" dur="2.5s" repeatCount="indefinite" begin="1.3s" />
-          <animate attributeName="cy" from="270" to="270" dur="2.5s" repeatCount="indefinite" begin="1.3s" />
-        </circle>
-        <circle r="3" class="data-pulse pulse-line-9-10">
-          <animate attributeName="opacity" values="0;1;1;0" dur="2.5s" repeatCount="indefinite" begin="1.8s" />
-          <animate attributeName="cx" from="710" to="930" dur="2.5s" repeatCount="indefinite" begin="1.8s" />
-          <animate attributeName="cy" from="270" to="270" dur="2.5s" repeatCount="indefinite" begin="1.8s" />
-        </circle>
-        <circle r="3" class="data-pulse pulse-line-4-5">
-          <animate attributeName="opacity" values="0;1;1;0" dur="2.5s" repeatCount="indefinite" begin="2.2s" />
-          <animate attributeName="cx" from="820" to="1040" dur="2.5s" repeatCount="indefinite" begin="2.2s" />
-          <animate attributeName="cy" from="130" to="130" dur="2.5s" repeatCount="indefinite" begin="2.2s" />
-        </circle>
-        <!-- Nodes -->
-        <g class="node node-1"><rect x="-16" y="-16" width="32" height="32" rx="6" fill="url(#nodeGradient)" /></g>
-        <g class="node node-2"><rect x="-14" y="-14" width="28" height="28" rx="6" fill="url(#nodeGradient)" /></g>
-        <g class="node node-3"><rect x="-18" y="-18" width="36" height="36" rx="6" fill="url(#nodeGradient)" /></g>
-        <g class="node node-4"><rect x="-14" y="-14" width="28" height="28" rx="6" fill="url(#nodeGradient)" /></g>
-        <g class="node node-5"><rect x="-16" y="-16" width="32" height="32" rx="6" fill="url(#nodeGradient)" /></g>
-        <g class="node node-6"><rect x="-14" y="-14" width="28" height="28" rx="6" fill="url(#nodeGradient)" /></g>
-        <g class="node node-7"><rect x="-14" y="-14" width="28" height="28" rx="6" fill="url(#nodeGradient)" /></g>
-        <g class="node node-8"><rect x="-16" y="-16" width="32" height="32" rx="6" fill="url(#nodeGradient)" /></g>
-        <g class="node node-9"><rect x="-18" y="-18" width="36" height="36" rx="6" fill="url(#nodeGradient)" /></g>
-        <g class="node node-10"><rect x="-14" y="-14" width="28" height="28" rx="6" fill="url(#nodeGradient)" /></g>
-        <g class="node node-11"><rect x="-16" y="-16" width="32" height="32" rx="6" fill="url(#nodeGradient)" /></g>
-      </svg>
-    </div>
     <div class="container">
       <div class="section-head">
         <span class="section-number">02 — Why Nodal</span>
@@ -363,6 +270,50 @@
           <p>We named the company Nodal because modern manufacturing software has to reflect how production environments actually work. Coffey &amp; Co. built Nodal to give mid-market manufacturers visibility and control across every node in their operation, starting on the shop floor and expanding across the entire business.</p>
         </div>
       </div>
+    </div>
+    <div class="why-nodal-network" aria-hidden="true">
+      <svg viewBox="0 0 1400 120" preserveAspectRatio="xMidYMid meet" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <defs>
+          <linearGradient id="nodeGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#4ebdfa" />
+            <stop offset="100%" stop-color="#0056b5" />
+          </linearGradient>
+          <filter id="pulseGlow" x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur stdDeviation="3" result="blur" />
+            <feMerge>
+              <feMergeNode in="blur" />
+              <feMergeNode in="SourceGraphic" />
+            </feMerge>
+          </filter>
+        </defs>
+        <line class="network-line" x1="60" y1="60" x2="200" y2="60" />
+        <line class="network-line" x1="200" y1="60" x2="340" y2="60" />
+        <line class="network-line" x1="340" y1="60" x2="480" y2="60" />
+        <line class="network-line" x1="480" y1="60" x2="620" y2="60" />
+        <line class="network-line" x1="620" y1="60" x2="760" y2="60" />
+        <line class="network-line" x1="760" y1="60" x2="900" y2="60" />
+        <line class="network-line" x1="900" y1="60" x2="1040" y2="60" />
+        <line class="network-line" x1="1040" y1="60" x2="1180" y2="60" />
+        <line class="network-line" x1="1180" y1="60" x2="1340" y2="60" />
+        <circle cx="60" cy="60" r="4" fill="#4ebdfa" filter="url(#pulseGlow)">
+          <animate attributeName="cx" values="60; 200; 340; 480; 620; 760; 900; 1040; 1180; 1340; 60" keyTimes="0; 0.1; 0.2; 0.3; 0.4; 0.5; 0.6; 0.7; 0.8; 0.9; 1" dur="6s" repeatCount="indefinite" />
+          <animate attributeName="opacity" values="0; 1; 1; 1; 1; 1; 1; 1; 1; 1; 0" keyTimes="0; 0.05; 0.1; 0.2; 0.3; 0.5; 0.7; 0.8; 0.9; 0.95; 1" dur="6s" repeatCount="indefinite" />
+        </circle>
+        <circle cx="60" cy="60" r="4" fill="#4ebdfa" filter="url(#pulseGlow)">
+          <animate attributeName="cx" values="60; 200; 340; 480; 620; 760; 900; 1040; 1180; 1340; 60" keyTimes="0; 0.1; 0.2; 0.3; 0.4; 0.5; 0.6; 0.7; 0.8; 0.9; 1" dur="6s" begin="3s" repeatCount="indefinite" />
+          <animate attributeName="opacity" values="0; 1; 1; 1; 1; 1; 1; 1; 1; 1; 0" keyTimes="0; 0.05; 0.1; 0.2; 0.3; 0.5; 0.7; 0.8; 0.9; 0.95; 1" dur="6s" begin="3s" repeatCount="indefinite" />
+        </circle>
+        <g class="node node-1"><rect x="-9" y="-9" width="18" height="18" rx="6" fill="url(#nodeGradient)" /></g>
+        <g class="node node-2"><rect x="-9" y="-9" width="18" height="18" rx="6" fill="url(#nodeGradient)" /></g>
+        <g class="node node-3"><rect x="-9" y="-9" width="18" height="18" rx="6" fill="url(#nodeGradient)" /></g>
+        <g class="node node-4"><rect x="-9" y="-9" width="18" height="18" rx="6" fill="url(#nodeGradient)" /></g>
+        <g class="node node-5"><rect x="-9" y="-9" width="18" height="18" rx="6" fill="url(#nodeGradient)" /></g>
+        <g class="node node-6"><rect x="-9" y="-9" width="18" height="18" rx="6" fill="url(#nodeGradient)" /></g>
+        <g class="node node-7"><rect x="-9" y="-9" width="18" height="18" rx="6" fill="url(#nodeGradient)" /></g>
+        <g class="node node-8"><rect x="-9" y="-9" width="18" height="18" rx="6" fill="url(#nodeGradient)" /></g>
+        <g class="node node-9"><rect x="-9" y="-9" width="18" height="18" rx="6" fill="url(#nodeGradient)" /></g>
+        <g class="node node-10"><rect x="-9" y="-9" width="18" height="18" rx="6" fill="url(#nodeGradient)" /></g>
+      </svg>
     </div>
   </section>
 
