@@ -71,14 +71,14 @@
     .page-hero > .container { position: relative; z-index: 2; }
     .hero-aurora { position: absolute; inset: 0; overflow: hidden; z-index: 0; pointer-events: none; }
     .aurora-blob { position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.55; will-change: transform; }
-    .blob-1 { width: 600px; height: 600px; background: radial-gradient(circle, rgba(78,189,250,0.45) 0%, transparent 70%); top: -10%; left: -5%; animation: auroraDrift1 28s ease-in-out infinite; }
-    .blob-2 { width: 500px; height: 500px; background: radial-gradient(circle, rgba(0,86,181,0.55) 0%, transparent 70%); top: 20%; right: -8%; animation: auroraDrift2 32s ease-in-out infinite; }
-    .blob-3 { width: 450px; height: 450px; background: radial-gradient(circle, rgba(78,189,250,0.3) 0%, transparent 70%); bottom: -15%; left: 25%; animation: auroraDrift3 30s ease-in-out infinite; }
-    .blob-4 { width: 380px; height: 380px; background: radial-gradient(circle, rgba(0,86,181,0.4) 0%, transparent 70%); top: 40%; left: 45%; animation: auroraDrift4 36s ease-in-out infinite; }
-    @keyframes auroraDrift1 { 0%,100% { transform: translate(0,0) scale(1); } 50% { transform: translate(35px, 25px) scale(1.05); } }
-    @keyframes auroraDrift2 { 0%,100% { transform: translate(0,0) scale(1); } 50% { transform: translate(-30px, 35px) scale(1.04); } }
-    @keyframes auroraDrift3 { 0%,100% { transform: translate(0,0) scale(1); } 50% { transform: translate(40px, -25px) scale(1.05); } }
-    @keyframes auroraDrift4 { 0%,100% { transform: translate(0,0) scale(1); } 50% { transform: translate(-25px, -30px) scale(1.03); } }
+    .blob-1 { width: 600px; height: 600px; background: radial-gradient(circle, rgba(78,189,250,0.45) 0%, transparent 70%); top: -10%; left: -5%; animation: auroraDrift1 34s ease-in-out infinite; }
+    .blob-2 { width: 500px; height: 500px; background: radial-gradient(circle, rgba(0,86,181,0.55) 0%, transparent 70%); top: 20%; right: -8%; animation: auroraDrift2 38s ease-in-out infinite -9s; }
+    .blob-3 { width: 450px; height: 450px; background: radial-gradient(circle, rgba(78,189,250,0.3) 0%, transparent 70%); bottom: -15%; left: 25%; animation: auroraDrift3 36s ease-in-out infinite -17s; }
+    .blob-4 { width: 380px; height: 380px; background: radial-gradient(circle, rgba(0,86,181,0.4) 0%, transparent 70%); top: 40%; left: 45%; animation: auroraDrift4 40s ease-in-out infinite -23s; }
+    @keyframes auroraDrift1 { 0%, 100% { transform: translate(0, 0) scale(1); } 33% { transform: translate(12px, 8px) scale(1.012); } 66% { transform: translate(6px, 14px) scale(1.008); } }
+    @keyframes auroraDrift2 { 0%, 100% { transform: translate(0, 0) scale(1); } 33% { transform: translate(-10px, 12px) scale(1.01); } 66% { transform: translate(-16px, 6px) scale(1.014); } }
+    @keyframes auroraDrift3 { 0%, 100% { transform: translate(0, 0) scale(1); } 33% { transform: translate(14px, -8px) scale(1.011); } 66% { transform: translate(8px, -14px) scale(1.009); } }
+    @keyframes auroraDrift4 { 0%, 100% { transform: translate(0, 0) scale(1); } 33% { transform: translate(-8px, -10px) scale(1.01); } 66% { transform: translate(-14px, -6px) scale(1.012); } }
     .hero-network {
       position: absolute; inset: 0; z-index: 1; pointer-events: none; opacity: 0.6;
     }
@@ -306,15 +306,15 @@
         <line class="mesh-line" x1="0" y1="480" x2="1600" y2="480"></line>
         <line class="mesh-line" x1="0" y1="560" x2="1600" y2="560"></line>
         <line class="mesh-line" x1="0" y1="600" x2="1600" y2="600"></line>
-        <circle r="3" fill="#8fd4fc" filter="url(#heroPulseGlow)">
-          <animate attributeName="cx" values="0;160;320;480;640;800;960;1120;1280;1440;1600" keyTimes="0;0.1;0.2;0.3;0.4;0.5;0.6;0.7;0.8;0.9;1" dur="9s" repeatCount="indefinite" begin="0s"></animate>
-          <animate attributeName="cy" values="240;240;160;160;240;320;320;240;160;240;240" keyTimes="0;0.1;0.2;0.3;0.4;0.5;0.6;0.7;0.8;0.9;1" dur="9s" repeatCount="indefinite" begin="0s"></animate>
-          <animate attributeName="opacity" values="0;0.7;0.7;0" keyTimes="0;0.05;0.95;1" dur="9s" repeatCount="indefinite" begin="0s"></animate>
+        <circle r="3" fill="#8fd4fc" opacity="0.55" filter="url(#heroPulseGlow)">
+          <animate attributeName="cx" values="0;  320;320; 320;640;640; 640;960;960; 960;1280;1280; 1280;1600" keyTimes="0; 0.14;0.18; 0.18;0.36;0.40; 0.40;0.58;0.62; 0.62;0.80;0.84; 0.84;1" dur="11s" repeatCount="indefinite" begin="0s"></animate>
+          <animate attributeName="cy" values="240; 240;160; 160;160;240; 240;240;320; 320;320;240; 240;240" keyTimes="0; 0.14;0.18; 0.18;0.36;0.40; 0.40;0.58;0.62; 0.62;0.80;0.84; 0.84;1" dur="11s" repeatCount="indefinite" begin="0s"></animate>
+          <animate attributeName="opacity" values="0;0.55;0.55;0" keyTimes="0;0.06;0.94;1" dur="11s" repeatCount="indefinite" begin="0s"></animate>
         </circle>
-        <circle r="3" fill="#8fd4fc" filter="url(#heroPulseGlow)">
-          <animate attributeName="cx" values="0;160;320;480;640;800;960;1120;1280;1440;1600" keyTimes="0;0.1;0.2;0.3;0.4;0.5;0.6;0.7;0.8;0.9;1" dur="9s" repeatCount="indefinite" begin="4.5s"></animate>
-          <animate attributeName="cy" values="400;400;480;400;320;320;400;480;400;400;400" keyTimes="0;0.1;0.2;0.3;0.4;0.5;0.6;0.7;0.8;0.9;1" dur="9s" repeatCount="indefinite" begin="4.5s"></animate>
-          <animate attributeName="opacity" values="0;0.7;0.7;0" keyTimes="0;0.05;0.95;1" dur="9s" repeatCount="indefinite" begin="4.5s"></animate>
+        <circle r="3" fill="#8fd4fc" opacity="0.55" filter="url(#heroPulseGlow)">
+          <animate attributeName="cx" values="0;  240;240; 240;560;560; 560;880;880; 880;1200;1200; 1200;1600" keyTimes="0; 0.14;0.18; 0.18;0.36;0.40; 0.40;0.58;0.62; 0.62;0.80;0.84; 0.84;1" dur="11s" repeatCount="indefinite" begin="5.5s"></animate>
+          <animate attributeName="cy" values="400; 400;480; 480;480;400; 400;400;320; 320;320;400; 400;400" keyTimes="0; 0.14;0.18; 0.18;0.36;0.40; 0.40;0.58;0.62; 0.62;0.80;0.84; 0.84;1" dur="11s" repeatCount="indefinite" begin="5.5s"></animate>
+          <animate attributeName="opacity" values="0;0.55;0.55;0" keyTimes="0;0.06;0.94;1" dur="11s" repeatCount="indefinite" begin="5.5s"></animate>
         </circle>
       </svg>
     </div>
