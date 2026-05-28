@@ -72,8 +72,8 @@
       background-position: center;
       z-index: 0;
       pointer-events: none;
-      -webkit-mask-image: linear-gradient(to right, black 0%, black 25%, transparent 60%);
-              mask-image: linear-gradient(to right, black 0%, black 25%, transparent 60%);
+      -webkit-mask-image: linear-gradient(to right, black 0%, black 30%, transparent 75%);
+              mask-image: linear-gradient(to right, black 0%, black 30%, transparent 75%);
       opacity: 0.85;
     }
     .floor-photo::after {
@@ -87,7 +87,12 @@
     .floor-container {
       position: relative;
       z-index: 1;
-      padding-left: 22%;
+      padding-left: 1.5rem;
+    }
+    .floor-container .section-head,
+    .floor-container .feature-grid {
+      margin-left: auto;
+      max-width: 60%;
     }
     .page-hero { padding: 7.5rem 0 8rem; position: relative; overflow: hidden; }
     .page-hero .deco-grid {
@@ -258,7 +263,11 @@
       .page-hero { padding: 4.5rem 0 5.5rem; }
       .section { padding: 4rem 0; }
       .cta .container { flex-direction: column; align-items: flex-start; }
-      .floor-container { padding-left: 1.5rem; }
+      .floor-container .section-head,
+      .floor-container .feature-grid {
+        max-width: 100%;
+        margin-left: 0;
+      }
       .floor-photo {
         width: 100%;
         height: 40%;
