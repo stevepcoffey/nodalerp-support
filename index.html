@@ -60,6 +60,34 @@
     .deco-glow.alt { background-image: radial-gradient(circle at 85% 20%, rgba(78,189,250,0.1) 0%, transparent 40%), radial-gradient(circle at 15% 85%, rgba(0,86,181,0.18) 0%, transparent 45%); }
     .deco-grid { background-image: linear-gradient(rgba(78,189,250,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(78,189,250,0.04) 1px, transparent 1px); background-size: 60px 60px; -webkit-mask-image: radial-gradient(ellipse at center, black 40%, transparent 75%); mask-image: radial-gradient(ellipse at center, black 40%, transparent 75%); }
     .dark-section > .container { position: relative; z-index: 1; }
+    .floor-photo {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 45%;
+      background-image: url('workerNodalfactory.jpeg');
+      background-size: cover;
+      background-position: center;
+      z-index: 0;
+      pointer-events: none;
+      -webkit-mask-image: linear-gradient(to right, black 0%, black 35%, transparent 92%);
+              mask-image: linear-gradient(to right, black 0%, black 35%, transparent 92%);
+      opacity: 0.85;
+    }
+    .floor-photo::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to right, rgba(5,12,29,0.25) 0%, rgba(5,12,29,0.6) 70%, rgba(5,12,29,1) 100%);
+      -webkit-mask-image: inherit;
+              mask-image: inherit;
+    }
+    .floor-container {
+      position: relative;
+      z-index: 1;
+      padding-left: 8%;
+    }
     .page-hero { padding: 7.5rem 0 8rem; position: relative; overflow: hidden; }
     .page-hero .deco-grid {
       z-index: 1;
@@ -229,6 +257,18 @@
       .page-hero { padding: 4.5rem 0 5.5rem; }
       .section { padding: 4rem 0; }
       .cta .container { flex-direction: column; align-items: flex-start; }
+      .floor-container { padding-left: 1.5rem; }
+      .floor-photo {
+        width: 100%;
+        height: 40%;
+        top: 0;
+        -webkit-mask-image: linear-gradient(to bottom, black 0%, black 30%, transparent 85%);
+                mask-image: linear-gradient(to bottom, black 0%, black 30%, transparent 85%);
+        opacity: 0.5;
+      }
+      .floor-photo::after {
+        background: linear-gradient(to bottom, rgba(5,12,29,0.3) 0%, rgba(5,12,29,0.7) 60%, rgba(5,12,29,1) 100%);
+      }
     }
     @media (max-width: 500px) { .step-grid { grid-template-columns: 1fr; } }
     @media (prefers-reduced-motion: reduce) {
@@ -417,8 +457,9 @@
   </section>
 
   <section class="dark-section section">
+    <div class="floor-photo" aria-hidden="true"></div>
     <div class="deco-glow alt"></div><div class="deco-grid"></div>
-    <div class="container">
+    <div class="container floor-container">
       <div class="section-head">
         <span class="section-number on-dark">02: Built for the Floor</span>
         <h2>Designed by people who've stood at the station.</h2>
