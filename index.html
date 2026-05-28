@@ -123,8 +123,8 @@
     .hd-live { display: inline-flex; align-items: center; gap: 0.4rem; font-size: 0.72rem; font-weight: 500; color: #2fb878; background: rgba(47,184,120,0.1); border: 1px solid rgba(47,184,120,0.3); padding: 0.3rem 0.7rem; border-radius: 999px; }
     .hd-live-dot { width: 7px; height: 7px; border-radius: 50%; background: #2fb878; animation: liveDotPulse 2s ease-in-out infinite; }
     @keyframes liveDotPulse { 0%,100% { opacity: 1; box-shadow: 0 0 0 0 rgba(47,184,120,0.5); } 50% { opacity: 0.7; box-shadow: 0 0 0 5px rgba(47,184,120,0); } }
-    .hd-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-radius: 10px; padding: 1rem 1.1rem; backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); box-shadow: 0 4px 24px rgba(0,0,0,0.15); transition: all 0.3s ease; }
-    .hd-card:hover { background: rgba(255,255,255,0.07); border-color: rgba(78,189,250,0.35); transform: translateY(-2px); }
+    .hd-card { background: rgba(10, 18, 38, 0.82); border: 1px solid rgba(255,255,255,0.1); border-radius: 10px; padding: 1rem 1.1rem; backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); box-shadow: 0 4px 24px rgba(0,0,0,0.15); transition: all 0.3s ease; }
+    .hd-card:hover { background: rgba(20, 30, 54, 0.88); border-color: rgba(78,189,250,0.35); transform: translateY(-2px); }
     .hd-kpi-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; }
     .hd-card-label { font-size: 0.7rem; color: rgba(243,243,243,0.6); margin-bottom: 0.4rem; }
     .hd-card-value { font-size: 1.5rem; font-weight: 700; color: var(--white); letter-spacing: -0.02em; line-height: 1; margin-bottom: 0.4rem; font-variant-numeric: tabular-nums; }
@@ -306,15 +306,15 @@
         <line class="mesh-line" x1="0" y1="480" x2="1600" y2="480"></line>
         <line class="mesh-line" x1="0" y1="560" x2="1600" y2="560"></line>
         <line class="mesh-line" x1="0" y1="600" x2="1600" y2="600"></line>
-        <circle r="4" fill="#4ebdfa" filter="url(#heroPulseGlow)">
-          <animate attributeName="cx" from="0" to="1600" dur="8s" repeatCount="indefinite" begin="0s"></animate>
-          <animate attributeName="cy" values="240;240" dur="8s" repeatCount="indefinite" begin="0s"></animate>
-          <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.05;0.95;1" dur="8s" repeatCount="indefinite" begin="0s"></animate>
+        <circle r="3" fill="#8fd4fc" filter="url(#heroPulseGlow)">
+          <animate attributeName="cx" values="0;160;320;480;640;800;960;1120;1280;1440;1600" keyTimes="0;0.1;0.2;0.3;0.4;0.5;0.6;0.7;0.8;0.9;1" dur="9s" repeatCount="indefinite" begin="0s"></animate>
+          <animate attributeName="cy" values="240;240;160;160;240;320;320;240;160;240;240" keyTimes="0;0.1;0.2;0.3;0.4;0.5;0.6;0.7;0.8;0.9;1" dur="9s" repeatCount="indefinite" begin="0s"></animate>
+          <animate attributeName="opacity" values="0;0.7;0.7;0" keyTimes="0;0.05;0.95;1" dur="9s" repeatCount="indefinite" begin="0s"></animate>
         </circle>
-        <circle r="4" fill="#4ebdfa" filter="url(#heroPulseGlow)">
-          <animate attributeName="cx" from="0" to="1600" dur="8s" repeatCount="indefinite" begin="4s"></animate>
-          <animate attributeName="cy" values="400;400" dur="8s" repeatCount="indefinite" begin="4s"></animate>
-          <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.05;0.95;1" dur="8s" repeatCount="indefinite" begin="4s"></animate>
+        <circle r="3" fill="#8fd4fc" filter="url(#heroPulseGlow)">
+          <animate attributeName="cx" values="0;160;320;480;640;800;960;1120;1280;1440;1600" keyTimes="0;0.1;0.2;0.3;0.4;0.5;0.6;0.7;0.8;0.9;1" dur="9s" repeatCount="indefinite" begin="4.5s"></animate>
+          <animate attributeName="cy" values="400;400;480;400;320;320;400;480;400;400;400" keyTimes="0;0.1;0.2;0.3;0.4;0.5;0.6;0.7;0.8;0.9;1" dur="9s" repeatCount="indefinite" begin="4.5s"></animate>
+          <animate attributeName="opacity" values="0;0.7;0.7;0" keyTimes="0;0.05;0.95;1" dur="9s" repeatCount="indefinite" begin="4.5s"></animate>
         </circle>
       </svg>
     </div>
