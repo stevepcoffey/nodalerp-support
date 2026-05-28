@@ -79,15 +79,14 @@
     @keyframes auroraDrift3 { 0%,100% { transform: translate(0,0) scale(1); } 50% { transform: translate(60px,-70px) scale(1.1); } }
     @keyframes auroraDrift4 { 0%,100% { transform: translate(0,0) scale(1); } 40% { transform: translate(-90px,-30px) scale(1.05); } 70% { transform: translate(40px,50px) scale(0.92); } }
     .hero-network {
-      position: absolute; inset: 0; z-index: 1; pointer-events: none; opacity: 0.5;
-      mask-image: linear-gradient(to right, black 0%, black 55%, transparent 85%);
-      -webkit-mask-image: linear-gradient(to right, black 0%, black 55%, transparent 85%);
+      position: absolute; inset: 0; z-index: 1; pointer-events: none; opacity: 0.7;
+      mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+      -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
     }
     .hero-network svg { width: 100%; height: 100%; }
-    .hero-network .network-line { stroke: #4ebdfa; stroke-width: 1.25; stroke-opacity: 0.3; }
+    .hero-network .mesh-line { stroke: #4ebdfa; stroke-width: 0.75; stroke-opacity: 0.07; }
+    .hero-network .network-line { stroke: #4ebdfa; stroke-width: 1.25; stroke-opacity: 0.25; }
     .hero-network .network-node {
-      width: 16px;
-      height: 16px;
       transform-box: fill-box;
       transform-origin: center;
       animation: heroNodePulse 4s ease-in-out infinite;
@@ -106,7 +105,8 @@
     .hero-network .n12 { animation-delay: 4.3s; }
     .hero-network .n13 { animation-delay: 4.6s; }
     .hero-network .n14 { animation-delay: 5s; }
-    @keyframes heroNodePulse { 0%,100% { opacity: 0.6; } 50% { opacity: 1; } }
+    .hero-network .n15 { animation-delay: 3.9s; }
+    @keyframes heroNodePulse { 0%,100% { opacity: 0.55; } 50% { opacity: 1; } }
     .hero-grid {
       display: grid;
       grid-template-columns: 1.1fr 1fr;
@@ -161,6 +161,23 @@
     .hd-order-dot.purple { background: #a78bfa; }
     .hd-order-value { font-size: 1.25rem; font-weight: 700; color: var(--white); letter-spacing: -0.01em; line-height: 1; margin-bottom: 0.25rem; }
     .hd-order-sub { font-size: 0.68rem; color: rgba(243,243,243,0.5); }
+    .hd-primary { display: flex; align-items: center; gap: 1.2rem; }
+    .hd-primary-left { flex-shrink: 0; }
+    .hd-primary-value { font-size: 2.1rem !important; }
+    .hd-primary-bar { flex-grow: 1; height: 6px; background: rgba(255,255,255,0.08); border-radius: 999px; overflow: hidden; }
+    .hd-primary-fill { height: 100%; width: 0%; background: var(--gradient); border-radius: 999px; transition: width 0.6s ease; }
+    .hd-strip { display: flex; justify-content: space-between; gap: 0.5rem; flex-wrap: wrap; padding: 0.9rem 1.1rem; }
+    .hd-strip-item { display: flex; flex-direction: column; align-items: flex-start; min-width: 0; }
+    .hd-strip-val { font-size: 0.95rem; font-weight: 700; color: var(--white); font-variant-numeric: tabular-nums; line-height: 1.1; }
+    .hd-strip-lbl { font-size: 0.58rem; text-transform: uppercase; letter-spacing: 0.08em; color: rgba(243,243,243,0.5); }
+    .hd-card-value.flash {
+      animation: hdValueFlash 0.3s ease;
+    }
+    @keyframes hdValueFlash {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.04); }
+      100% { transform: scale(1); }
+    }
 
     .screenshot-thumb-link {
       display: block;
@@ -225,10 +242,12 @@
       .hd-card { backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
       .aurora-blob { filter: blur(60px); }
       .hero-network {
-        opacity: 0.3;
+        opacity: 0.4;
         mask-image: linear-gradient(to bottom, black 0%, black 50%, transparent 80%);
         -webkit-mask-image: linear-gradient(to bottom, black 0%, black 50%, transparent 80%);
       }
+      .hd-strip-val { font-size: 0.84rem; }
+      .hd-strip-lbl { font-size: 0.54rem; }
       .feature-grid, .feature-grid.cols-4, .screenshot-grid, .footer-grid { grid-template-columns: 1fr; }
       .step-grid { grid-template-columns: 1fr 1fr; }
       .nav, .header-cta .btn { display: none; }
@@ -273,7 +292,7 @@
       <div class="aurora-blob blob-4"></div>
     </div>
     <div class="hero-network" aria-hidden="true">
-      <svg viewBox="0 0 1400 600" preserveAspectRatio="xMidYMid slice">
+      <svg viewBox="0 0 1600 600" preserveAspectRatio="xMidYMid slice">
         <defs>
           <linearGradient id="heroNodeGradient" x1="0%" y1="0%" x2="100%" y2="100%">
             <stop offset="0%" stop-color="#4ebdfa" />
@@ -284,52 +303,86 @@
             <feMerge><feMergeNode in="blur"></feMergeNode><feMergeNode in="SourceGraphic"></feMergeNode></feMerge>
           </filter>
         </defs>
-        <line class="network-line" x1="100" y1="120" x2="260" y2="240"></line>
-        <line class="network-line" x1="100" y1="120" x2="380" y2="130"></line>
-        <line class="network-line" x1="260" y1="240" x2="180" y2="400"></line>
-        <line class="network-line" x1="260" y1="240" x2="420" y2="340"></line>
-        <line class="network-line" x1="180" y1="400" x2="340" y2="500"></line>
-        <line class="network-line" x1="380" y1="130" x2="520" y2="90"></line>
-        <line class="network-line" x1="380" y1="130" x2="560" y2="220"></line>
-        <line class="network-line" x1="420" y1="340" x2="560" y2="220"></line>
-        <line class="network-line" x1="420" y1="340" x2="600" y2="440"></line>
-        <line class="network-line" x1="340" y1="500" x2="600" y2="440"></line>
-        <line class="network-line" x1="560" y1="220" x2="720" y2="320"></line>
-        <line class="network-line" x1="560" y1="220" x2="760" y2="150"></line>
-        <line class="network-line" x1="600" y1="440" x2="700" y2="520"></line>
-        <line class="network-line" x1="520" y1="90" x2="760" y2="150"></line>
-        <line class="network-line" x1="720" y1="320" x2="880" y2="260"></line>
-        <line class="network-line" x1="720" y1="320" x2="920" y2="420"></line>
-        <line class="network-line" x1="760" y1="150" x2="880" y2="260"></line>
-        <line class="network-line" x1="700" y1="520" x2="920" y2="420"></line>
-        <rect class="network-node n1" x="92" y="112" width="16" height="16" rx="5" fill="url(#heroNodeGradient)" transform="rotate(45 100 120)"></rect>
-        <rect class="network-node n2" x="252" y="232" width="16" height="16" rx="5" fill="url(#heroNodeGradient)" transform="rotate(45 260 240)"></rect>
-        <rect class="network-node n3" x="172" y="392" width="16" height="16" rx="5" fill="url(#heroNodeGradient)" transform="rotate(45 180 400)"></rect>
-        <rect class="network-node n4" x="372" y="122" width="16" height="16" rx="5" fill="url(#heroNodeGradient)" transform="rotate(45 380 130)"></rect>
-        <rect class="network-node n5" x="412" y="332" width="16" height="16" rx="5" fill="url(#heroNodeGradient)" transform="rotate(45 420 340)"></rect>
-        <rect class="network-node n6" x="332" y="492" width="16" height="16" rx="5" fill="url(#heroNodeGradient)" transform="rotate(45 340 500)"></rect>
-        <rect class="network-node n7" x="552" y="212" width="16" height="16" rx="5" fill="url(#heroNodeGradient)" transform="rotate(45 560 220)"></rect>
-        <rect class="network-node n8" x="592" y="432" width="16" height="16" rx="5" fill="url(#heroNodeGradient)" transform="rotate(45 600 440)"></rect>
-        <rect class="network-node n9" x="512" y="82" width="16" height="16" rx="5" fill="url(#heroNodeGradient)" transform="rotate(45 520 90)"></rect>
-        <rect class="network-node n10" x="712" y="312" width="16" height="16" rx="5" fill="url(#heroNodeGradient)" transform="rotate(45 720 320)"></rect>
-        <rect class="network-node n11" x="752" y="142" width="16" height="16" rx="5" fill="url(#heroNodeGradient)" transform="rotate(45 760 150)"></rect>
-        <rect class="network-node n12" x="692" y="512" width="16" height="16" rx="5" fill="url(#heroNodeGradient)" transform="rotate(45 700 520)"></rect>
-        <rect class="network-node n13" x="872" y="252" width="16" height="16" rx="5" fill="url(#heroNodeGradient)" transform="rotate(45 880 260)"></rect>
-        <rect class="network-node n14" x="912" y="412" width="16" height="16" rx="5" fill="url(#heroNodeGradient)" transform="rotate(45 920 420)"></rect>
+        <line class="mesh-line" x1="0" y1="0" x2="0" y2="600"></line>
+        <line class="mesh-line" x1="80" y1="0" x2="80" y2="600"></line>
+        <line class="mesh-line" x1="160" y1="0" x2="160" y2="600"></line>
+        <line class="mesh-line" x1="240" y1="0" x2="240" y2="600"></line>
+        <line class="mesh-line" x1="320" y1="0" x2="320" y2="600"></line>
+        <line class="mesh-line" x1="400" y1="0" x2="400" y2="600"></line>
+        <line class="mesh-line" x1="480" y1="0" x2="480" y2="600"></line>
+        <line class="mesh-line" x1="560" y1="0" x2="560" y2="600"></line>
+        <line class="mesh-line" x1="640" y1="0" x2="640" y2="600"></line>
+        <line class="mesh-line" x1="720" y1="0" x2="720" y2="600"></line>
+        <line class="mesh-line" x1="800" y1="0" x2="800" y2="600"></line>
+        <line class="mesh-line" x1="880" y1="0" x2="880" y2="600"></line>
+        <line class="mesh-line" x1="960" y1="0" x2="960" y2="600"></line>
+        <line class="mesh-line" x1="1040" y1="0" x2="1040" y2="600"></line>
+        <line class="mesh-line" x1="1120" y1="0" x2="1120" y2="600"></line>
+        <line class="mesh-line" x1="1200" y1="0" x2="1200" y2="600"></line>
+        <line class="mesh-line" x1="1280" y1="0" x2="1280" y2="600"></line>
+        <line class="mesh-line" x1="1360" y1="0" x2="1360" y2="600"></line>
+        <line class="mesh-line" x1="1440" y1="0" x2="1440" y2="600"></line>
+        <line class="mesh-line" x1="1520" y1="0" x2="1520" y2="600"></line>
+        <line class="mesh-line" x1="1600" y1="0" x2="1600" y2="600"></line>
+        <line class="mesh-line" x1="0" y1="0" x2="1600" y2="0"></line>
+        <line class="mesh-line" x1="0" y1="80" x2="1600" y2="80"></line>
+        <line class="mesh-line" x1="0" y1="160" x2="1600" y2="160"></line>
+        <line class="mesh-line" x1="0" y1="240" x2="1600" y2="240"></line>
+        <line class="mesh-line" x1="0" y1="320" x2="1600" y2="320"></line>
+        <line class="mesh-line" x1="0" y1="400" x2="1600" y2="400"></line>
+        <line class="mesh-line" x1="0" y1="480" x2="1600" y2="480"></line>
+        <line class="mesh-line" x1="0" y1="560" x2="1600" y2="560"></line>
+        <line class="mesh-line" x1="0" y1="600" x2="1600" y2="600"></line>
+        <line class="network-line" x1="640" y1="160" x2="800" y2="160"></line>
+        <line class="network-line" x1="800" y1="160" x2="960" y2="160"></line>
+        <line class="network-line" x1="960" y1="160" x2="1120" y2="160"></line>
+        <line class="network-line" x1="1120" y1="160" x2="1280" y2="160"></line>
+        <line class="network-line" x1="720" y1="320" x2="880" y2="320"></line>
+        <line class="network-line" x1="880" y1="320" x2="1040" y2="320"></line>
+        <line class="network-line" x1="1040" y1="320" x2="1200" y2="320"></line>
+        <line class="network-line" x1="1200" y1="320" x2="1360" y2="320"></line>
+        <line class="network-line" x1="640" y1="480" x2="800" y2="480"></line>
+        <line class="network-line" x1="800" y1="480" x2="960" y2="480"></line>
+        <line class="network-line" x1="960" y1="480" x2="1120" y2="480"></line>
+        <line class="network-line" x1="1120" y1="480" x2="1280" y2="480"></line>
+        <line class="network-line" x1="640" y1="160" x2="720" y2="320"></line>
+        <line class="network-line" x1="800" y1="160" x2="880" y2="320"></line>
+        <line class="network-line" x1="960" y1="160" x2="1040" y2="320"></line>
+        <line class="network-line" x1="1120" y1="160" x2="1200" y2="320"></line>
+        <line class="network-line" x1="1280" y1="160" x2="1360" y2="320"></line>
+        <line class="network-line" x1="720" y1="320" x2="800" y2="480"></line>
+        <line class="network-line" x1="880" y1="320" x2="960" y2="480"></line>
+        <line class="network-line" x1="1040" y1="320" x2="1120" y2="480"></line>
+        <line class="network-line" x1="1200" y1="320" x2="1280" y2="480"></line>
+        <rect class="network-node n1" x="631" y="151" width="18" height="18" rx="5" fill="url(#heroNodeGradient)" transform="rotate(45 640 160)"></rect>
+        <rect class="network-node n2" x="791" y="151" width="18" height="18" rx="5" fill="url(#heroNodeGradient)" transform="rotate(45 800 160)"></rect>
+        <rect class="network-node n3" x="951" y="151" width="18" height="18" rx="5" fill="url(#heroNodeGradient)" transform="rotate(45 960 160)"></rect>
+        <rect class="network-node n4" x="1111" y="151" width="18" height="18" rx="5" fill="url(#heroNodeGradient)" transform="rotate(45 1120 160)"></rect>
+        <rect class="network-node n5" x="1271" y="151" width="18" height="18" rx="5" fill="url(#heroNodeGradient)" transform="rotate(45 1280 160)"></rect>
+        <rect class="network-node n6" x="711" y="311" width="18" height="18" rx="5" fill="url(#heroNodeGradient)" transform="rotate(45 720 320)"></rect>
+        <rect class="network-node n7" x="871" y="311" width="18" height="18" rx="5" fill="url(#heroNodeGradient)" transform="rotate(45 880 320)"></rect>
+        <rect class="network-node n8" x="1031" y="311" width="18" height="18" rx="5" fill="url(#heroNodeGradient)" transform="rotate(45 1040 320)"></rect>
+        <rect class="network-node n9" x="1191" y="311" width="18" height="18" rx="5" fill="url(#heroNodeGradient)" transform="rotate(45 1200 320)"></rect>
+        <rect class="network-node n10" x="1351" y="311" width="18" height="18" rx="5" fill="url(#heroNodeGradient)" transform="rotate(45 1360 320)"></rect>
+        <rect class="network-node n11" x="631" y="471" width="18" height="18" rx="5" fill="url(#heroNodeGradient)" transform="rotate(45 640 480)"></rect>
+        <rect class="network-node n12" x="791" y="471" width="18" height="18" rx="5" fill="url(#heroNodeGradient)" transform="rotate(45 800 480)"></rect>
+        <rect class="network-node n13" x="951" y="471" width="18" height="18" rx="5" fill="url(#heroNodeGradient)" transform="rotate(45 960 480)"></rect>
+        <rect class="network-node n14" x="1111" y="471" width="18" height="18" rx="5" fill="url(#heroNodeGradient)" transform="rotate(45 1120 480)"></rect>
+        <rect class="network-node n15" x="1271" y="471" width="18" height="18" rx="5" fill="url(#heroNodeGradient)" transform="rotate(45 1280 480)"></rect>
         <circle r="3.5" fill="#4ebdfa" filter="url(#heroPulseGlow)">
-          <animate attributeName="cx" values="100;260;420;560;720;880;100" keyTimes="0;0.166;0.333;0.5;0.666;0.833;1" dur="7s" repeatCount="indefinite" begin="0s"></animate>
-          <animate attributeName="cy" values="120;240;340;220;320;260;120" keyTimes="0;0.166;0.333;0.5;0.666;0.833;1" dur="7s" repeatCount="indefinite" begin="0s"></animate>
-          <animate attributeName="opacity" values="0;1;1;1;1;0" keyTimes="0;0.1;0.2;0.8;0.95;1" dur="7s" repeatCount="indefinite" begin="0s"></animate>
+          <animate attributeName="cx" values="640;800;960;1120;1280;640" keyTimes="0;0.2;0.4;0.6;0.8;1" dur="6s" repeatCount="indefinite" begin="0s"></animate>
+          <animate attributeName="cy" values="160;160;160;160;160;160" keyTimes="0;0.2;0.4;0.6;0.8;1" dur="6s" repeatCount="indefinite" begin="0s"></animate>
+          <animate attributeName="opacity" values="0;1;1;1;1;0" keyTimes="0;0.1;0.25;0.75;0.9;1" dur="6s" repeatCount="indefinite" begin="0s"></animate>
         </circle>
         <circle r="3.5" fill="#4ebdfa" filter="url(#heroPulseGlow)">
-          <animate attributeName="cx" values="380;520;760;880;380" keyTimes="0;0.25;0.5;0.75;1" dur="7s" repeatCount="indefinite" begin="2.5s"></animate>
-          <animate attributeName="cy" values="130;90;150;260;130" keyTimes="0;0.25;0.5;0.75;1" dur="7s" repeatCount="indefinite" begin="2.5s"></animate>
-          <animate attributeName="opacity" values="0;1;1;1;0" keyTimes="0;0.12;0.7;0.9;1" dur="7s" repeatCount="indefinite" begin="2.5s"></animate>
+          <animate attributeName="cx" values="720;880;1040;1200;1360;720" keyTimes="0;0.2;0.4;0.6;0.8;1" dur="6s" repeatCount="indefinite" begin="2s"></animate>
+          <animate attributeName="cy" values="320;320;320;320;320;320" keyTimes="0;0.2;0.4;0.6;0.8;1" dur="6s" repeatCount="indefinite" begin="2s"></animate>
+          <animate attributeName="opacity" values="0;1;1;1;1;0" keyTimes="0;0.1;0.25;0.75;0.9;1" dur="6s" repeatCount="indefinite" begin="2s"></animate>
         </circle>
         <circle r="3.5" fill="#4ebdfa" filter="url(#heroPulseGlow)">
-          <animate attributeName="cx" values="180;340;600;700;920;180" keyTimes="0;0.2;0.4;0.6;0.8;1" dur="7s" repeatCount="indefinite" begin="4.5s"></animate>
-          <animate attributeName="cy" values="400;500;440;520;420;400" keyTimes="0;0.2;0.4;0.6;0.8;1" dur="7s" repeatCount="indefinite" begin="4.5s"></animate>
-          <animate attributeName="opacity" values="0;1;1;1;1;0" keyTimes="0;0.1;0.25;0.75;0.92;1" dur="7s" repeatCount="indefinite" begin="4.5s"></animate>
+          <animate attributeName="cx" values="640;800;960;1120;1280;640" keyTimes="0;0.2;0.4;0.6;0.8;1" dur="6s" repeatCount="indefinite" begin="4s"></animate>
+          <animate attributeName="cy" values="480;480;480;480;480;480" keyTimes="0;0.2;0.4;0.6;0.8;1" dur="6s" repeatCount="indefinite" begin="4s"></animate>
+          <animate attributeName="opacity" values="0;1;1;1;1;0" keyTimes="0;0.1;0.25;0.75;0.9;1" dur="6s" repeatCount="indefinite" begin="4s"></animate>
         </circle>
       </svg>
     </div>
@@ -354,44 +407,61 @@
           </div>
           <div class="hd-live"><span class="hd-live-dot"></span>Live</div>
         </div>
+        <div class="hd-card hd-primary">
+          <div class="hd-primary-left">
+            <div class="hd-card-label">Work Orders Processed</div>
+            <div class="hd-card-value hd-primary-value" id="sim-workorders">148</div>
+            <div class="hd-card-trend up" id="sim-workorders-trend">↗ live</div>
+          </div>
+          <div class="hd-primary-bar"><div class="hd-primary-fill" id="sim-progress-bar"></div></div>
+        </div>
         <div class="hd-kpi-grid">
           <div class="hd-card">
             <div class="hd-card-label">Total Revenue (MTD)</div>
-            <div class="hd-card-value">$2.8M</div>
-            <div class="hd-card-trend up">↗ 12.5%</div>
+            <div class="hd-card-value" id="sim-revenue">$2.8M</div>
+            <div class="hd-card-trend up" id="sim-revenue-trend">↗ 12.5%</div>
           </div>
           <div class="hd-card">
             <div class="hd-card-label">Gross Margin</div>
-            <div class="hd-card-value">34.2%</div>
+            <div class="hd-card-value" id="sim-margin">34.2%</div>
             <div class="hd-card-trend up">↗ 2.1%</div>
           </div>
           <div class="hd-card">
             <div class="hd-card-label">Operating Costs</div>
-            <div class="hd-card-value">$1.9M</div>
+            <div class="hd-card-value" id="sim-costs">$1.9M</div>
             <div class="hd-card-trend down">↘ 3.4%</div>
           </div>
           <div class="hd-card">
             <div class="hd-card-label">Net Cash Flow</div>
-            <div class="hd-card-value">$487K</div>
+            <div class="hd-card-value" id="sim-cashflow">$487K</div>
             <div class="hd-card-trend up">↗ 8.7%</div>
           </div>
         </div>
         <div class="hd-order-grid">
           <div class="hd-card hd-order">
             <div class="hd-order-head"><span class="hd-order-dot blue"></span>Work Orders</div>
-            <div class="hd-order-value">147</div>
-            <div class="hd-order-sub">Total Orders</div>
+            <div class="hd-order-value" id="sim-wo-active">147</div>
+            <div class="hd-order-sub">Active</div>
           </div>
           <div class="hd-card hd-order">
             <div class="hd-order-head"><span class="hd-order-dot green"></span>Purchase Orders</div>
-            <div class="hd-order-value">$1.2M</div>
+            <div class="hd-order-value" id="sim-po">$1.2M</div>
             <div class="hd-order-sub">Total Spend</div>
           </div>
           <div class="hd-card hd-order">
             <div class="hd-order-head"><span class="hd-order-dot purple"></span>Sales Orders</div>
-            <div class="hd-order-value">$2.8M</div>
+            <div class="hd-order-value" id="sim-so">$2.8M</div>
             <div class="hd-order-sub">Total Revenue</div>
           </div>
+        </div>
+        <div class="hd-card hd-strip">
+          <div class="hd-strip-item"><span class="hd-strip-val" id="sim-items">3,420</span><span class="hd-strip-lbl">Items</span></div>
+          <div class="hd-strip-item"><span class="hd-strip-val" id="sim-lowstock">23</span><span class="hd-strip-lbl">Low Stock</span></div>
+          <div class="hd-strip-item"><span class="hd-strip-val" id="sim-oos">7</span><span class="hd-strip-lbl">Out of Stock</span></div>
+          <div class="hd-strip-item"><span class="hd-strip-val" id="sim-turnover">5.2x</span><span class="hd-strip-lbl">Turnover</span></div>
+          <div class="hd-strip-item"><span class="hd-strip-val" id="sim-accuracy">98.7%</span><span class="hd-strip-lbl">Accuracy</span></div>
+          <div class="hd-strip-item"><span class="hd-strip-val" id="sim-receiving">12</span><span class="hd-strip-lbl">Receiving</span></div>
+          <div class="hd-strip-item"><span class="hd-strip-val" id="sim-shipping">18</span><span class="hd-strip-lbl">Shipping</span></div>
         </div>
       </div>
     </div>
@@ -581,12 +651,8 @@
   <script>
     (function () {
       const card = document.querySelector('.hero-dashboard');
-      if (!card) return;
-
       const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      const canTilt = !prefersReduced && window.matchMedia('(min-width: 901px)').matches;
-
-      if (canTilt) {
+      if (card && !prefersReduced && window.matchMedia('(min-width: 901px)').matches) {
         const maxY = 5;
         const maxX = 5;
 
@@ -603,6 +669,83 @@
           card.style.setProperty('--ry', '0deg');
         });
       }
+
+      const sim = {
+        workorders: document.getElementById('sim-workorders'),
+        workordersTrend: document.getElementById('sim-workorders-trend'),
+        progressBar: document.getElementById('sim-progress-bar'),
+        revenue: document.getElementById('sim-revenue'),
+        revenueTrend: document.getElementById('sim-revenue-trend'),
+        margin: document.getElementById('sim-margin'),
+        costs: document.getElementById('sim-costs'),
+        cashflow: document.getElementById('sim-cashflow'),
+        woActive: document.getElementById('sim-wo-active'),
+        po: document.getElementById('sim-po'),
+        so: document.getElementById('sim-so'),
+        items: document.getElementById('sim-items'),
+        lowstock: document.getElementById('sim-lowstock'),
+        oos: document.getElementById('sim-oos'),
+        turnover: document.getElementById('sim-turnover'),
+        accuracy: document.getElementById('sim-accuracy'),
+        receiving: document.getElementById('sim-receiving'),
+        shipping: document.getElementById('sim-shipping')
+      };
+
+      if (Object.values(sim).some((node) => !node)) return;
+
+      const START = 148;
+      const END = 498;
+      const RANGE = END - START;
+
+      function flashValue(el) {
+        el.classList.remove('flash');
+        void el.offsetWidth;
+        el.classList.add('flash');
+      }
+
+      function renderProgress(p) {
+        const workorders = Math.round(START + RANGE * p);
+        sim.workorders.textContent = workorders.toString();
+        sim.workordersTrend.textContent = `↗ ${Math.round(p * 100)}% of target`;
+        sim.progressBar.style.width = `${(p * 100).toFixed(1)}%`;
+
+        sim.revenue.textContent = `$${(2.4 + p * 0.9).toFixed(1)}M`;
+        sim.revenueTrend.textContent = `↗ ${(8 + p * 7).toFixed(1)}%`;
+        sim.margin.textContent = `${(33.5 + p * 1.4).toFixed(1)}%`;
+        sim.costs.textContent = `$${(1.7 + p * 0.4).toFixed(1)}M`;
+        sim.cashflow.textContent = `$${Math.round(420 + p * 140)}K`;
+        sim.woActive.textContent = Math.round(workorders * 0.32).toString();
+        sim.po.textContent = `$${(0.9 + p * 0.7).toFixed(1)}M`;
+        sim.so.textContent = `$${(2.3 + p * 1.1).toFixed(1)}M`;
+        sim.items.textContent = Math.round(3600 - p * 320).toLocaleString();
+        sim.lowstock.textContent = Math.round(14 + p * 18).toString();
+        sim.oos.textContent = Math.round(3 + p * 7).toString();
+        sim.turnover.textContent = `${(4.6 + p * 1.0).toFixed(1)}x`;
+        sim.accuracy.textContent = `${(98.2 + p * 0.9).toFixed(1)}%`;
+        sim.receiving.textContent = Math.round(8 + p * 12).toString();
+        sim.shipping.textContent = Math.round(10 + p * 22).toString();
+
+        flashValue(sim.workorders);
+        flashValue(sim.revenue);
+        flashValue(sim.margin);
+        flashValue(sim.costs);
+        flashValue(sim.cashflow);
+      }
+
+      if (prefersReduced) {
+        renderProgress(0.5);
+        return;
+      }
+
+      let tick = 0;
+      function stepSimulation() {
+        const p = tick / 60;
+        renderProgress(p);
+        tick = tick >= 60 ? 0 : tick + 1;
+      }
+
+      stepSimulation();
+      setInterval(stepSimulation, 1000);
     })();
   </script>
 
