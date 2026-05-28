@@ -129,6 +129,28 @@
     .page-hero h1 { color: var(--white); margin: 1rem 0 1.2rem; max-width: 36rem; }
     .page-hero .lead { color: rgba(243,243,243,0.78); max-width: 36rem; margin-bottom: 2rem; }
     .page-hero-ctas { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin-top: 1.5rem;
+      padding: 0.6rem 1.1rem;
+      background: rgba(78, 189, 250, 0.08);
+      border: 1px solid rgba(78, 189, 250, 0.25);
+      border-radius: 999px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: #f3f3f3;
+      letter-spacing: 0.01em;
+    }
+    .hero-badge-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #2fb878;
+      flex-shrink: 0;
+      box-shadow: 0 0 8px rgba(47, 184, 120, 0.6);
+    }
 
     .hero-dashboard {
       position: relative;
@@ -500,6 +522,10 @@
         <p class="lead">Real-time visibility into production, inventory, materials, quality, and shipping without forcing a full ERP migration. Operators get a simple tablet app. Managers get live dashboards. Your back office gets cleaner data.</p>
         <div class="page-hero-ctas">
           <a href="demo.html" class="btn btn-primary">Book a demo <span class="arrow">→</span></a>
+        </div>
+        <div class="hero-badge">
+          <span class="hero-badge-dot"></span>
+          Deploy in days, not quarters.
         </div>
       </div>
       <div class="hero-dashboard" aria-label="Operations dashboard preview">
