@@ -192,29 +192,122 @@
       100% { transform: scale(1); }
     }
 
-    .screenshot-item {
-      display: block;
+    .why-carousel { margin-top: 0.5rem; }
+    .why-carousel-wrap {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .why-carousel-viewport {
+      flex: 1;
+      min-width: 0;
+      overflow: hidden;
+      padding: 0.75rem 0 1.25rem;
+    }
+    .why-carousel-track {
+      display: flex;
+      align-items: stretch;
+      gap: 1.25rem;
+    }
+    .why-carousel-slide {
+      flex: 0.85 1 0;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+      opacity: 0.48;
+      transform: scale(0.94);
+      cursor: pointer;
+      transition:
+        flex 0.55s cubic-bezier(0.4, 0, 0.2, 1),
+        opacity 0.45s ease,
+        transform 0.45s ease;
+    }
+    .why-carousel-slide:hover:not(.is-active) {
+      opacity: 0.68;
+      transform: scale(0.96);
+    }
+    .why-carousel-slide.is-active {
+      flex: 2.6 1 0;
+      opacity: 1;
+      transform: scale(1);
+      cursor: default;
+    }
+    .why-carousel-shot {
       border-radius: 6px;
       overflow: hidden;
       border: 1px solid var(--border);
       aspect-ratio: 16 / 10;
       background: #f3f3f3;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      transition: box-shadow 0.45s ease, border-color 0.35s ease;
     }
-    .screenshot-item img {
+    .why-carousel-slide.is-active .why-carousel-shot {
+      border-color: rgba(78, 189, 250, 0.35);
+      box-shadow: 0 14px 36px rgba(5, 12, 29, 0.12);
+    }
+    .why-carousel-shot img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       object-position: top center;
       display: block;
-      transition: transform 0.35s ease;
+      transition: transform 0.55s cubic-bezier(0.4, 0, 0.2, 1);
     }
-    .screenshot-item:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 12px 28px rgba(5, 12, 29, 0.12);
+    .why-carousel-slide.is-active .why-carousel-shot img {
+      transform: scale(1.02);
     }
-    .screenshot-item:hover img {
-      transform: scale(1.04);
+    .why-carousel-card {
+      opacity: 0.75;
+      transition: opacity 0.45s ease, transform 0.45s ease, box-shadow 0.45s ease;
+    }
+    .why-carousel-slide.is-active .why-carousel-card {
+      opacity: 1;
+      transform: translateY(-2px);
+      box-shadow: 0 10px 24px rgba(5, 12, 29, 0.08);
+    }
+    .why-carousel-nav {
+      flex-shrink: 0;
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      border: 1px solid var(--border);
+      background: var(--white);
+      color: var(--blue);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .why-carousel-nav:hover {
+      border-color: var(--blue-light);
+      background: rgba(78, 189, 250, 0.08);
+      transform: translateY(-1px);
+      box-shadow: 0 6px 16px rgba(5, 12, 29, 0.08);
+    }
+    .why-carousel-nav svg { width: 20px; height: 20px; }
+    .why-carousel-dots {
+      display: flex;
+      justify-content: center;
+      gap: 0.55rem;
+      margin-top: 0.25rem;
+    }
+    .why-carousel-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      border: none;
+      padding: 0;
+      background: rgba(5, 12, 29, 0.18);
+      cursor: pointer;
+      transition: background 0.25s ease, transform 0.25s ease;
+    }
+    .why-carousel-dot.is-active {
+      background: var(--blue);
+      transform: scale(1.2);
+    }
+    .why-carousel-dot:hover:not(.is-active) {
+      background: rgba(78, 189, 250, 0.55);
     }
     .section { padding: 5.5rem 0; }
     .section.light { background: var(--white); }
@@ -232,7 +325,6 @@
     .feature-icon svg { width: 22px; height: 22px; }
     .feature-card h3 { color: var(--text); margin-bottom: 0.5rem; font-size: 1.15rem; }
     .feature-card p { color: var(--text-muted); font-size: 0.94rem; line-height: 1.55; }
-    .screenshot-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-bottom: 3rem; }
     .cta { padding: 5rem 0; }
     .cta .container { display: flex; justify-content: space-between; align-items: center; gap: 2rem; flex-wrap: wrap; }
     .cta h2 { color: var(--white); margin-bottom: 0.6rem; }
@@ -271,7 +363,22 @@
       .hero-network { opacity: 0.4; }
       .hd-strip-val { font-size: 0.84rem; }
       .hd-strip-lbl { font-size: 0.54rem; }
-      .feature-grid, .feature-grid.cols-4, .screenshot-grid, .footer-grid { grid-template-columns: 1fr; }
+      .feature-grid, .feature-grid.cols-4, .footer-grid { grid-template-columns: 1fr; }
+      .why-carousel-wrap { gap: 0.65rem; }
+      .why-carousel-nav { width: 40px; height: 40px; }
+      .why-carousel-track { display: block; }
+      .why-carousel-slide {
+        display: none;
+        flex: none;
+        opacity: 1;
+        transform: none;
+        cursor: default;
+      }
+      .why-carousel-slide.is-active { display: flex; }
+      .why-carousel-slide:hover:not(.is-active) {
+        opacity: 1;
+        transform: none;
+      }
       .step-grid { grid-template-columns: 1fr 1fr; }
       .nav, .header-cta .btn { display: none; }
       .page-hero { padding: 4.5rem 0 5.5rem; }
@@ -299,6 +406,9 @@
       .aurora-blob { animation: none !important; }
       .hero-dashboard { animation: none !important; transform: none !important; }
       .hd-live-dot { animation: none !important; }
+      .why-carousel-slide,
+      .why-carousel-shot img,
+      .why-carousel-card { transition: none !important; }
     }
   </style>
 </head>
@@ -531,29 +641,50 @@
         <h2>Accurate data starts where the work happens.</h2>
         <p class="lead">When operators log production at their station, not on a clipboard that gets entered at the end of shift, you get something your current system probably can't deliver: data that's current, accurate, and trustworthy enough to make decisions on.</p>
       </div>
-      <div class="screenshot-grid">
-        <a href="#hero" class="screenshot-item" aria-label="View operations hub in hero">
-          <img src="operations-hub-screenshot-CuQ2uPt-.png" alt="Operations hub dashboard" loading="lazy" />
-        </a>
-        <div class="screenshot-item">
-          <img src="nodalDashscreenshop.png" alt="Shopfloor dashboard" loading="lazy" />
+      <div class="why-carousel" id="whyCarousel" aria-roledescription="carousel" aria-label="Why it matters highlights">
+        <div class="why-carousel-wrap">
+          <button type="button" class="why-carousel-nav why-carousel-prev" aria-label="Previous highlight">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+          </button>
+          <div class="why-carousel-viewport">
+            <div class="why-carousel-track">
+              <article class="why-carousel-slide is-active" data-slide="0" aria-label="Leadership sees the truth">
+                <div class="why-carousel-shot">
+                  <img src="operations-hub-screenshot-CuQ2uPt-.png" alt="Operations hub dashboard" loading="lazy" />
+                </div>
+                <div class="why-carousel-card feature-card">
+                  <h3>Leadership sees the truth</h3>
+                  <p>Live dashboards reflect what's actually happening on the floor, not a version of reality from yesterday's data entry batch.</p>
+                </div>
+              </article>
+              <article class="why-carousel-slide" data-slide="1" aria-label="Operators stay productive">
+                <div class="why-carousel-shot">
+                  <img src="nodalDashscreenshop.png" alt="Shopfloor dashboard" loading="lazy" />
+                </div>
+                <div class="why-carousel-card feature-card">
+                  <h3>Operators stay productive</h3>
+                  <p>No leaving the station to find a computer. No paperwork piling up to enter later. Less time on overhead, more time on the job.</p>
+                </div>
+              </article>
+              <article class="why-carousel-slide" data-slide="2" aria-label="Quality issues surface immediately">
+                <div class="why-carousel-shot">
+                  <img src="nodalWorkOrderscreenshot.png" alt="Work orders dashboard" loading="lazy" />
+                </div>
+                <div class="why-carousel-card feature-card">
+                  <h3>Quality issues surface immediately</h3>
+                  <p>Scrap and quality fails feed trend reporting in real time. Spot recurring problems in days, not at month-end review.</p>
+                </div>
+              </article>
+            </div>
+          </div>
+          <button type="button" class="why-carousel-nav why-carousel-next" aria-label="Next highlight">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+          </button>
         </div>
-        <div class="screenshot-item">
-          <img src="nodalWorkOrderscreenshot.png" alt="Work orders dashboard" loading="lazy" />
-        </div>
-      </div>
-      <div class="feature-grid">
-        <div class="feature-card">
-          <h3>Leadership sees the truth</h3>
-          <p>Live dashboards reflect what's actually happening on the floor, not a version of reality from yesterday's data entry batch.</p>
-        </div>
-        <div class="feature-card">
-          <h3>Operators stay productive</h3>
-          <p>No leaving the station to find a computer. No paperwork piling up to enter later. Less time on overhead, more time on the job.</p>
-        </div>
-        <div class="feature-card">
-          <h3>Quality issues surface immediately</h3>
-          <p>Scrap and quality fails feed trend reporting in real time. Spot recurring problems in days, not at month-end review.</p>
+        <div class="why-carousel-dots" role="tablist" aria-label="Carousel slides">
+          <button type="button" class="why-carousel-dot is-active" role="tab" aria-selected="true" aria-label="Slide 1: Leadership"></button>
+          <button type="button" class="why-carousel-dot" role="tab" aria-selected="false" aria-label="Slide 2: Operators"></button>
+          <button type="button" class="why-carousel-dot" role="tab" aria-selected="false" aria-label="Slide 3: Quality"></button>
         </div>
       </div>
     </div>
@@ -742,6 +873,60 @@
 
       stepSimulation();
       setInterval(stepSimulation, TICK_SECONDS * 1000);
+    })();
+
+    (function initWhyCarousel() {
+      const root = document.getElementById('whyCarousel');
+      if (!root) return;
+
+      const slides = Array.from(root.querySelectorAll('.why-carousel-slide'));
+      const dots = Array.from(root.querySelectorAll('.why-carousel-dot'));
+      const prevBtn = root.querySelector('.why-carousel-prev');
+      const nextBtn = root.querySelector('.why-carousel-next');
+      let active = 0;
+
+      function setActive(index) {
+        active = (index + slides.length) % slides.length;
+        slides.forEach((slide, i) => {
+          const on = i === active;
+          slide.classList.toggle('is-active', on);
+          slide.setAttribute('aria-hidden', on ? 'false' : 'true');
+        });
+        dots.forEach((dot, i) => {
+          const on = i === active;
+          dot.classList.toggle('is-active', on);
+          dot.setAttribute('aria-selected', on ? 'true' : 'false');
+        });
+      }
+
+      prevBtn.addEventListener('click', () => setActive(active - 1));
+      nextBtn.addEventListener('click', () => setActive(active + 1));
+      dots.forEach((dot, i) => dot.addEventListener('click', () => setActive(i)));
+      slides.forEach((slide, i) => {
+        slide.addEventListener('click', () => {
+          if (i !== active) setActive(i);
+        });
+        slide.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            if (i !== active) setActive(i);
+          }
+        });
+      });
+
+      root.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft') {
+          e.preventDefault();
+          setActive(active - 1);
+        } else if (e.key === 'ArrowRight') {
+          e.preventDefault();
+          setActive(active + 1);
+        }
+      });
+
+      slides.forEach((slide, i) => {
+        if (i !== active) slide.setAttribute('aria-hidden', 'true');
+      });
     })();
   </script>
 
