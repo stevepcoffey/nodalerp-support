@@ -978,7 +978,8 @@
         <h2>Open a ticket</h2>
       </div>
 
-      <form class="ticket-form" id="ticketForm" novalidate>
+      <form class="ticket-form" id="ticketForm" action="https://formspree.io/f/xjgzlgpk" method="POST" novalidate>
+        <input type="hidden" name="_subject" value="New support ticket — Nodal Shopfloor" />
         <input type="hidden" name="route" id="routeField" value="cs" />
         <div class="field">
           <label for="fullName">Full name <span class="req">*</span></label>
@@ -1246,11 +1247,11 @@
     const form = document.getElementById('ticketForm');
     const successMsg = document.getElementById('successMsg');
     const refNumberEl = document.getElementById('refNumber');
+    const submitBtn = form.querySelector('button[type="submit"]');
 
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
 
-      // Basic required-field validation
       const required = ['fullName', 'email', 'subject', 'description'];
       let ok = true;
       required.forEach(name => {
@@ -1264,54 +1265,41 @@
       });
       if (!ok) return;
 
-      // Gather payload (the developer hook below uses this)
       const activeChip = document.querySelector('.chip.active');
-      const payload = {
-        route:       currentRoute, // 'cs' or 'dev'
-        fullName:    form.elements.fullName.value.trim(),
-        email:       form.elements.email.value.trim(),
-        company:     form.elements.company.value.trim(),
-        category:    form.elements.category.value,
-        subject:     form.elements.subject.value.trim(),
-        description: form.elements.description.value.trim(),
-        priority:    activeChip ? activeChip.dataset.priority : 'normal',
-        submittedAt: new Date().toISOString()
-      };
-
-      /* ===========================================================
-         🔌 BACKEND HOOK: REPLACE THIS BLOCK WITH A REAL POST
-         -----------------------------------------------------------
-         This demo just fakes success locally. To wire up a real
-         backend (Zendesk, Freshdesk, Formspree, a Supabase function,
-         your own /api/tickets endpoint, etc.), replace the block
-         below with something like:
-
-           const res = await fetch('/api/tickets', {
-             method: 'POST',
-             headers: { 'Content-Type': 'application/json' },
-             body: JSON.stringify(payload)
-           });
-           if (!res.ok) throw new Error('Request failed');
-           const data = await res.json();
-           const reference = data.reference;
-
-         Then use `reference` in place of the fake one below.
-         =========================================================== */
+      const priority = activeChip ? activeChip.dataset.priority : 'normal';
+      const routeLabel = currentRoute === 'dev' ? 'Development' : 'Customer Service';
       const reference = 'NDL-' + Math.floor(100000 + Math.random() * 900000);
 
-      // Show success message
-      refNumberEl.textContent = reference;
-      successMsg.classList.add('show');
-      successMsg.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      submitBtn.disabled = true;
+      try {
+        const formData = new FormData(form);
+        formData.set('reference', reference);
+        formData.set('priority', priority);
+        formData.set('routeLabel', routeLabel);
+        formData.set('submittedAt', new Date().toISOString());
 
-      // Reset form (but keep success visible)
-      form.reset();
-      // Restore default priority + route after reset
-      document.querySelectorAll('.chip').forEach(c => {
-        c.classList.toggle('active', c.dataset.priority === 'normal');
-        c.setAttribute('aria-checked', c.dataset.priority === 'normal' ? 'true' : 'false');
-      });
-      setRouteFromCategory();
+        const response = await fetch(form.action, {
+          method: 'POST',
+          body: formData,
+          headers: { Accept: 'application/json' }
+        });
+        if (!response.ok) throw new Error('Submission failed');
+
+        refNumberEl.textContent = reference;
+        successMsg.classList.add('show');
+        successMsg.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+        form.reset();
+        document.querySelectorAll('.chip').forEach(c => {
+          c.classList.toggle('active', c.dataset.priority === 'normal');
+          c.setAttribute('aria-checked', c.dataset.priority === 'normal' ? 'true' : 'false');
+        });
+        setRouteFromCategory();
+      } catch (err) {
+        alert('Submission failed. Please email steve@coffeyandco.com directly.');
+      } finally {
+        submitBtn.disabled = false;
+      }
     });
   </script>
 
