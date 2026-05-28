@@ -199,6 +199,7 @@
       border: 1px solid var(--border);
       aspect-ratio: 16 / 10;
       background: #f3f3f3;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
     .screenshot-item img {
       width: 100%;
@@ -206,13 +207,14 @@
       object-fit: cover;
       object-position: top center;
       display: block;
+      transition: transform 0.35s ease;
     }
-    .screenshot-thumb-link {
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-    .screenshot-thumb-link:hover {
+    .screenshot-item:hover {
       transform: translateY(-4px);
       box-shadow: 0 12px 28px rgba(5, 12, 29, 0.12);
+    }
+    .screenshot-item:hover img {
+      transform: scale(1.04);
     }
     .section { padding: 5.5rem 0; }
     .section.light { background: var(--white); }
@@ -530,7 +532,7 @@
         <p class="lead">When operators log production at their station, not on a clipboard that gets entered at the end of shift, you get something your current system probably can't deliver: data that's current, accurate, and trustworthy enough to make decisions on.</p>
       </div>
       <div class="screenshot-grid">
-        <a href="#hero" class="screenshot-item screenshot-thumb-link" aria-label="View operations hub in hero">
+        <a href="#hero" class="screenshot-item" aria-label="View operations hub in hero">
           <img src="operations-hub-screenshot-CuQ2uPt-.png" alt="Operations hub dashboard" loading="lazy" />
         </a>
         <div class="screenshot-item">
@@ -542,12 +544,12 @@
       </div>
       <div class="feature-grid">
         <div class="feature-card">
-          <h3>Operators stay productive</h3>
-          <p>No leaving the station to find a computer. No paperwork piling up to enter later. Less time on overhead, more time on the job.</p>
-        </div>
-        <div class="feature-card">
           <h3>Leadership sees the truth</h3>
           <p>Live dashboards reflect what's actually happening on the floor, not a version of reality from yesterday's data entry batch.</p>
+        </div>
+        <div class="feature-card">
+          <h3>Operators stay productive</h3>
+          <p>No leaving the station to find a computer. No paperwork piling up to enter later. Less time on overhead, more time on the job.</p>
         </div>
         <div class="feature-card">
           <h3>Quality issues surface immediately</h3>
