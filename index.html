@@ -192,10 +192,22 @@
       100% { transform: scale(1); }
     }
 
-    .screenshot-thumb-link {
+    .screenshot-item {
       display: block;
       border-radius: 6px;
       overflow: hidden;
+      border: 1px solid var(--border);
+      aspect-ratio: 16 / 10;
+      background: #f3f3f3;
+    }
+    .screenshot-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center;
+      display: block;
+    }
+    .screenshot-thumb-link {
       transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
     .screenshot-thumb-link:hover {
@@ -518,14 +530,14 @@
         <p class="lead">When operators log production at their station, not on a clipboard that gets entered at the end of shift, you get something your current system probably can't deliver: data that's current, accurate, and trustworthy enough to make decisions on.</p>
       </div>
       <div class="screenshot-grid">
-        <a href="#hero" class="screenshot-thumb-link" aria-label="View operations hub in hero">
-          <img src="operations-hub-screenshot-CuQ2uPt-.png" alt="Operations hub dashboard" style="width: 100%; height: auto; border-radius: 6px; border: 1px solid var(--border); display: block;" loading="lazy" />
+        <a href="#hero" class="screenshot-item screenshot-thumb-link" aria-label="View operations hub in hero">
+          <img src="operations-hub-screenshot-CuQ2uPt-.png" alt="Operations hub dashboard" loading="lazy" />
         </a>
-        <div class="screenshot-placeholder" style="background: #f3f3f3; border: 2px dashed #d8dce4; border-radius: 6px; aspect-ratio: 16/10; display: flex; align-items: center; justify-content: center; color: #8993a4; font-size: 0.88rem; text-align: center; padding: 1rem;">
-          Dashboard screenshot<br><span style="font-size: 0.78rem;">(replace with actual image)</span>
+        <div class="screenshot-item">
+          <img src="nodalDashscreenshop.png" alt="Shopfloor dashboard" loading="lazy" />
         </div>
-        <div class="screenshot-placeholder" style="background: #f3f3f3; border: 2px dashed #d8dce4; border-radius: 6px; aspect-ratio: 16/10; display: flex; align-items: center; justify-content: center; color: #8993a4; font-size: 0.88rem; text-align: center; padding: 1rem;">
-          Dashboard screenshot<br><span style="font-size: 0.78rem;">(replace with actual image)</span>
+        <div class="screenshot-item">
+          <img src="nodalWorkOrderscreenshot.png" alt="Work orders dashboard" loading="lazy" />
         </div>
       </div>
       <div class="feature-grid">
