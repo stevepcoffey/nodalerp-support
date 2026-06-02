@@ -127,15 +127,15 @@
       background-position: center;
       z-index: 0;
       pointer-events: none;
-      -webkit-mask-image: linear-gradient(to right, black 0%, black 50%, transparent 97%);
-              mask-image: linear-gradient(to right, black 0%, black 50%, transparent 97%);
+      -webkit-mask-image: linear-gradient(to right, black 0%, black 28%, rgba(0, 0, 0, 0.45) 58%, rgba(0, 0, 0, 0.15) 78%, transparent 94%);
+              mask-image: linear-gradient(to right, black 0%, black 28%, rgba(0, 0, 0, 0.45) 58%, rgba(0, 0, 0, 0.15) 78%, transparent 94%);
       opacity: 0.85;
     }
     .floor-photo::after {
       content: "";
       position: absolute;
       inset: 0;
-      background: linear-gradient(to right, rgba(5,12,29,0.25) 0%, rgba(5,12,29,0.5) 82%, rgba(5,12,29,1) 100%);
+      background: linear-gradient(to right, rgba(5,12,29,0.3) 0%, rgba(5,12,29,0.65) 68%, rgba(5,12,29,1) 100%);
       -webkit-mask-image: inherit;
               mask-image: inherit;
     }
@@ -234,8 +234,7 @@
     .hd-live { display: inline-flex; align-items: center; gap: 0.4rem; font-size: 0.72rem; font-weight: 500; color: #2fb878; background: rgba(47,184,120,0.1); border: 1px solid rgba(47,184,120,0.3); padding: 0.3rem 0.7rem; border-radius: 999px; }
     .hd-live-dot { width: 7px; height: 7px; border-radius: 50%; background: #2fb878; animation: liveDotPulse 2s ease-in-out infinite; }
     @keyframes liveDotPulse { 0%,100% { opacity: 1; box-shadow: 0 0 0 0 rgba(47,184,120,0.5); } 50% { opacity: 0.7; box-shadow: 0 0 0 5px rgba(47,184,120,0); } }
-    .hd-card { background: rgba(10, 18, 38, 0.82); border: 1px solid rgba(255,255,255,0.1); border-radius: 10px; padding: 1rem 1.1rem; backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); box-shadow: 0 4px 24px rgba(0,0,0,0.15); transition: all 0.3s ease; }
-    .hd-card:hover { background: rgba(20, 30, 54, 0.88); border-color: rgba(78,189,250,0.35); transform: translateY(-2px); }
+    .hd-card { background: rgba(10, 18, 38, 0.82); border: 1px solid rgba(255,255,255,0.1); border-radius: 10px; padding: 1rem 1.1rem; backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); box-shadow: 0 4px 24px rgba(0,0,0,0.15); }
     .hd-kpi-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; }
     .hd-card-label { font-size: 0.7rem; color: rgba(243,243,243,0.6); margin-bottom: 0.4rem; }
     .hd-card-value { font-size: 1.5rem; font-weight: 700; color: var(--white); letter-spacing: -0.02em; line-height: 1; margin-bottom: 0.4rem; font-variant-numeric: tabular-nums; }
