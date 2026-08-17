@@ -149,7 +149,22 @@
       margin-left: auto;
       max-width: 60%;
     }
+    .hero-pin-track { position: relative; height: 260vh; }
     .page-hero { padding: 7.5rem 0 8rem; position: relative; overflow: hidden; }
+    .hero-pin-sticky {
+      --hero-progress: 0;
+      --hero-blur: 20px;
+      --hero-reveal-opacity: 0.35;
+      --hero-reveal-y: 18px;
+      --hero-cta-opacity: 0.55;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      min-height: 700px;
+      padding: 5.5rem 0 4rem;
+      display: flex;
+      align-items: center;
+    }
     .page-hero .deco-grid {
       z-index: 1;
       opacity: 0.35;
@@ -157,7 +172,19 @@
       -webkit-mask-image: radial-gradient(ellipse at center, black 35%, transparent 78%);
       mask-image: radial-gradient(ellipse at center, black 35%, transparent 78%);
     }
-    .page-hero > .container { position: relative; z-index: 2; }
+    .page-hero > .container { position: relative; z-index: 2; width: 100%; }
+    .hero-floor-wash {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background-image: url('workerNodalfactory.jpeg');
+      background-size: cover;
+      background-position: center left;
+      opacity: calc(0.1 + var(--hero-progress) * 0.12);
+      filter: blur(var(--hero-blur));
+      will-change: filter, opacity;
+    }
     .hero-aurora { position: absolute; inset: 0; overflow: hidden; z-index: 0; pointer-events: none; }
     .aurora-blob { position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.55; will-change: transform; }
     .blob-1 { width: 600px; height: 600px; background: radial-gradient(circle, rgba(78,189,250,0.45) 0%, transparent 70%); top: -10%; left: -5%; animation: auroraDrift1 34s ease-in-out infinite; }
@@ -183,7 +210,43 @@
     }
     .page-hero h1 { color: var(--white); margin: 1rem 0 1.2rem; max-width: 36rem; }
     .page-hero .lead { color: rgba(243,243,243,0.78); max-width: 36rem; margin-bottom: 2rem; }
+    .hero-beats {
+      position: relative;
+      min-height: 7.6rem;
+      margin-bottom: 2rem;
+      max-width: 36rem;
+    }
+    .hero-beat {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      margin: 0;
+      color: rgba(243,243,243,0.78);
+      font-size: 1.12rem;
+      font-weight: 300;
+      line-height: 1.55;
+      opacity: 0;
+      transform: translateY(14px);
+      pointer-events: none;
+      transition: opacity 0.45s ease, transform 0.45s ease;
+    }
+    .hero-beat.is-active {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
     .page-hero-ctas { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+    .hero-copy .page-hero-ctas,
+    .hero-copy .hero-badge {
+      opacity: var(--hero-cta-opacity, 1);
+    }
+    .hero-reveal {
+      filter: blur(var(--hero-blur));
+      opacity: var(--hero-reveal-opacity);
+      transform: translate3d(0, var(--hero-reveal-y), 0);
+      will-change: filter, opacity, transform;
+    }
     .hero-badge {
       display: inline-flex;
       align-items: center;
@@ -458,6 +521,23 @@
       .step-grid { grid-template-columns: 1fr 1fr; }
       .nav, .header-cta { display: none; }
       .hamburger { display: flex; }
+      .hero-pin-track { height: auto; }
+      .hero-pin-sticky {
+        position: relative;
+        height: auto;
+        min-height: 0;
+        padding: 4.5rem 0 5.5rem;
+        --hero-progress: 1;
+        --hero-blur: 0px;
+        --hero-reveal-opacity: 1;
+        --hero-reveal-y: 0px;
+        --hero-cta-opacity: 1;
+      }
+      .hero-floor-wash { filter: none; opacity: 0.18; }
+      .hero-reveal { filter: none; opacity: 1; transform: none; will-change: auto; }
+      .hero-beats { min-height: 0; }
+      .hero-beat { position: relative; display: none; transform: none; opacity: 0; }
+      .hero-beat[data-beat="3"] { display: block; opacity: 1; }
       .page-hero { padding: 4.5rem 0 5.5rem; }
       .section { padding: 4rem 0; }
       .cta .container { flex-direction: column; align-items: flex-start; }
@@ -486,6 +566,22 @@
       .why-carousel-slide,
       .why-carousel-shot img,
       .why-carousel-card { transition: none !important; }
+      .hero-pin-track { height: auto; }
+      .hero-pin-sticky {
+        position: relative;
+        height: auto;
+        min-height: 0;
+        padding: 7.5rem 0 8rem;
+        --hero-progress: 1;
+        --hero-blur: 0px;
+        --hero-reveal-opacity: 1;
+        --hero-reveal-y: 0px;
+        --hero-cta-opacity: 1;
+      }
+      .hero-floor-wash { filter: none; opacity: 0.16; }
+      .hero-reveal { filter: none; opacity: 1; transform: none; will-change: auto; }
+      .hero-beat { transition: none !important; position: relative; display: none; transform: none; opacity: 0; }
+      .hero-beat[data-beat="3"] { display: block; opacity: 1; }
     }
   </style>
 </head>
@@ -521,7 +617,9 @@
     <a href="/demo" class="mobile-menu-cta">Book a demo</a>
   </div>
 
-  <section class="dark-section page-hero" id="hero">
+  <section class="hero-pin-track" id="hero">
+  <div class="dark-section page-hero hero-pin-sticky">
+    <div class="hero-floor-wash" aria-hidden="true"></div>
     <div class="hero-aurora" aria-hidden="true">
       <div class="aurora-blob blob-1"></div>
       <div class="aurora-blob blob-2"></div>
@@ -586,8 +684,12 @@
     <div class="container hero-grid">
       <div class="hero-copy">
         <span class="eyebrow">Nodal Shopfloor</span>
-        <h1>Production floor visibility without replacing your ERP.</h1>
-        <p class="lead">Real-time visibility into production, inventory, materials, quality, and shipping without forcing a full ERP migration. Operators get a simple tablet app. Managers get live dashboards. Your back office gets cleaner data.</p>
+        <h1>Keep your ERP. Fix the production blind spot.</h1>
+        <div class="hero-beats" aria-live="polite">
+          <p class="hero-beat is-active" data-beat="1">A modern, cost-effective production management system for building materials manufacturers.</p>
+          <p class="hero-beat" data-beat="2">Nodal Shopfloor is simple for operators to use, fast to integrate, and built to work with the systems you already have.</p>
+          <p class="hero-beat" data-beat="3">Track materials and production as work moves through the plant and capture accurate production data without another massive software project.</p>
+        </div>
         <div class="page-hero-ctas">
           <a href="demo.html" class="btn btn-primary">Book a demo <span class="arrow">→</span></a>
         </div>
@@ -596,6 +698,7 @@
           Deploy in days, not quarters.
         </div>
       </div>
+      <div class="hero-reveal">
       <div class="hero-dashboard" aria-label="Operations dashboard preview">
         <div class="hd-header">
           <div class="hd-header-left">
@@ -664,7 +767,9 @@
           </div>
         </div>
       </div>
+      </div>
     </div>
+  </div>
   </section>
 
   <section class="section light" id="workflow">
@@ -873,8 +978,14 @@
   <script>
     (function () {
       const card = document.querySelector('.hero-dashboard');
+      const track = document.querySelector('.hero-pin-track');
+      const sticky = document.querySelector('.hero-pin-sticky');
+      const beats = sticky ? sticky.querySelectorAll('.hero-beat') : [];
       const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      if (card && !prefersReduced && window.matchMedia('(min-width: 901px)').matches) {
+      const isDesktop = window.matchMedia('(min-width: 901px)').matches;
+      const usePin = Boolean(track && sticky && !prefersReduced && isDesktop);
+
+      if (card && !prefersReduced && isDesktop && !usePin) {
         const maxY = 5;
         const maxX = 5;
 
@@ -928,7 +1039,7 @@
         el.classList.add('flash');
       }
 
-      function renderProgress(p) {
+      function renderProgress(p, flash) {
         const workorders = Math.round(START + RANGE * p);
         sim.workorders.textContent = workorders.toString();
         sim.workordersTrend.textContent = `↗ ${Math.round(p * 100)}% of target`;
@@ -950,23 +1061,77 @@
         sim.receiving.textContent = Math.round(8 + p * 12).toString();
         sim.shipping.textContent = Math.round(10 + p * 22).toString();
 
-        flashValue(sim.workorders);
+        if (flash) flashValue(sim.workorders);
       }
 
-      if (prefersReduced) {
-        renderProgress(0.5);
+      function setBeat(index) {
+        beats.forEach((el, i) => {
+          el.classList.toggle('is-active', i === index);
+        });
+      }
+
+      function applyPinProgress(p) {
+        if (!sticky) return;
+        sticky.style.setProperty('--hero-progress', p.toFixed(4));
+        sticky.style.setProperty('--hero-blur', (20 * (1 - p)).toFixed(2) + 'px');
+        sticky.style.setProperty('--hero-reveal-opacity', (0.35 + 0.65 * p).toFixed(3));
+        sticky.style.setProperty('--hero-reveal-y', (18 * (1 - p)).toFixed(2) + 'px');
+        sticky.style.setProperty('--hero-cta-opacity', (0.55 + 0.45 * p).toFixed(3));
+        setBeat(p >= 0.66 ? 2 : p >= 0.33 ? 1 : 0);
+        renderProgress(p, false);
+      }
+
+      function startCycle(fromP, canTick) {
+        let tick = Math.round(fromP * TOTAL_TICKS);
+        function stepSimulation() {
+          if (canTick && !canTick()) return;
+          const p = tick / TOTAL_TICKS;
+          renderProgress(p, true);
+          tick = tick >= TOTAL_TICKS ? 0 : tick + 1;
+        }
+        stepSimulation();
+        setInterval(stepSimulation, TICK_SECONDS * 1000);
+      }
+
+      if (prefersReduced || !isDesktop) {
+        if (sticky) {
+          sticky.style.setProperty('--hero-progress', '1');
+          sticky.style.setProperty('--hero-blur', '0px');
+          sticky.style.setProperty('--hero-reveal-opacity', '1');
+          sticky.style.setProperty('--hero-reveal-y', '0px');
+          sticky.style.setProperty('--hero-cta-opacity', '1');
+        }
+        setBeat(2);
+        if (prefersReduced) renderProgress(0.5, false);
+        else startCycle(0);
         return;
       }
 
-      let tick = 0;
-      function stepSimulation() {
-        const p = tick / TOTAL_TICKS;
-        renderProgress(p);
-        tick = tick >= TOTAL_TICKS ? 0 : tick + 1;
+      if (usePin) {
+        let ticking = false;
+        let pinProgress = 0;
+        let cycleStarted = false;
+        function onScroll() {
+          if (ticking) return;
+          ticking = true;
+          requestAnimationFrame(() => {
+            const range = track.offsetHeight - window.innerHeight;
+            const p = range <= 0 ? 1 : Math.min(1, Math.max(0, -track.getBoundingClientRect().top / range));
+            pinProgress = p;
+            applyPinProgress(p);
+            if (p >= 1 && !cycleStarted) {
+              cycleStarted = true;
+              startCycle(1, () => pinProgress >= 1);
+            }
+            ticking = false;
+          });
+        }
+        window.addEventListener('scroll', onScroll, { passive: true });
+        onScroll();
+        return;
       }
 
-      stepSimulation();
-      setInterval(stepSimulation, TICK_SECONDS * 1000);
+      startCycle(0);
     })();
 
     (function initWhyCarousel() {
