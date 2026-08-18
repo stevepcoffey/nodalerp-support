@@ -145,12 +145,13 @@
       max-width: 60%;
     }
     .page-hero {
+      --reveal: 0;
+      --reveal-copy: 0;
       position: relative;
       overflow: hidden;
       min-height: 100vh;
       display: flex;
       align-items: center;
-      justify-content: center;
       background: #0E1B2C;
       padding: 6.5rem 1.5rem 4.5rem;
     }
@@ -160,68 +161,154 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      transform: scale(1.08);
-      filter: blur(10px) brightness(0.45);
       pointer-events: none;
       z-index: 0;
     }
-    .hero-video-overlay {
+    .hero-blur-mask {
       position: absolute;
       inset: 0;
       z-index: 1;
       pointer-events: none;
-      background:
-        radial-gradient(ellipse at center, rgba(14, 27, 44, 0.62) 0%, rgba(14, 27, 44, 0.42) 55%, rgba(14, 27, 44, 0.7) 100%),
-        linear-gradient(to bottom, rgba(14, 27, 44, 0.4) 0%, rgba(14, 27, 44, 0.68) 100%);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      mask-image: linear-gradient(to right, black 0%, black 35%, transparent 75%);
+      -webkit-mask-image: linear-gradient(to right, black 0%, black 35%, transparent 75%);
     }
-    .hero-copy {
-      position: relative;
+    .hero-video-overlay {
+      position: absolute;
+      inset: 0;
       z-index: 2;
-      max-width: 680px;
+      pointer-events: none;
+      background: linear-gradient(to right, rgba(14, 27, 44, 0.92) 0%, rgba(14, 27, 44, 0.75) 40%, rgba(14, 27, 44, 0.45) 100%);
+    }
+    .hero-inner {
+      position: relative;
+      z-index: 3;
       width: 100%;
+      max-width: var(--container);
       margin: 0 auto;
-      text-align: center;
+      display: grid;
+      grid-template-columns: minmax(0, 0.48fr) minmax(0, 0.52fr);
+      gap: 2.4rem;
+      align-items: center;
+    }
+    .hero-col-copy {
+      text-align: left;
     }
     .page-hero h1 {
       color: var(--white);
-      margin: 0 auto 1.15rem;
+      margin: 0 0 1.15rem;
     }
-    .hero-support {
-      margin: 0 auto;
+    .hero-reveal {
+      opacity: var(--reveal-copy);
+      transform: translateY(calc(12px * (1 - var(--reveal-copy))));
+      pointer-events: none;
+    }
+    .page-hero.is-live .hero-reveal { pointer-events: auto; }
+    .hero-lead {
+      margin: 0 0 0.7rem;
+      color: var(--white);
+      font-size: 1.12rem;
+      font-weight: 500;
+      line-height: 1.45;
+    }
+    .hero-sub {
+      margin: 0;
       color: #8A93A3;
-      font-size: 1.08rem;
+      font-size: 1rem;
       font-weight: 400;
       line-height: 1.55;
     }
     .hero-actions {
       display: flex;
       flex-direction: column;
-      align-items: center;
-      margin-top: 1.8rem;
+      align-items: flex-start;
+      margin-top: 1.5rem;
     }
-    .page-hero-ctas { display: flex; gap: 0.75rem; flex-wrap: wrap; justify-content: center; }
-    .hero-badge {
+    .page-hero-ctas { display: flex; gap: 0.75rem; flex-wrap: wrap; justify-content: flex-start; }
+    .hero-dash {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+    }
+    .dash-card {
+      --card-in: 0;
+      background: rgba(10, 18, 38, 0.72);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 8px;
+      padding: 1rem 1.05rem 1.05rem;
+      transform: translateY(calc(14px * (1 - var(--card-in)))) scale(calc(0.98 + 0.02 * var(--card-in)));
+      opacity: calc(0.78 + 0.22 * var(--card-in));
+    }
+    .dash-card.span-2 { grid-column: 1 / -1; }
+    .dash-label {
+      display: block;
+      font-size: 0.68rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(243, 243, 243, 0.55);
+      margin-bottom: 0.45rem;
+    }
+    .dash-value,
+    .dash-bar-fill,
+    .dash-dot,
+    .dash-obscure {
+      filter: blur(calc(8px * (1 - var(--reveal))));
+      opacity: calc(0.6 + 0.4 * var(--reveal));
+    }
+    .dash-value {
+      display: block;
+      font-size: 1.55rem;
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+      font-variant-numeric: tabular-nums;
+    }
+    .dash-value.good { color: #2fb878; }
+    .dash-meta {
+      margin-top: 0.35rem;
+      font-size: 0.78rem;
+      color: rgba(243, 243, 243, 0.5);
+    }
+    .dash-bar {
+      margin-top: 0.7rem;
+      height: 6px;
+      border-radius: 99px;
+      background: rgba(255, 255, 255, 0.1);
+      overflow: hidden;
+    }
+    .dash-bar-fill {
+      display: block;
+      height: 100%;
+      width: 83%;
+      border-radius: 99px;
+      background: linear-gradient(90deg, #2DD4BF 0%, #2563EB 100%);
+    }
+    .dash-status {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.85rem;
+      margin-top: 0.55rem;
+      align-items: center;
+    }
+    .dash-status-item {
       display: inline-flex;
       align-items: center;
-      gap: 0.6rem;
-      margin-top: 1.5rem;
-      padding: 0.6rem 1.1rem;
-      background: rgba(78, 189, 250, 0.08);
-      border: 1px solid rgba(78, 189, 250, 0.25);
-      border-radius: 999px;
-      font-size: 0.85rem;
-      font-weight: 500;
-      color: #f3f3f3;
-      letter-spacing: 0.01em;
+      gap: 0.4rem;
+      font-size: 0.88rem;
+      color: rgba(243, 243, 243, 0.82);
     }
-    .hero-badge-dot {
+    .dash-dot {
       width: 8px;
       height: 8px;
       border-radius: 50%;
-      background: #2fb878;
       flex-shrink: 0;
-      box-shadow: 0 0 8px rgba(47, 184, 120, 0.6);
     }
+    .dash-dot.run { background: #2fb878; box-shadow: 0 0 8px rgba(47, 184, 120, 0.55); }
+    .dash-dot.down { background: #e05d5d; box-shadow: 0 0 8px rgba(224, 93, 93, 0.45); }
+    .dash-dot.idle { background: #e6a23c; box-shadow: 0 0 8px rgba(230, 162, 60, 0.45); }
 
     .why-carousel { margin-top: 0.5rem; }
     .why-carousel-wrap {
@@ -399,7 +486,24 @@
       .step-grid { grid-template-columns: 1fr 1fr; }
       .nav, .header-cta { display: none; }
       .hamburger { display: flex; }
-      .page-hero { padding: 6.5rem 1rem 4.5rem; }
+      .page-hero { padding: 6.5rem 1rem 3.5rem; }
+      .hero-inner {
+        display: flex;
+        flex-direction: column;
+        gap: 1.6rem;
+      }
+      .hero-col-copy { display: contents; }
+      .hero-headline { order: 1; max-width: none; }
+      .hero-dash { order: 2; }
+      .hero-reveal { order: 3; }
+      .dash-card.mobile-hide { display: none; }
+      .hero-blur-mask {
+        mask-image: linear-gradient(to bottom, black 0%, black 28%, transparent 70%);
+        -webkit-mask-image: linear-gradient(to bottom, black 0%, black 28%, transparent 70%);
+      }
+      .hero-video-overlay {
+        background: linear-gradient(to bottom, rgba(14, 27, 44, 0.88) 0%, rgba(14, 27, 44, 0.7) 45%, rgba(14, 27, 44, 0.5) 100%);
+      }
       .section { padding: 4rem 0; }
       .cta .container { flex-direction: column; align-items: flex-start; }
       .floor-container .section-head,
@@ -424,17 +528,15 @@
       .why-carousel-slide,
       .why-carousel-shot img,
       .why-carousel-card { transition: none !important; }
-      .hero-video { display: none; }
-      .page-hero::before {
-        content: "";
-        position: absolute;
-        inset: 0;
+      .hero-video,
+      .hero-blur-mask { display: none; }
+      .page-hero {
+        --reveal: 1;
+        --reveal-copy: 1;
         background: #0E1B2C url('hero-poster.jpg') center / cover no-repeat;
-        transform: scale(1.08);
-        filter: blur(10px) brightness(0.45);
-        z-index: 0;
-        pointer-events: none;
       }
+      .dash-card { --card-in: 1; }
+      .hero-reveal { pointer-events: auto; }
     }
   </style>
 </head>
@@ -474,17 +576,45 @@
     <video class="hero-video" poster="hero-poster.jpg" autoplay muted loop playsinline preload="none" aria-hidden="true">
       <source src="nodalshopfloorvideo.mp4" type="video/mp4" />
     </video>
+    <div class="hero-blur-mask" aria-hidden="true"></div>
     <div class="hero-video-overlay" aria-hidden="true"></div>
-    <div class="hero-copy">
-      <h1>Keep your ERP.<br />Fix the production blind spot.</h1>
-      <p class="hero-support">Capture production as it happens — simple for operators, fast to integrate, and built to work with the systems you already have.</p>
-      <div class="hero-actions">
-        <div class="page-hero-ctas">
-          <a href="demo.html" class="btn btn-primary">Book a demo <span class="arrow">→</span></a>
+    <div class="hero-inner">
+      <div class="hero-col-copy">
+        <h1 class="hero-headline">Your production floor runs in real time. Floor data visibility should too.</h1>
+        <div class="hero-reveal">
+          <p class="hero-lead">A modern, cost-effective production management system for manufacturers.</p>
+          <p class="hero-sub">Simple for operators to use, fast to integrate, and built to work with the systems you already have. Track materials and production as work moves through the plant and capture accurate production data without another massive software project.</p>
+          <div class="hero-actions">
+            <div class="page-hero-ctas">
+              <a href="demo.html" class="btn btn-primary">Book a demo <span class="arrow">→</span></a>
+            </div>
+          </div>
         </div>
-        <div class="hero-badge">
-          <span class="hero-badge-dot"></span>
-          Deploy in days, not quarters.
+      </div>
+      <div class="hero-dash" aria-hidden="true">
+        <div class="dash-card span-2">
+          <span class="dash-label">Production output</span>
+          <span class="dash-value">12,480 bd ft</span>
+          <div class="dash-meta dash-obscure">Target 15,000 · 83%</div>
+          <div class="dash-bar"><span class="dash-bar-fill"></span></div>
+        </div>
+        <div class="dash-card mobile-hide">
+          <span class="dash-label">Work in progress</span>
+          <span class="dash-value">37 jobs</span>
+          <div class="dash-meta">On the floor</div>
+        </div>
+        <div class="dash-card mobile-hide">
+          <span class="dash-label">Scrap / yield</span>
+          <span class="dash-value good">97.8% yield</span>
+          <div class="dash-meta dash-obscure">2.2% scrap</div>
+        </div>
+        <div class="dash-card span-2">
+          <span class="dash-label">Station status</span>
+          <div class="dash-status">
+            <span class="dash-status-item"><span class="dash-dot run"></span> <span class="dash-obscure">6 running</span></span>
+            <span class="dash-status-item"><span class="dash-dot down"></span> <span class="dash-obscure">1 down</span></span>
+            <span class="dash-status-item"><span class="dash-dot idle"></span> <span class="dash-obscure">1 idle</span></span>
+          </div>
         </div>
       </div>
     </div>
@@ -697,34 +827,68 @@
   </script>
   <script>
     (function () {
+      const hero = document.querySelector('.page-hero');
       const video = document.querySelector('.hero-video');
-      if (!video) return;
+      const cards = hero ? hero.querySelectorAll('.dash-card') : [];
       const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+      function clamp(n, a, b) { return Math.min(b, Math.max(a, n)); }
+      function map(p, start) { return clamp((p - start) / (1 - start), 0, 1); }
+
+      function setReveal(p) {
+        if (!hero) return;
+        hero.style.setProperty('--reveal', p.toFixed(4));
+        hero.style.setProperty('--reveal-copy', map(p, 0.18).toFixed(4));
+        cards.forEach(function (card, i) {
+          card.style.setProperty('--card-in', map(p, i * 0.07).toFixed(4));
+        });
+        hero.classList.toggle('is-live', p >= 0.45);
+      }
+
       if (prefersReduced) {
-        video.pause();
-        video.removeAttribute('autoplay');
-        video.autoplay = false;
-        video.preload = 'none';
+        setReveal(1);
+        if (video) {
+          video.pause();
+          video.removeAttribute('autoplay');
+          video.autoplay = false;
+          video.preload = 'none';
+        }
         return;
       }
 
-      function playBackgroundVideo() {
-        video.muted = true;
-        video.playsInline = true;
-        video.autoplay = true;
-        video.preload = 'auto';
-        const play = function () { video.play().catch(function () {}); };
-        if (video.readyState >= 2) play();
-        else video.addEventListener('canplay', play, { once: true });
-        video.load();
+      if (video) {
+        function playBackgroundVideo() {
+          video.muted = true;
+          video.playsInline = true;
+          video.autoplay = true;
+          video.preload = 'auto';
+          const play = function () { video.play().catch(function () {}); };
+          if (video.readyState >= 2) play();
+          else video.addEventListener('canplay', play, { once: true });
+          video.load();
+        }
+        if ('requestIdleCallback' in window) {
+          requestIdleCallback(playBackgroundVideo, { timeout: 1200 });
+        } else {
+          setTimeout(playBackgroundVideo, 200);
+        }
       }
 
-      if ('requestIdleCallback' in window) {
-        requestIdleCallback(playBackgroundVideo, { timeout: 1200 });
-      } else {
-        setTimeout(playBackgroundVideo, 200);
+      if (!hero) return;
+      var ticking = false;
+      function onScroll() {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(function () {
+          var top = hero.getBoundingClientRect().top;
+          var range = window.innerHeight * 0.55;
+          var p = clamp(-top / range, 0, 1);
+          setReveal(p);
+          ticking = false;
+        });
       }
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
     })();
 
     (function initWhyCarousel() {
