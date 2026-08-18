@@ -144,16 +144,25 @@
       margin-left: auto;
       max-width: 60%;
     }
+    .hero-pin-track {
+      position: relative;
+      height: 220vh;
+    }
     .page-hero {
-      --reveal: 0;
-      --reveal-copy: 0;
+      --t: 0;
       position: relative;
       overflow: hidden;
+      background: #0E1B2C;
+    }
+    .hero-pin-sticky {
+      position: sticky;
+      top: 0;
+      height: 100vh;
       min-height: 100vh;
       display: flex;
       align-items: center;
-      background: #0E1B2C;
-      padding: 6.5rem 1.5rem 4.5rem;
+      justify-content: center;
+      padding: 5.5rem 1.5rem 3rem;
     }
     .hero-video {
       position: absolute;
@@ -161,86 +170,70 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
+      filter: blur(10px) brightness(0.42);
+      transform: scale(1.08);
       pointer-events: none;
       z-index: 0;
-    }
-    .hero-blur-mask {
-      position: absolute;
-      inset: 0;
-      z-index: 1;
-      pointer-events: none;
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-      mask-image: linear-gradient(to right, black 0%, black 35%, transparent 75%);
-      -webkit-mask-image: linear-gradient(to right, black 0%, black 35%, transparent 75%);
     }
     .hero-video-overlay {
       position: absolute;
       inset: 0;
-      z-index: 2;
+      z-index: 1;
       pointer-events: none;
-      background: linear-gradient(to right, rgba(14, 27, 44, 0.92) 0%, rgba(14, 27, 44, 0.75) 40%, rgba(14, 27, 44, 0.45) 100%);
+      background:
+        radial-gradient(ellipse at center, rgba(14, 27, 44, 0.28) 0%, rgba(14, 27, 44, 0.62) 58%, rgba(14, 27, 44, 0.82) 100%);
     }
-    .hero-inner {
+    .hero-stage {
       position: relative;
-      z-index: 3;
+      z-index: 2;
       width: 100%;
-      max-width: var(--container);
+      max-width: 760px;
       margin: 0 auto;
-      display: grid;
-      grid-template-columns: minmax(0, 0.48fr) minmax(0, 0.52fr);
-      gap: 2.4rem;
-      align-items: center;
-    }
-    .hero-col-copy {
-      text-align: left;
-    }
-    .page-hero h1 {
-      color: var(--white);
-      margin: 0 0 1.15rem;
-    }
-    .hero-reveal {
-      opacity: var(--reveal-copy);
-      transform: translateY(calc(12px * (1 - var(--reveal-copy))));
-      pointer-events: none;
-    }
-    .page-hero.is-live .hero-reveal { pointer-events: auto; }
-    .hero-lead {
-      margin: 0 0 0.7rem;
-      color: var(--white);
-      font-size: 1.12rem;
-      font-weight: 500;
-      line-height: 1.45;
-    }
-    .hero-sub {
-      margin: 0;
-      color: #8A93A3;
-      font-size: 1rem;
-      font-weight: 400;
-      line-height: 1.55;
-    }
-    .hero-actions {
       display: flex;
       flex-direction: column;
-      align-items: flex-start;
-      margin-top: 1.5rem;
+      align-items: center;
+      text-align: center;
     }
-    .page-hero-ctas { display: flex; gap: 0.75rem; flex-wrap: wrap; justify-content: flex-start; }
+    .hero-headline-slot {
+      position: relative;
+      width: 100%;
+      min-height: 6.4rem;
+      margin-bottom: 1.4rem;
+    }
+    .hero-line {
+      margin: 0;
+      color: var(--white);
+      font-size: clamp(1.7rem, 3.2vw, 2.55rem);
+      font-weight: 700;
+      letter-spacing: -0.015em;
+      line-height: 1.12;
+    }
+    .hero-line-1,
+    .hero-line-2 {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+    }
+    .hero-line-1 { opacity: calc(1 - var(--t)); }
+    .hero-line-2 { opacity: var(--t); }
     .hero-dash {
+      width: 100%;
+      max-width: 640px;
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0.75rem;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 0.7rem;
     }
     .dash-card {
-      --card-in: 0;
-      background: rgba(10, 18, 38, 0.72);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      border-radius: 8px;
-      padding: 1rem 1.05rem 1.05rem;
-      transform: translateY(calc(14px * (1 - var(--card-in)))) scale(calc(0.98 + 0.02 * var(--card-in)));
-      opacity: calc(0.78 + 0.22 * var(--card-in));
+      background: rgba(15, 25, 41, 0.66);
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      border-radius: 14px;
+      padding: 1.05rem 1.1rem 1.1rem;
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      text-align: left;
     }
-    .dash-card.span-2 { grid-column: 1 / -1; }
+    .dash-card.span-all { grid-column: 1 / -1; }
     .dash-label {
       display: block;
       font-size: 0.68rem;
@@ -248,27 +241,32 @@
       letter-spacing: 0.1em;
       text-transform: uppercase;
       color: rgba(243, 243, 243, 0.55);
-      margin-bottom: 0.45rem;
+      margin-bottom: 0.4rem;
     }
     .dash-value,
     .dash-bar-fill,
     .dash-dot,
     .dash-obscure {
-      filter: blur(calc(8px * (1 - var(--reveal))));
-      opacity: calc(0.6 + 0.4 * var(--reveal));
+      filter: blur(calc(8px * (1 - var(--t))));
+      opacity: calc(0.62 + 0.38 * var(--t));
     }
     .dash-value {
       display: block;
-      font-size: 1.55rem;
+      font-size: 1.45rem;
       font-weight: 700;
       color: var(--white);
       letter-spacing: -0.02em;
       line-height: 1.15;
       font-variant-numeric: tabular-nums;
     }
-    .dash-value.good { color: #2fb878; }
+    .dash-value.compact { font-size: 1.2rem; }
+    .dash-unit {
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: rgba(243, 243, 243, 0.48);
+    }
     .dash-meta {
-      margin-top: 0.35rem;
+      margin-top: 0.3rem;
       font-size: 0.78rem;
       color: rgba(243, 243, 243, 0.5);
     }
@@ -288,27 +286,38 @@
     }
     .dash-status {
       display: flex;
-      flex-wrap: wrap;
-      gap: 0.85rem;
-      margin-top: 0.55rem;
       align-items: center;
-    }
-    .dash-status-item {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      font-size: 0.88rem;
-      color: rgba(243, 243, 243, 0.82);
+      gap: 0.45rem;
+      margin-top: 0.15rem;
     }
     .dash-dot {
       width: 8px;
       height: 8px;
       border-radius: 50%;
       flex-shrink: 0;
+      background: #2fb878;
+      box-shadow: 0 0 8px rgba(47, 184, 120, 0.55);
     }
-    .dash-dot.run { background: #2fb878; box-shadow: 0 0 8px rgba(47, 184, 120, 0.55); }
-    .dash-dot.down { background: #e05d5d; box-shadow: 0 0 8px rgba(224, 93, 93, 0.45); }
-    .dash-dot.idle { background: #e6a23c; box-shadow: 0 0 8px rgba(230, 162, 60, 0.45); }
+    .hero-below {
+      min-height: 6.6rem;
+      width: 100%;
+      margin-top: 1.35rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      opacity: var(--t);
+      transform: translateY(calc(10px * (1 - var(--t))));
+      pointer-events: none;
+    }
+    .hero-pin-sticky.is-live .hero-below { pointer-events: auto; }
+    .page-hero-ctas { display: flex; gap: 0.75rem; flex-wrap: wrap; justify-content: center; }
+    .hero-subtext {
+      margin: 1rem 0 0;
+      color: #8A93A3;
+      font-size: 1.02rem;
+      font-weight: 400;
+      line-height: 1.45;
+    }
 
     .why-carousel { margin-top: 0.5rem; }
     .why-carousel-wrap {
@@ -486,23 +495,43 @@
       .step-grid { grid-template-columns: 1fr 1fr; }
       .nav, .header-cta { display: none; }
       .hamburger { display: flex; }
-      .page-hero { padding: 6.5rem 1rem 3.5rem; }
-      .hero-inner {
-        display: flex;
-        flex-direction: column;
-        gap: 1.6rem;
+      .hero-pin-track { height: auto; }
+      .hero-pin-sticky {
+        position: relative;
+        height: auto;
+        min-height: 100vh;
+        padding: 6.5rem 1rem 3.5rem;
       }
-      .hero-col-copy { display: contents; }
-      .hero-headline { order: 1; max-width: none; }
-      .hero-dash { order: 2; }
-      .hero-reveal { order: 3; }
-      .dash-card.mobile-hide { display: none; }
-      .hero-blur-mask {
-        mask-image: linear-gradient(to bottom, black 0%, black 28%, transparent 70%);
-        -webkit-mask-image: linear-gradient(to bottom, black 0%, black 28%, transparent 70%);
+      .page-hero { --t: 1; }
+      .hero-headline-slot {
+        display: contents;
       }
-      .hero-video-overlay {
-        background: linear-gradient(to bottom, rgba(14, 27, 44, 0.88) 0%, rgba(14, 27, 44, 0.7) 45%, rgba(14, 27, 44, 0.5) 100%);
+      .hero-line-1,
+      .hero-line-2 {
+        position: static;
+        opacity: 1;
+      }
+      .hero-line-1 {
+        order: 1;
+        font-size: 1.08rem;
+        font-weight: 500;
+        line-height: 1.4;
+        color: rgba(243, 243, 243, 0.82);
+        margin-bottom: 1.2rem;
+      }
+      .hero-dash { order: 2; grid-template-columns: 1fr 1fr; }
+      .hero-line-2 {
+        order: 3;
+        margin: 1.4rem 0 0;
+        font-size: clamp(1.55rem, 6vw, 2rem);
+      }
+      .hero-below {
+        order: 4;
+        opacity: 1;
+        transform: none;
+        pointer-events: auto;
+        min-height: 0;
+        margin-top: 1.1rem;
       }
       .section { padding: 4rem 0; }
       .cta .container { flex-direction: column; align-items: flex-start; }
@@ -528,15 +557,38 @@
       .why-carousel-slide,
       .why-carousel-shot img,
       .why-carousel-card { transition: none !important; }
-      .hero-video,
-      .hero-blur-mask { display: none; }
-      .page-hero {
-        --reveal: 1;
-        --reveal-copy: 1;
+      .hero-video { display: none; }
+      .hero-pin-track { height: auto; }
+      .hero-pin-sticky {
+        position: relative;
+        height: auto;
+        min-height: 100vh;
         background: #0E1B2C url('hero-poster.jpg') center / cover no-repeat;
       }
-      .dash-card { --card-in: 1; }
-      .hero-reveal { pointer-events: auto; }
+      .page-hero { --t: 1; }
+      .hero-headline-slot { display: contents; }
+      .hero-line-1,
+      .hero-line-2 {
+        position: static;
+        opacity: 1;
+      }
+      .hero-line-1 {
+        font-size: 1.08rem;
+        font-weight: 500;
+        line-height: 1.4;
+        color: rgba(243, 243, 243, 0.82);
+        margin-bottom: 1.2rem;
+        order: 1;
+      }
+      .hero-dash { order: 2; }
+      .hero-line-2 { margin-top: 1.4rem; order: 3; }
+      .hero-below {
+        opacity: 1;
+        transform: none;
+        pointer-events: auto;
+        min-height: 0;
+        order: 4;
+      }
     }
   </style>
 </head>
@@ -572,49 +624,44 @@
     <a href="/demo" class="mobile-menu-cta">Book a demo</a>
   </div>
 
-  <section class="dark-section page-hero" id="hero">
-    <video class="hero-video" poster="hero-poster.jpg" autoplay muted loop playsinline preload="none" aria-hidden="true">
-      <source src="nodalshopfloorvideo.mp4" type="video/mp4" />
-    </video>
-    <div class="hero-blur-mask" aria-hidden="true"></div>
-    <div class="hero-video-overlay" aria-hidden="true"></div>
-    <div class="hero-inner">
-      <div class="hero-col-copy">
-        <h1 class="hero-headline">Your production floor runs in real time. Floor data visibility should too.</h1>
-        <div class="hero-reveal">
-          <p class="hero-lead">A modern, cost-effective production management system for manufacturers.</p>
-          <p class="hero-sub">Simple for operators to use, fast to integrate, and built to work with the systems you already have. Track materials and production as work moves through the plant and capture accurate production data without another massive software project.</p>
-          <div class="hero-actions">
-            <div class="page-hero-ctas">
-              <a href="demo.html" class="btn btn-primary">Book a demo <span class="arrow">→</span></a>
+  <section class="hero-pin-track" id="hero">
+    <div class="dark-section page-hero hero-pin-sticky">
+      <video class="hero-video" poster="hero-poster.jpg" autoplay muted loop playsinline preload="none" aria-hidden="true">
+        <source src="nodalshopfloorvideo.mp4" type="video/mp4" />
+      </video>
+      <div class="hero-video-overlay" aria-hidden="true"></div>
+      <div class="hero-stage">
+        <div class="hero-headline-slot">
+          <h1 class="hero-line hero-line-1">Your production floor runs in real time. Floor data visibility should too.</h1>
+          <p class="hero-line hero-line-2">A modern, cost-effective production management system for manufacturers.</p>
+        </div>
+        <div class="hero-dash" aria-hidden="true">
+          <div class="dash-card span-all">
+            <span class="dash-label">Production output</span>
+            <span class="dash-value">12,480 <span class="dash-unit">/ 15,000 bd ft</span></span>
+            <div class="dash-bar"><span class="dash-bar-fill"></span></div>
+          </div>
+          <div class="dash-card">
+            <span class="dash-label">Work in progress</span>
+            <span class="dash-value">37 jobs</span>
+          </div>
+          <div class="dash-card">
+            <span class="dash-label">Scrap / yield</span>
+            <span class="dash-value good">97.8% yield</span>
+          </div>
+          <div class="dash-card">
+            <span class="dash-label">Station status</span>
+            <div class="dash-status">
+              <span class="dash-dot"></span>
+              <span class="dash-value compact">6 / 8 running</span>
             </div>
           </div>
         </div>
-      </div>
-      <div class="hero-dash" aria-hidden="true">
-        <div class="dash-card span-2">
-          <span class="dash-label">Production output</span>
-          <span class="dash-value">12,480 bd ft</span>
-          <div class="dash-meta dash-obscure">Target 15,000 · 83%</div>
-          <div class="dash-bar"><span class="dash-bar-fill"></span></div>
-        </div>
-        <div class="dash-card mobile-hide">
-          <span class="dash-label">Work in progress</span>
-          <span class="dash-value">37 jobs</span>
-          <div class="dash-meta">On the floor</div>
-        </div>
-        <div class="dash-card mobile-hide">
-          <span class="dash-label">Scrap / yield</span>
-          <span class="dash-value good">97.8% yield</span>
-          <div class="dash-meta dash-obscure">2.2% scrap</div>
-        </div>
-        <div class="dash-card span-2">
-          <span class="dash-label">Station status</span>
-          <div class="dash-status">
-            <span class="dash-status-item"><span class="dash-dot run"></span> <span class="dash-obscure">6 running</span></span>
-            <span class="dash-status-item"><span class="dash-dot down"></span> <span class="dash-obscure">1 down</span></span>
-            <span class="dash-status-item"><span class="dash-dot idle"></span> <span class="dash-obscure">1 idle</span></span>
+        <div class="hero-below">
+          <div class="page-hero-ctas">
+            <a href="demo.html" class="btn btn-primary">Book a demo <span class="arrow">→</span></a>
           </div>
+          <p class="hero-subtext">Keep your ERP. Fix the production blind spot.</p>
         </div>
       </div>
     </div>
@@ -827,36 +874,40 @@
   </script>
   <script>
     (function () {
-      const hero = document.querySelector('.page-hero');
+      const track = document.querySelector('.hero-pin-track');
+      const sticky = document.querySelector('.hero-pin-sticky');
       const video = document.querySelector('.hero-video');
-      const cards = hero ? hero.querySelectorAll('.dash-card') : [];
+      const line1 = document.querySelector('.hero-line-1');
+      const line2 = document.querySelector('.hero-line-2');
       const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const isDesktop = window.matchMedia('(min-width: 901px)').matches;
 
       function clamp(n, a, b) { return Math.min(b, Math.max(a, n)); }
-      function map(p, start) { return clamp((p - start) / (1 - start), 0, 1); }
-
-      function setReveal(p) {
-        if (!hero) return;
-        hero.style.setProperty('--reveal', p.toFixed(4));
-        hero.style.setProperty('--reveal-copy', map(p, 0.18).toFixed(4));
-        cards.forEach(function (card, i) {
-          card.style.setProperty('--card-in', map(p, i * 0.07).toFixed(4));
-        });
-        hero.classList.toggle('is-live', p >= 0.45);
+      function toT(p) {
+        if (p <= 0.12) return 0;
+        if (p >= 0.5) return 1;
+        return (p - 0.12) / 0.38;
+      }
+      function applyT(t) {
+        if (!sticky) return;
+        sticky.style.setProperty('--t', t.toFixed(4));
+        sticky.classList.toggle('is-live', t >= 0.5);
+        if (line1) line1.setAttribute('aria-hidden', t > 0.5 ? 'true' : 'false');
+        if (line2) line2.setAttribute('aria-hidden', t > 0.5 ? 'false' : 'true');
       }
 
-      if (prefersReduced) {
-        setReveal(1);
-        if (video) {
+      if (prefersReduced || !isDesktop) {
+        applyT(1);
+        if (prefersReduced && video) {
           video.pause();
           video.removeAttribute('autoplay');
           video.autoplay = false;
           video.preload = 'none';
         }
-        return;
+        if (prefersReduced) return;
       }
 
-      if (video) {
+      if (video && !prefersReduced) {
         function playBackgroundVideo() {
           video.muted = true;
           video.playsInline = true;
@@ -874,16 +925,16 @@
         }
       }
 
-      if (!hero) return;
+      if (prefersReduced || !isDesktop || !track || !sticky) return;
+
       var ticking = false;
       function onScroll() {
         if (ticking) return;
         ticking = true;
         requestAnimationFrame(function () {
-          var top = hero.getBoundingClientRect().top;
-          var range = window.innerHeight * 0.55;
-          var p = clamp(-top / range, 0, 1);
-          setReveal(p);
+          var range = track.offsetHeight - window.innerHeight;
+          var p = range <= 0 ? 1 : clamp(-track.getBoundingClientRect().top / range, 0, 1);
+          applyT(toT(p));
           ticking = false;
         });
       }
