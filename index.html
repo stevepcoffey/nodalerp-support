@@ -299,6 +299,120 @@
       line-height: 1.45;
     }
 
+    .integ-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+      gap: 3.5rem;
+      align-items: center;
+    }
+    .integ-copy .section-head { margin-bottom: 0; max-width: none; }
+    .integ-copy h2 { color: var(--white); margin-bottom: 1rem; }
+    .integ-copy .lead { color: #8A93A3; margin-bottom: 1.1rem; }
+    .integ-punch {
+      margin: 0;
+      color: #F5F7FA;
+      font-size: 1.05rem;
+      font-weight: 400;
+      line-height: 1.55;
+    }
+    .hub {
+      position: relative;
+      width: 100%;
+      max-width: 440px;
+      aspect-ratio: 1;
+      margin: 0 auto;
+    }
+    .hub-spoke,
+    .hub-flow {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      --r: 148px;
+      pointer-events: none;
+    }
+    .hub-spoke {
+      width: 1px;
+      height: var(--r);
+      background: linear-gradient(to top, rgba(78, 189, 250, 0.55), rgba(15, 169, 156, 0.12));
+      transform-origin: center bottom;
+      transform: translate(-50%, -100%) rotate(var(--a));
+    }
+    .hub-flow {
+      width: 6px;
+      height: 6px;
+      margin: -3px 0 0 -3px;
+      border-radius: 50%;
+      background: #0FA99C;
+      box-shadow: 0 0 8px rgba(15, 169, 156, 0.7);
+      opacity: 0;
+      animation: hubFlow 5.4s linear infinite;
+      animation-play-state: paused;
+    }
+    .hub.is-on .hub-flow { animation-play-state: running; }
+    @keyframes hubFlow {
+      0% { transform: rotate(var(--a)) translateY(0); opacity: 0; }
+      12% { opacity: 0.95; }
+      85% { opacity: 0.7; }
+      100% { transform: rotate(var(--a)) translateY(calc(-1 * var(--r))); opacity: 0; }
+    }
+    .hub-core {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 2;
+      width: 138px;
+      padding: 0.9rem 0.75rem 0.85rem;
+      border-radius: 16px;
+      background:
+        linear-gradient(rgba(15, 25, 41, 0.94), rgba(15, 25, 41, 0.94)) padding-box,
+        linear-gradient(90deg, #0FA99C, #2563EB) border-box;
+      border: 1px solid transparent;
+      box-shadow: 0 0 28px rgba(37, 99, 235, 0.28);
+      text-align: center;
+    }
+    .hub-core img {
+      height: 22px;
+      margin: 0 auto 0.45rem;
+    }
+    .hub-core-label {
+      display: block;
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      color: #F5F7FA;
+    }
+    .hub-ring { position: absolute; inset: 0; }
+    .hub-chip {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      z-index: 2;
+      width: 112px;
+      padding: 0.55rem 0.5rem 0.6rem;
+      background: rgba(15, 25, 41, 0.68);
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      border-radius: 14px;
+      text-align: center;
+      transform: translate(-50%, -50%) rotate(var(--a)) translateY(-148px) rotate(calc(-1 * var(--a)));
+    }
+    .hub-chip-cat {
+      display: block;
+      font-size: 0.58rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #8A93A3;
+      margin-bottom: 0.2rem;
+    }
+    .hub-chip-name {
+      display: block;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: #F5F7FA;
+      letter-spacing: -0.01em;
+    }
+
     .why-carousel { margin-top: 0.5rem; }
     .why-carousel-wrap {
       display: flex;
@@ -483,6 +597,35 @@
       }
       .page-hero { min-height: 0; }
       .hero .stat-row { grid-template-columns: 1fr 1fr; }
+      .integ-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .hub {
+        aspect-ratio: auto;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1.25rem;
+      }
+      .hub-spoke,
+      .hub-flow { display: none; }
+      .hub-core {
+        position: relative;
+        left: auto;
+        top: auto;
+        transform: none;
+      }
+      .hub-ring {
+        position: static;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+        width: 100%;
+      }
+      .hub-chip {
+        position: static;
+        transform: none;
+        width: auto;
+      }
       .section { padding: 4rem 0; }
       .cta .container { flex-direction: column; align-items: flex-start; }
       .floor-container .section-head,
@@ -525,6 +668,7 @@
         pointer-events: auto;
         transition: none;
       }
+      .hub-flow { display: none; }
     }
   </style>
 </head>
@@ -723,10 +867,70 @@
     </div>
   </section>
 
+  <section class="dark-section section" id="integrations">
+    <div class="deco-glow"></div><div class="deco-grid"></div>
+    <div class="container">
+      <div class="integ-grid">
+        <div class="integ-copy">
+          <div class="section-head">
+            <span class="section-number on-dark">04: Integrations</span>
+            <h2>Built to <span class="gradient-text">connect</span>, not complicate.</h2>
+          </div>
+          <p class="lead">Nodal Shopfloor is built around modern APIs and easy connectivity, making it simple to integrate with the ERP, CRM, accounting, and other systems you already use. Focused workflows can be configured and deployed in days, not quarters.</p>
+          <p class="integ-punch">No rip-and-replace. No massive custom integration project. Just production data flowing where it needs to go.</p>
+        </div>
+        <div class="hub" id="integHub" aria-hidden="true">
+          <span class="hub-spoke" style="--a: 0deg;"></span>
+          <span class="hub-spoke" style="--a: 60deg;"></span>
+          <span class="hub-spoke" style="--a: 120deg;"></span>
+          <span class="hub-spoke" style="--a: 180deg;"></span>
+          <span class="hub-spoke" style="--a: 240deg;"></span>
+          <span class="hub-spoke" style="--a: 300deg;"></span>
+          <span class="hub-flow" style="--a: 0deg; animation-delay: 0s;"></span>
+          <span class="hub-flow" style="--a: 60deg; animation-delay: 0.9s;"></span>
+          <span class="hub-flow" style="--a: 120deg; animation-delay: 1.8s;"></span>
+          <span class="hub-flow" style="--a: 180deg; animation-delay: 2.7s;"></span>
+          <span class="hub-flow" style="--a: 240deg; animation-delay: 3.6s;"></span>
+          <span class="hub-flow" style="--a: 300deg; animation-delay: 4.5s;"></span>
+          <div class="hub-core">
+            <img src="nodalerp-logo-light.png" alt="" />
+            <span class="hub-core-label">Nodal Shopfloor</span>
+          </div>
+          <div class="hub-ring">
+            <div class="hub-chip" style="--a: 0deg;">
+              <span class="hub-chip-cat">Accounting</span>
+              <span class="hub-chip-name">QuickBooks</span>
+            </div>
+            <div class="hub-chip" style="--a: 60deg;">
+              <span class="hub-chip-cat">ERP</span>
+              <span class="hub-chip-name">Sage</span>
+            </div>
+            <div class="hub-chip" style="--a: 120deg;">
+              <span class="hub-chip-cat">Sales</span>
+              <span class="hub-chip-name">Shopify</span>
+            </div>
+            <div class="hub-chip" style="--a: 180deg;">
+              <span class="hub-chip-cat">Sales</span>
+              <span class="hub-chip-name">EDI</span>
+            </div>
+            <div class="hub-chip" style="--a: 240deg;">
+              <span class="hub-chip-cat">CRM / ERP</span>
+              <span class="hub-chip-name">Open API</span>
+            </div>
+            <div class="hub-chip" style="--a: 300deg;">
+              <span class="hub-chip-cat">Events</span>
+              <span class="hub-chip-name">Webhooks</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section class="section light">
     <div class="container">
       <div class="section-head">
-        <span class="section-number">04: Hardware</span>
+        <span class="section-number">05: Hardware</span>
         <h2>Use your hardware. Or use ours.</h2>
         <p class="lead">Nodal Shopfloor runs on your existing iPads, phones, and PCs. If you already have scanning systems, we'll integrate with them. If you want shop-floor-ready hardware shipped and configured, our Floor-Ready Kit includes Chromebooks, scanning guns, and label printers per workstation.</p>
       </div>
@@ -736,7 +940,7 @@
   <section class="section gray">
     <div class="container">
       <div class="section-head">
-        <span class="section-number">05: Deployment</span>
+        <span class="section-number">06: Deployment</span>
         <h2>Go live in days.</h2>
         <p class="lead">For most facilities, Nodal can be turned on and in use in a matter of days. Here's the implementation.</p>
       </div>
@@ -1020,6 +1224,19 @@
       document.addEventListener('visibilitychange', function () {
         setVisibility(onScreen, tabVisible());
       });
+    })();
+
+    (function initIntegHub() {
+      const hub = document.getElementById('integHub');
+      if (!hub || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      if (!('IntersectionObserver' in window)) {
+        hub.classList.add('is-on');
+        return;
+      }
+      var io = new IntersectionObserver(function (entries) {
+        hub.classList.toggle('is-on', !!(entries[0] && entries[0].isIntersecting));
+      }, { threshold: 0.25 });
+      io.observe(hub);
     })();
 
     (function initWhyCarousel() {
