@@ -174,25 +174,73 @@
         radial-gradient(ellipse at center, rgba(14, 27, 44, 0.62) 0%, rgba(14, 27, 44, 0.42) 55%, rgba(14, 27, 44, 0.7) 100%),
         linear-gradient(to bottom, rgba(14, 27, 44, 0.4) 0%, rgba(14, 27, 44, 0.68) 100%);
     }
+    .hero-cards {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      pointer-events: none;
+    }
+    .hero-card {
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+      min-width: 8.5rem;
+      padding: 0.7rem 0.9rem;
+      background: rgba(10, 18, 38, 0.52);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      border-radius: 8px;
+      opacity: 0.6;
+    }
+    .hero-card:nth-child(1) { top: 16%; right: 5%; }
+    .hero-card:nth-child(2) { bottom: 16%; left: 5%; }
+    .hero-card:nth-child(3) { top: 18%; left: 5%; }
+    .hero-card:nth-child(4) { bottom: 18%; right: 5%; }
+    .hero-card-label {
+      font-size: 0.68rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(243, 243, 243, 0.82);
+    }
+    .hero-card-value {
+      display: block;
+      font-size: 1.28rem;
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      filter: blur(7px);
+      user-select: none;
+    }
     .hero-copy {
       position: relative;
-      z-index: 2;
-      text-align: center;
-      max-width: 44rem;
+      z-index: 3;
+      max-width: 680px;
+      width: 100%;
       margin: 0 auto;
+      text-align: center;
     }
     .page-hero h1 {
       color: var(--white);
-      margin: 0 auto 1.1rem;
+      margin: 0 auto 1.25rem;
       max-width: 18ch;
     }
-    .hero-product {
-      margin: 0 auto;
-      max-width: 38rem;
+    .hero-primary {
+      text-align: left;
       color: #8A93A3;
-      font-size: 1.12rem;
-      font-weight: 300;
+      font-size: 1.08rem;
+      font-weight: 400;
       line-height: 1.55;
+    }
+    .hero-primary p { margin: 0 0 0.85rem; }
+    .hero-credit {
+      text-align: left;
+      margin: 0.15rem 0 0;
+      font-size: 0.92rem;
+      font-weight: 300;
+      line-height: 1.5;
+      color: rgba(138, 147, 163, 0.58);
     }
     .hero-actions {
       display: flex;
@@ -380,6 +428,12 @@
     .step-num { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: var(--blue); margin-bottom: 0.6rem; display: block; }
     .step-card h3 { color: var(--text); margin-bottom: 0.4rem; font-size: 1rem; }
     .step-card p { color: var(--text-muted); font-size: 0.86rem; line-height: 1.5; }
+    @media (max-width: 1200px) {
+      .hero-card:nth-child(3),
+      .hero-card:nth-child(4) { display: none; }
+      .hero-card:nth-child(1) { top: 12%; right: 2.5%; bottom: auto; }
+      .hero-card:nth-child(2) { top: 12%; left: 2.5%; bottom: auto; }
+    }
     @media (max-width: 900px) {
       .feature-grid, .feature-grid.cols-4, .footer-grid { grid-template-columns: 1fr; }
       .why-carousel-wrap { gap: 0.65rem; }
@@ -401,6 +455,9 @@
       .nav, .header-cta { display: none; }
       .hamburger { display: flex; }
       .page-hero { padding: 6.5rem 1rem 4.5rem; }
+      .hero-cards { display: none; }
+      .hero-primary,
+      .hero-credit { text-align: center; }
       .section { padding: 4rem 0; }
       .cta .container { flex-direction: column; align-items: flex-start; }
       .floor-container .section-head,
@@ -476,9 +533,31 @@
       <source src="nodalshopfloorvideo.mp4" type="video/mp4" />
     </video>
     <div class="hero-video-overlay" aria-hidden="true"></div>
+    <div class="hero-cards" aria-hidden="true">
+      <div class="hero-card">
+        <span class="hero-card-label">Work orders</span>
+        <span class="hero-card-value">129</span>
+      </div>
+      <div class="hero-card">
+        <span class="hero-card-label">Scrap rate</span>
+        <span class="hero-card-value">8.4%</span>
+      </div>
+      <div class="hero-card">
+        <span class="hero-card-label">On-time delivery</span>
+        <span class="hero-card-value">94.2%</span>
+      </div>
+      <div class="hero-card">
+        <span class="hero-card-label">Inventory accuracy</span>
+        <span class="hero-card-value">98.5%</span>
+      </div>
+    </div>
     <div class="hero-copy">
       <h1>Keep your ERP. Fix the production blind spot.</h1>
-      <p class="hero-product">Nodal Shopfloor is a modern, cost-effective production management system that tracks materials and production as work moves through the plant.</p>
+      <div class="hero-primary">
+        <p>Production data shouldn't live in paper, spreadsheets, and disconnected systems.</p>
+        <p>Nodal Shopfloor gives manufacturers a simple way to capture production as it happens, with software that's easy for operators to use, fast to integrate, and built to work with the systems you already have.</p>
+      </div>
+      <p class="hero-credit">A modern, cost-effective production management system built for building materials manufacturers.</p>
       <div class="hero-actions">
         <div class="page-hero-ctas">
           <a href="demo.html" class="btn btn-primary">Book a demo <span class="arrow">→</span></a>
