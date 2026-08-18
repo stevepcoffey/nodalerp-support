@@ -144,20 +144,17 @@
       margin-left: auto;
       max-width: 60%;
     }
-    .hero-pin-track { position: relative; height: 140vh; }
-    .page-hero { padding: 0; position: relative; overflow: hidden; }
-    .hero-pin-sticky {
-      position: sticky;
-      top: 0;
+    .page-hero {
+      position: relative;
+      overflow: hidden;
       min-height: 100vh;
-      height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
       background: #0E1B2C;
+      padding: 6.5rem 1.5rem 4.5rem;
     }
-    .hero-video,
-    .hero-video-poster {
+    .hero-video {
       position: absolute;
       inset: 0;
       width: 100%;
@@ -177,106 +174,31 @@
         radial-gradient(ellipse at center, rgba(14, 27, 44, 0.62) 0%, rgba(14, 27, 44, 0.42) 55%, rgba(14, 27, 44, 0.7) 100%),
         linear-gradient(to bottom, rgba(14, 27, 44, 0.4) 0%, rgba(14, 27, 44, 0.68) 100%);
     }
-    .hero-chips {
-      position: absolute;
-      inset: 0;
-      z-index: 2;
-      pointer-events: none;
-    }
-    .hero-chip {
-      position: absolute;
-      display: inline-flex;
-      flex-direction: column;
-      gap: 0.15rem;
-      padding: 0.55rem 0.8rem;
-      background: rgba(10, 18, 38, 0.45);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      border-radius: 8px;
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-      opacity: 0.72;
-      animation: heroChipIn 0.8s ease forwards, heroChipDrift 9s ease-in-out 0.8s infinite;
-    }
-    .hero-chip:nth-child(1) { top: 18%; left: 6%; animation-delay: 0.05s, 0.85s; }
-    .hero-chip:nth-child(2) { top: 22%; right: 7%; animation-delay: 0.18s, -2.2s; }
-    .hero-chip:nth-child(3) { bottom: 18%; left: 8%; animation-delay: 0.3s, -5s; }
-    .hero-chip:nth-child(4) { bottom: 20%; right: 8%; animation-delay: 0.12s, -1.2s; }
-    .hero-chip-label {
-      font-size: 0.62rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: rgba(243, 243, 243, 0.58);
-    }
-    .hero-chip-value {
-      font-size: 0.92rem;
-      font-weight: 700;
-      color: var(--white);
-      font-variant-numeric: tabular-nums;
-      letter-spacing: -0.01em;
-    }
-    @keyframes heroChipIn {
-      from { opacity: 0; transform: translateY(8px); }
-      to { opacity: 0.72; transform: translateY(0); }
-    }
-    @keyframes heroChipDrift {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-8px); }
-    }
     .hero-copy {
       position: relative;
-      z-index: 3;
+      z-index: 2;
       text-align: center;
       max-width: 44rem;
       margin: 0 auto;
-      padding: 0 1.5rem;
     }
     .page-hero h1 {
       color: var(--white);
-      margin: 0 auto;
-      max-width: 22rem;
-      transition: opacity 0.28s ease, transform 0.28s ease;
+      margin: 0 auto 1.1rem;
+      max-width: 18ch;
     }
     .hero-product {
       margin: 0 auto;
       max-width: 38rem;
-      color: rgba(138, 147, 163, 0.95);
+      color: #8A93A3;
       font-size: 1.12rem;
       font-weight: 300;
       line-height: 1.55;
-      opacity: 0;
-      transform: translateY(12px);
-      pointer-events: none;
-      transition: opacity 0.28s ease, transform 0.28s ease;
     }
     .hero-actions {
       display: flex;
       flex-direction: column;
       align-items: center;
       margin-top: 1.8rem;
-      opacity: 0;
-      transform: translateY(12px);
-      pointer-events: none;
-      transition: opacity 0.28s ease, transform 0.28s ease;
-    }
-    .hero-pin-sticky.is-beat-2 h1,
-    .hero-pin-sticky.is-settled h1 {
-      opacity: 0;
-      transform: translateY(-12px);
-      pointer-events: none;
-    }
-    .hero-pin-sticky.is-beat-2 .hero-product,
-    .hero-pin-sticky.is-beat-2 .hero-actions,
-    .hero-pin-sticky.is-settled .hero-product,
-    .hero-pin-sticky.is-settled .hero-actions {
-      opacity: 1;
-      transform: translateY(0);
-      pointer-events: auto;
-    }
-    .hero-pin-sticky.is-settled h1 {
-      opacity: 1;
-      transform: none;
-      pointer-events: auto;
-      margin-bottom: 1.1rem;
     }
     .page-hero-ctas { display: flex; gap: 0.75rem; flex-wrap: wrap; justify-content: center; }
     .hero-badge {
@@ -458,12 +380,6 @@
     .step-num { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: var(--blue); margin-bottom: 0.6rem; display: block; }
     .step-card h3 { color: var(--text); margin-bottom: 0.4rem; font-size: 1rem; }
     .step-card p { color: var(--text-muted); font-size: 0.86rem; line-height: 1.5; }
-    @media (max-width: 1100px) {
-      .hero-chip:nth-child(3),
-      .hero-chip:nth-child(4) { display: none; }
-      .hero-chip:nth-child(1) { top: 12%; left: 3%; }
-      .hero-chip:nth-child(2) { top: 12%; right: 3%; }
-    }
     @media (max-width: 900px) {
       .feature-grid, .feature-grid.cols-4, .footer-grid { grid-template-columns: 1fr; }
       .why-carousel-wrap { gap: 0.65rem; }
@@ -484,27 +400,7 @@
       .step-grid { grid-template-columns: 1fr 1fr; }
       .nav, .header-cta { display: none; }
       .hamburger { display: flex; }
-      .hero-pin-track { height: auto; }
-      .hero-pin-sticky {
-        position: relative;
-        height: auto;
-        min-height: 100vh;
-        padding: 6.5rem 1rem 4.5rem;
-      }
-      .hero-chips { display: none; }
-      .hero-pin-sticky h1 {
-        opacity: 1;
-        transform: none;
-        margin-bottom: 1.1rem;
-        pointer-events: auto;
-      }
-      .hero-product,
-      .hero-actions {
-        opacity: 1;
-        transform: none;
-        pointer-events: auto;
-      }
-      .page-hero { padding: 0; }
+      .page-hero { padding: 6.5rem 1rem 4.5rem; }
       .section { padding: 4rem 0; }
       .cta .container { flex-direction: column; align-items: flex-start; }
       .floor-container .section-head,
@@ -529,17 +425,8 @@
       .why-carousel-slide,
       .why-carousel-shot img,
       .why-carousel-card { transition: none !important; }
-      .hero-pin-track { height: auto; }
-      .hero-pin-sticky {
-        position: relative;
-        height: auto;
-        min-height: 100vh;
-      }
-      .hero-chip { animation: none !important; }
-      .hero-video {
-        display: none;
-      }
-      .hero-pin-sticky::before {
+      .hero-video { display: none; }
+      .page-hero::before {
         content: "";
         position: absolute;
         inset: 0;
@@ -548,23 +435,6 @@
         filter: blur(10px) brightness(0.45);
         z-index: 0;
         pointer-events: none;
-      }
-      .hero-pin-sticky h1 {
-        opacity: 1 !important;
-        transform: none !important;
-        margin-bottom: 1.1rem;
-        pointer-events: auto;
-      }
-      .hero-product,
-      .hero-actions {
-        opacity: 1 !important;
-        transform: none !important;
-        pointer-events: auto;
-      }
-      .hero-product,
-      .hero-actions,
-      .page-hero h1 {
-        transition: none !important;
       }
     }
   </style>
@@ -601,41 +471,21 @@
     <a href="/demo" class="mobile-menu-cta">Book a demo</a>
   </div>
 
-  <section class="hero-pin-track" id="hero">
-    <div class="dark-section page-hero hero-pin-sticky">
-      <video class="hero-video" poster="hero-poster.jpg" autoplay muted loop playsinline preload="none" aria-hidden="true">
-        <source src="nodalshopfloorvideo.mp4" type="video/mp4" />
-      </video>
-      <div class="hero-video-overlay" aria-hidden="true"></div>
-      <div class="hero-chips" aria-hidden="true">
-        <div class="hero-chip">
-          <span class="hero-chip-label">Work Orders</span>
-          <span class="hero-chip-value">129 active</span>
+  <section class="dark-section page-hero" id="hero">
+    <video class="hero-video" poster="hero-poster.jpg" autoplay muted loop playsinline preload="none" aria-hidden="true">
+      <source src="nodalshopfloorvideo.mp4" type="video/mp4" />
+    </video>
+    <div class="hero-video-overlay" aria-hidden="true"></div>
+    <div class="hero-copy">
+      <h1>Keep your ERP. Fix the production blind spot.</h1>
+      <p class="hero-product">Nodal Shopfloor is a modern, cost-effective production management system that tracks materials and production as work moves through the plant.</p>
+      <div class="hero-actions">
+        <div class="page-hero-ctas">
+          <a href="demo.html" class="btn btn-primary">Book a demo <span class="arrow">→</span></a>
         </div>
-        <div class="hero-chip">
-          <span class="hero-chip-label">Accuracy</span>
-          <span class="hero-chip-value">98.5%</span>
-        </div>
-        <div class="hero-chip">
-          <span class="hero-chip-label">Total Revenue</span>
-          <span class="hero-chip-value">$2.6M</span>
-        </div>
-        <div class="hero-chip">
-          <span class="hero-chip-label">Turnover</span>
-          <span class="hero-chip-value">5.2x</span>
-        </div>
-      </div>
-      <div class="hero-copy">
-        <h1>Keep your ERP.<br />Fix the production blind spot.</h1>
-        <p class="hero-product">Nodal Shopfloor is a modern, cost-effective production management system that tracks materials and production as work moves through the plant.</p>
-        <div class="hero-actions">
-          <div class="page-hero-ctas">
-            <a href="demo.html" class="btn btn-primary">Book a demo <span class="arrow">→</span></a>
-          </div>
-          <div class="hero-badge">
-            <span class="hero-badge-dot"></span>
-            Deploy in days, not quarters.
-          </div>
+        <div class="hero-badge">
+          <span class="hero-badge-dot"></span>
+          Deploy in days, not quarters.
         </div>
       </div>
     </div>
@@ -848,27 +698,19 @@
   </script>
   <script>
     (function () {
-      const track = document.querySelector('.hero-pin-track');
-      const sticky = document.querySelector('.hero-pin-sticky');
       const video = document.querySelector('.hero-video');
+      if (!video) return;
       const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      const isDesktop = window.matchMedia('(min-width: 901px)').matches;
-      const usePin = Boolean(track && sticky && !prefersReduced && isDesktop);
 
-      if (prefersReduced && video) {
+      if (prefersReduced) {
         video.pause();
         video.removeAttribute('autoplay');
         video.autoplay = false;
         video.preload = 'none';
+        return;
       }
 
       function playBackgroundVideo() {
-        if (!video) return;
-        if (prefersReduced) {
-          video.pause();
-          video.removeAttribute('autoplay');
-          return;
-        }
         video.muted = true;
         video.playsInline = true;
         video.autoplay = true;
@@ -879,32 +721,11 @@
         video.load();
       }
 
-      if (!prefersReduced) {
-        if ('requestIdleCallback' in window) {
-          requestIdleCallback(playBackgroundVideo, { timeout: 1200 });
-        } else {
-          setTimeout(playBackgroundVideo, 200);
-        }
+      if ('requestIdleCallback' in window) {
+        requestIdleCallback(playBackgroundVideo, { timeout: 1200 });
+      } else {
+        setTimeout(playBackgroundVideo, 200);
       }
-
-      if (!usePin) {
-        if (sticky) sticky.classList.add('is-settled');
-        return;
-      }
-
-      var ticking = false;
-      function onScroll() {
-        if (ticking) return;
-        ticking = true;
-        requestAnimationFrame(function () {
-          var range = track.offsetHeight - window.innerHeight;
-          var p = range <= 0 ? 1 : Math.min(1, Math.max(0, -track.getBoundingClientRect().top / range));
-          sticky.classList.toggle('is-beat-2', p >= 0.42);
-          ticking = false;
-        });
-      }
-      window.addEventListener('scroll', onScroll, { passive: true });
-      onScroll();
     })();
 
     (function initWhyCarousel() {
