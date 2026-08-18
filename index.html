@@ -175,7 +175,8 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: space-evenly;
+      justify-content: center;
+      gap: 5.5vh;
       text-align: center;
       padding: 34px 24px;
     }
@@ -200,7 +201,7 @@
     }
     .hero.go .hero-h2 { filter: blur(0); transition-delay: 2s; }
     .hero.go .card-out .val { filter: blur(0); transition-delay: 2s; }
-    .hero.go .card-out .bar > i { filter: blur(0); transition-delay: 0s, 2s; }
+    .hero.go .card-out .bar > i { filter: blur(0); transition-delay: 2s; }
     .hero.go .card-wip .val { filter: blur(0); transition-delay: 2.4s; }
     .hero.go .card-yield .val { filter: blur(0); transition-delay: 2.8s; }
     .hero.go .card-cycle .val { filter: blur(0); transition-delay: 3.2s; }
@@ -264,10 +265,10 @@
     .hero .bar > i {
       display: block;
       height: 100%;
-      width: 0%;
+      width: 68%;
       border-radius: 4px;
       background: linear-gradient(90deg, #0FA99C, #2563EB);
-      transition: width 3.6s cubic-bezier(.33, .68, .4, 1), filter 0.75s ease;
+      transition: filter 0.75s ease;
     }
     .hero-reveal {
       max-width: 640px;
@@ -476,7 +477,7 @@
       .hamburger { display: flex; }
       .hero {
         justify-content: flex-start;
-        gap: 28px;
+        gap: 34px;
         padding: 28px 16px 40px;
         min-height: 0;
       }
@@ -572,23 +573,23 @@
       <div class="hero-dash" aria-hidden="true">
         <div class="card card-out">
           <div class="card-label">Production output</div>
-          <div class="val"><span id="outVal">8,200</span> <span class="val-unit">/ 15,000 bd ft</span></div>
+          <div class="val"><span id="outVal">10,200</span> <span class="val-unit">/ 15,000 bd ft</span></div>
           <div class="bar"><i id="outBar"></i></div>
         </div>
         <div class="stat-row">
           <div class="card card-wip">
             <div class="card-label">Work in progress</div>
-            <div class="val sm" id="wipVal">52</div>
+            <div class="val sm" id="wipVal">41</div>
             <div class="card-sub">jobs on the floor</div>
           </div>
           <div class="card card-yield">
             <div class="card-label">Scrap / yield</div>
-            <div class="val sm good" id="yieldVal">94.2%</div>
+            <div class="val sm good" id="yieldVal">96.9%</div>
             <div class="card-sub">yield rate</div>
           </div>
           <div class="card card-cycle">
             <div class="card-label">Cycle time</div>
-            <div class="val sm"><span id="cycleVal">4.6</span> <span class="val-unit">min</span></div>
+            <div class="val sm"><span id="cycleVal">3.9</span> <span class="val-unit">min</span></div>
             <div class="card-sub">per unit</div>
           </div>
         </div>
@@ -820,20 +821,152 @@
       const outBar = document.getElementById('outBar');
       const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-      function tween(el, from, to, dur, fmt, delay) {
-        setTimeout(function () {
-          var t0 = performance.now();
-          (function step(now) {
-            var p = Math.min((now - t0) / dur, 1);
-            var e = 1 - Math.pow(1 - p, 2);
-            el.textContent = fmt(from + (to - from) * e);
-            if (p < 1) requestAnimationFrame(step);
-            else el.textContent = fmt(to);
-          })(performance.now());
-        }, delay);
+      var active = false;
+      var introDone = false;
+      var timers = [];
+      var cur = { out: 10200, wip: 41, yield: 96.9, cycle: 3.9 };
+
+      function rand(a, b) { return a + Math.random() * (b - a); }
+
+      function clearTimers() {
+        timers.forEach(clearTimeout);
+        timers = [];
       }
 
-      function setFinal() {
+      function schedule(fn, ms) {
+        var id = setTimeout(function () {
+          timers = timers.filter(function (t) { return t !== id; });
+          fn();
+        }, ms);
+        timers.push(id);
+      }
+
+      function tweenTo(el, from, to, dur, fmt, onFrame) {
+        var t0 = performance.now();
+        (function step(now) {
+          if (!active) return;
+          var p = Math.min((now - t0) / dur, 1);
+          var e = 1 - Math.pow(1 - p, 2);
+          var v = from + (to - from) * e;
+          el.textContent = fmt(v);
+          if (onFrame) onFrame(v);
+          if (p < 1) requestAnimationFrame(step);
+        })(performance.now());
+      }
+
+      function setBar(v) {
+        if (outBar) outBar.style.width = Math.min(v / 15000 * 100, 100) + '%';
+      }
+
+      function liveAccumulate(el, o) {
+        (function tick() {
+          if (!active) return;
+          var next = cur.out + rand(o.incMin, o.incMax);
+          tweenTo(el, cur.out, next, o.tween, o.fmt, function (v) {
+            cur.out = v;
+            o.onFrame(v);
+          });
+          cur.out = next;
+          schedule(tick, rand(o.intMin, o.intMax));
+        })();
+      }
+
+      function liveWalk(el, key, o) {
+        (function tick() {
+          if (!active) return;
+          var d = rand(o.stepMin, o.stepMax) * (Math.random() < 0.5 ? -1 : 1);
+          var next = Math.min(o.max, Math.max(o.min, cur[key] + d));
+          tweenTo(el, cur[key], next, o.tween, o.fmt);
+          cur[key] = next;
+          schedule(tick, rand(o.intMin, o.intMax));
+        })();
+      }
+
+      function kickLoops() {
+        if (!active) return;
+        liveAccumulate(outVal, {
+          incMin: 16, incMax: 48, tween: 1000, intMin: 1900, intMax: 3000,
+          fmt: function (v) { return Math.round(v).toLocaleString(); },
+          onFrame: setBar
+        });
+        liveWalk(wipVal, 'wip', {
+          min: 33, max: 44, stepMin: 1, stepMax: 2, tween: 750, intMin: 2600, intMax: 3900,
+          fmt: function (v) { return String(Math.round(v)); }
+        });
+        liveWalk(yieldVal, 'yield', {
+          min: 97.3, max: 98.2, stepMin: 0.1, stepMax: 0.3, tween: 800, intMin: 2800, intMax: 4200,
+          fmt: function (v) { return v.toFixed(1) + '%'; }
+        });
+        liveWalk(cycleVal, 'cycle', {
+          min: 3.1, max: 3.7, stepMin: 0.1, stepMax: 0.2, tween: 800, intMin: 2900, intMax: 4300,
+          fmt: function (v) { return v.toFixed(1); }
+        });
+      }
+
+      function startIntro() {
+        if (!hero) return;
+        hero.classList.add('go');
+        setBar(cur.out);
+        schedule(function () {
+          if (!active) return;
+          liveAccumulate(outVal, {
+            incMin: 16, incMax: 48, tween: 1000, intMin: 1900, intMax: 3000,
+            fmt: function (v) { return Math.round(v).toLocaleString(); },
+            onFrame: setBar
+          });
+        }, 2000);
+        schedule(function () {
+          if (!active) return;
+          liveWalk(wipVal, 'wip', {
+            min: 33, max: 44, stepMin: 1, stepMax: 2, tween: 750, intMin: 2600, intMax: 3900,
+            fmt: function (v) { return String(Math.round(v)); }
+          });
+        }, 2400);
+        schedule(function () {
+          if (!active) return;
+          liveWalk(yieldVal, 'yield', {
+            min: 97.3, max: 98.2, stepMin: 0.1, stepMax: 0.3, tween: 800, intMin: 2800, intMax: 4200,
+            fmt: function (v) { return v.toFixed(1) + '%'; }
+          });
+        }, 2800);
+        schedule(function () {
+          if (!active) return;
+          liveWalk(cycleVal, 'cycle', {
+            min: 3.1, max: 3.7, stepMin: 0.1, stepMax: 0.2, tween: 800, intMin: 2900, intMax: 4300,
+            fmt: function (v) { return v.toFixed(1); }
+          });
+        }, 3200);
+        schedule(function () { if (reveal) reveal.classList.add('in'); }, 6600);
+      }
+
+      function pauseLoops() {
+        active = false;
+        clearTimers();
+      }
+
+      function resumeLoops() {
+        if (active) return;
+        active = true;
+        kickLoops();
+        if (reveal && !reveal.classList.contains('in')) reveal.classList.add('in');
+      }
+
+      function setVisibility(onScreen, tabVisible) {
+        var shouldRun = onScreen && tabVisible;
+        if (shouldRun) {
+          if (!introDone) {
+            introDone = true;
+            active = true;
+            startIntro();
+          } else {
+            resumeLoops();
+          }
+        } else {
+          pauseLoops();
+        }
+      }
+
+      if (prefersReduced) {
         if (outVal) outVal.textContent = (12480).toLocaleString();
         if (wipVal) wipVal.textContent = '37';
         if (yieldVal) yieldVal.textContent = '97.8%';
@@ -841,21 +974,6 @@
         if (outBar) outBar.style.width = '83%';
         if (hero) hero.classList.add('go');
         if (reveal) reveal.classList.add('in');
-      }
-
-      function playSequence() {
-        if (!hero) return;
-        hero.classList.add('go');
-        tween(outVal, 8200, 12480, 4400, function (v) { return Math.round(v).toLocaleString(); }, 2000);
-        tween(wipVal, 52, 37, 3600, function (v) { return String(Math.round(v)); }, 2400);
-        tween(yieldVal, 94.2, 97.8, 3800, function (v) { return v.toFixed(1) + '%'; }, 2800);
-        tween(cycleVal, 4.6, 3.4, 3400, function (v) { return v.toFixed(1); }, 3200);
-        setTimeout(function () { if (outBar) outBar.style.width = '83%'; }, 2000);
-        setTimeout(function () { if (reveal) reveal.classList.add('in'); }, 6600);
-      }
-
-      if (prefersReduced) {
-        setFinal();
         if (video) {
           video.pause();
           video.removeAttribute('autoplay');
@@ -884,23 +1002,24 @@
       }
 
       if (!hero) return;
-      var started = false;
-      function start() {
-        if (started) return;
-        started = true;
-        playSequence();
-      }
+
+      var onScreen = false;
+      function tabVisible() { return document.visibilityState === 'visible'; }
+
       if ('IntersectionObserver' in window) {
         var io = new IntersectionObserver(function (entries) {
-          if (entries[0] && entries[0].isIntersecting) {
-            start();
-            io.disconnect();
-          }
+          onScreen = !!(entries[0] && entries[0].isIntersecting);
+          setVisibility(onScreen, tabVisible());
         }, { threshold: 0.35 });
         io.observe(hero);
       } else {
-        start();
+        onScreen = true;
+        setVisibility(true, tabVisible());
       }
+
+      document.addEventListener('visibilitychange', function () {
+        setVisibility(onScreen, tabVisible());
+      });
     })();
 
     (function initWhyCarousel() {
